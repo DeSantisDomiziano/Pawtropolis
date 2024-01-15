@@ -39,7 +39,7 @@ public class Main {
         zoo.addAnimal(e2);
         zoo.addAnimal(e3);
 
-
+        /*
         zoo.getAnimalsByClass(Tiger.class).forEach(System.out::println);
 
         // TODO cerchiamo di far compilare il codice qua sotto
@@ -61,5 +61,7 @@ public class Main {
 
         Tiger shortestTiger = zoo.getShortestByClass(Tiger.class);
         System.out.println(shortestTiger);
+        */
+
     }
 }
