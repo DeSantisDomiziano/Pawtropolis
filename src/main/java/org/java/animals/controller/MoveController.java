@@ -2,6 +2,8 @@ package org.java.animals.controller;
 
 import org.java.animals.entity.Coordinate;
 
+import java.util.Locale;
+
 import static org.java.animals.controller.MapController.roomMap;
 public class MoveController {
 
@@ -12,73 +14,72 @@ public class MoveController {
         }
         return instance;
     }
-    public static Coordinate userPosition = new Coordinate(0,0);
+    public static Coordinate userPosition = new Coordinate(1,0);
+
     private Coordinate coordinate;
-    int positionX = userPosition.getX();
-    int positionY = userPosition.getY();
 
 
     private void goToNorth() {
-        roomMap.get(userPosition);
-        positionY -= 1;
-        coordinate = new Coordinate(positionY, userPosition.getX());
+        coordinate = new Coordinate(userPosition.getY() - 1, userPosition.getX());
+
         if(roomMap.containsKey(coordinate)) {
-            userPosition.setY(positionY);
-            System.out.println("you are here:  " + roomMap.get(coordinate).getName());
+            userPosition.minusY();
+            System.out.println("you are here:  " + roomMap.get(userPosition).getName());
         }else {
             System.out.println("room not found");
         }
     }
     private void goToEast(){
-        roomMap.get(userPosition);
-        positionX += 1;
-        coordinate = new Coordinate(userPosition.getY(), positionX);
+        coordinate = new Coordinate(userPosition.getY(), userPosition.getX() + 1);
+
         if(roomMap.containsKey(coordinate)) {
-            userPosition.setX(positionX);
-            System.out.println("you are here:  " + roomMap.get(coordinate).getName());
+            userPosition.plusX();
+            System.out.println("you are here:  " + roomMap.get(userPosition).getName());
         }else {
             System.out.println("room not found");
         }
     }
     private void goToSouth(){
-        roomMap.get(userPosition);
-        positionY += 1;
-        coordinate = new Coordinate(positionY, userPosition.getX());
+        coordinate = new Coordinate(userPosition.getY() + 1, userPosition.getX());
+
         if(roomMap.containsKey(coordinate)) {
-            userPosition.setY(positionY);
-            System.out.println("you are here:  " + roomMap.get(coordinate).getName());
+            userPosition.plusY();
+            System.out.println("you are here:  " + roomMap.get(userPosition).getName());
         }else {
             System.out.println("room not found");
         }
     }
 
     private void goToWest(){
-        roomMap.get(userPosition);
-        positionX -= 1;
-        coordinate = new Coordinate(userPosition.getY(), positionX);
+        coordinate = new Coordinate(userPosition.getY(), userPosition.getX() - 1);
+
         if(roomMap.containsKey(coordinate)) {
-            userPosition.setX(positionX);
-            System.out.println("you are here: " + roomMap.get(coordinate).getName());
+            userPosition.minusX();
+            System.out.println("you are here: " + roomMap.get(userPosition).getName());
         }else {
             System.out.println("room not found");
         }
     }
 
 
-    public void changeRoom(int inputPosition ){
-        switch (inputPosition) {
-            case 1:
+    public void changeRoom(String inputPosition ){
+        String command = inputPosition.toLowerCase();
+
+        switch (command) {
+            case "go north":
                 goToNorth();
                 break;
-            case 2:
+            case "go south":
                 goToSouth();
                 break;
-            case 3:
+            case "go west":
                 goToWest();
                 break;
-            case 4:
+            case "go east":
                 goToEast();
                 break;
+            default:
+                System.out.println("command not found");
         }
     }
 
