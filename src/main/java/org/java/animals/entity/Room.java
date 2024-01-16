@@ -12,6 +12,11 @@ public class Room {
     private List<Animal> listAnimal = new ArrayList<>();
     private List<Room> listRoom = new ArrayList<>();
 
+    public Room(){}
+    public Room(String name){
+        setName(name);
+    }
+
     public Room(String name, List<Item> listItem, List<Animal> listAnimal, List<Room> listRoom) {
         setName(name);
         setListRoom(listRoom);
