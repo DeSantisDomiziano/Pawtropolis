@@ -19,8 +19,8 @@ public abstract class AnimalWithWings extends Animal{
         this.wingsSpan = wingsSpan;
     }
 
-    @Override
+    /*@Override
     public String toString() {
         return super.toString() + "cm, tailLength= " + getWingsSpan() + "cm}";
-    }
+    }*/
 }

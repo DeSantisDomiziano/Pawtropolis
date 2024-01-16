@@ -2,8 +2,6 @@ package org.java.animals.controller;
 
 import org.java.animals.entity.Coordinate;
 
-import java.util.Locale;
-
 import static org.java.animals.controller.MapController.roomMap;
 public class MoveController {
 

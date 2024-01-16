@@ -1,3 +1,4 @@
+import org.java.animals.controller.ActionController;
 import org.java.animals.controller.MapController;
 import org.java.animals.controller.MoveController;
 
@@ -5,6 +6,7 @@ import java.util.Scanner;
 
 public class GameMain {
     public static void main(String[] args) {
+        ActionController actionController = ActionController.getInstance();
         Scanner scanner = new Scanner(System.in);
         MapController mapController = MapController.getInstance();
         mapController.createMap();
@@ -28,6 +30,7 @@ public class GameMain {
                     case "drop":
                         break;
                     case "look":
+                        actionController.lookRoom();
                         break;
                     case "bag":
                         break;

@@ -35,4 +35,9 @@ public class Item {
     public void setSlotsRequired(double slotsRequired) {
         this.slotsRequired = slotsRequired;
     }
+
+    @Override
+    public String toString() {
+        return "name: " + getName();
+    }
 }

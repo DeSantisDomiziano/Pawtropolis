@@ -71,13 +71,7 @@ public abstract class Animal {
 
     @Override
     public String toString() {
-        return "{" +
-                "name='" + getName() + '\'' +
-                ", favFood='" + getFavouriteFoodFood() + '\'' +
-                ", age=" + getAge() +
-                " years old, startZoo=" + getDateAddedToTheZoo() +
-                ", weight=" + getWeight() +
-                "kg, height=" + getHeight();
+        return "name: " + getName() + " type: " + getClass().getSimpleName();
     }
 
 }

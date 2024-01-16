@@ -9,7 +9,7 @@ public class Room {
 
     private String name;
     private List<Item> listItem = new ArrayList<>();
-    private List<Animal> listAnimal = new ArrayList<>();
+    private List<? extends Animal> listAnimal = new ArrayList<>();
     private List<Room> listRoom = new ArrayList<>();
 
     public Room(){}
@@ -17,9 +17,8 @@ public class Room {
         setName(name);
     }
 
-    public Room(String name, List<Item> listItem, List<Animal> listAnimal, List<Room> listRoom) {
+    public Room(String name, List<Item> listItem, List<? extends Animal> listAnimal) {
         setName(name);
-        setListRoom(listRoom);
         setListAnimal(listAnimal);
         setListItem(listItem);
     }
@@ -40,11 +39,11 @@ public class Room {
         this.listItem = listItem;
     }
 
-    public List<Animal> getListAnimal() {
+    public List<? extends Animal> getListAnimal() {
         return listAnimal;
     }
 
-    public void setListAnimal(List<Animal> listAnimal) {
+    public void setListAnimal(List<? extends Animal> listAnimal) {
         this.listAnimal = listAnimal;
     }
 
