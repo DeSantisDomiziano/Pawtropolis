@@ -5,6 +5,7 @@ import org.java.animals.abst.AnimalWithTail;
 import org.java.animals.abst.AnimalWithWings;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Zoo {
 
@@ -26,8 +27,17 @@ public class Zoo {
         allAnimals.computeIfAbsent(animal.getClass(), k -> new ArrayList<>()).add(animal);
     }
 
-    public <T extends Animal> ArrayList<T> getAnimalsByClass(Class<T> clazz){
-        return (ArrayList<T>) allAnimals.get(clazz);
+    @SuppressWarnings("unchecked")
+    public <T extends Animal> List<T> getAnimalsByClass(Class<T> clazz){
+        if (allAnimals.get(clazz) != null){
+            return (ArrayList<T>) allAnimals.get(clazz);
+        }
+        return allAnimals.values()
+                .stream()
+                .flatMap(Collection::stream)
+                .filter(clazz::isInstance)
+                .map(clazz::cast)
+                .collect(Collectors.toList());
     }
 
     public <T extends Animal> T getHeaviestByClass(Class<T> clazz){

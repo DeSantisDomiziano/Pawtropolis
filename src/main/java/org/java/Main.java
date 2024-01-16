@@ -1,5 +1,6 @@
 package org.java;
 
+import org.java.animals.abst.AnimalWithTail;
 import org.java.animals.entity.Eagle;
 import org.java.animals.entity.Lion;
 import org.java.animals.entity.Tiger;
@@ -38,6 +39,8 @@ public class Main {
         zoo.addAnimal(e1);
         zoo.addAnimal(e2);
         zoo.addAnimal(e3);
+
+        System.out.println(zoo.getLongestTailByClass(AnimalWithTail.class));
 
         /*
         zoo.getAnimalsByClass(Tiger.class).forEach(System.out::println);

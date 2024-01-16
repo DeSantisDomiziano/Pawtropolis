@@ -13,10 +13,10 @@ public class Room {
     private List<Room> listRoom = new ArrayList<>();
 
     public Room(String name, List<Item> listItem, List<Animal> listAnimal, List<Room> listRoom) {
-        this.name = name;
-        this.listItem = listItem;
-        this.listAnimal = listAnimal;
-        this.listRoom = listRoom;
+        setName(name);
+        setListRoom(listRoom);
+        setListAnimal(listAnimal);
+        setListItem(listItem);
     }
 
     public String getName() {
