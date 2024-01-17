@@ -1,4 +1,4 @@
-package org.java.animals.entity;
+package org.java.game.entity;
 
 public class Item {
 

@@ -1,12 +1,14 @@
-import org.java.animals.controller.ActionController;
-import org.java.animals.controller.MapController;
-import org.java.animals.controller.MoveController;
-import org.java.animals.entity.Item;
+package org.java.game;
+
+import org.java.game.controller.ActionController;
+import org.java.game.controller.MapController;
+import org.java.game.controller.MoveController;
+import org.java.game.entity.Item;
 
 import java.util.Scanner;
 
-import static org.java.animals.controller.MapController.roomMap;
-import static org.java.animals.controller.MoveController.userPosition;
+import static org.java.game.controller.MapController.roomMap;
+import static org.java.game.controller.MoveController.userPosition;
 
 public class GameMain {
     public static void main(String[] args) {
@@ -55,8 +57,9 @@ public class GameMain {
                     System.out.println("Turn off");
                     scanner.close();
                     System.exit(0);
+                    break;
                 default:
-                    System.out.println("Command not found. Repeat the command");
+                    moveController.printCommandNotFound();
             }
         } while (true);
 

@@ -1,4 +1,4 @@
-package org.java.animals.entity;
+package org.java.game.entity;
 
 import java.util.Objects;
 

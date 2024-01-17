@@ -1,7 +1,6 @@
-package org.java.animals.entity;
+package org.java.game.entity;
 
 import org.java.animals.abst.Animal;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,11 +10,6 @@ public class Room {
     private List<Item> listItem = new ArrayList<>();
     private List<? extends Animal> listAnimal = new ArrayList<>();
     private List<Room> listRoom = new ArrayList<>();
-
-    public Room(){}
-    public Room(String name){
-        setName(name);
-    }
 
     public Room(String name, List<Item> listItem, List<? extends Animal> listAnimal) {
         setName(name);

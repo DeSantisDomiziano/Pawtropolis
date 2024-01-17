@@ -1,12 +1,12 @@
-package org.java.animals.controller;
-
+package org.java.game.controller;
 import org.java.animals.entity.*;
-
+import org.java.game.entity.Coordinate;
+import org.java.game.entity.Item;
+import org.java.game.entity.Room;
 import java.time.LocalDate;
 import java.util.*;
 
 public class MapController {
-    Room room;
     Zoo zoo = Zoo.getInstance();
 
     public static Map<Coordinate, Room> roomMap = new HashMap<>();
@@ -25,11 +25,11 @@ public class MapController {
         Coordinate coordinate2 = new Coordinate(1, 0);
         Coordinate coordinate3 = new Coordinate(1, 1);
 
-        Item item1 = new Item("Torcia", "è una torcia", 3.0);
-        Item item2 = new Item("Spada", "è una spada", 6.0);
-        Item item3 = new Item("palla", "è una palla", 1.2);
-        Item item4 = new Item("collare", "è una collare", 5.0);
-        Item item5 = new Item("elmetto", "è una elmetto", 5.0);
+        Item item1 = new Item("Torch", "is a torch", 3.0);
+        Item item2 = new Item("Sword", "is a sword", 6.0);
+        Item item3 = new Item("ball", "is a ball ", 1.2);
+        Item item4 = new Item("collar", "is a collar", 5.0);
+        Item item5 = new Item("helmet", "is an helmet", 5.0);
 
         Tiger t1 = new Tiger("Sid", "eagle", 3, LocalDate.now(), 100.75f,130, 30);
         Tiger t2 = new Tiger("Gino", "pony", 5, LocalDate.now(), 150.3f,140, 55);
@@ -37,7 +37,7 @@ public class MapController {
 
         Lion l1 = new Lion("Alex", "zebra", 6, LocalDate.now(), 80.8f, 110,40);
         Lion l2 = new Lion("Manny", "dog", 2, LocalDate.now(), 63.8f, 94,32);
-        Lion l3 = new Lion("Annarella", "human", 4, LocalDate.now(), 87.8f, 122,46);
+        Lion l3 = new Lion("Annawrella", "human", 4, LocalDate.now(), 87.8f, 122,46);
 
         Eagle e1 = new Eagle("Spirit", "worm", 4, LocalDate.now(), 22.35f, 60, 62);
         Eagle e2 = new Eagle("Bomber", "balls", 2, LocalDate.now(), 20.3f, 54, 55);
@@ -53,8 +53,6 @@ public class MapController {
         List<Item> itemList2 = new ArrayList<>(itemList);
         List<Item> itemList3 = new ArrayList<>(itemList);
 
-
-
         zoo.addAnimal(t1);
         zoo.addAnimal(t2);
         zoo.addAnimal(t3);
@@ -67,7 +65,7 @@ public class MapController {
         zoo.addAnimal(e2);
         zoo.addAnimal(e3);
 
-        Room roomOfStart = new Room(" room of start", itemList, zoo.getAnimalsByClass(Lion.class));
+        Room roomOfStart = new Room("room of start", itemList, zoo.getAnimalsByClass(Lion.class));
         Room room2 = new Room("room 2", itemList1, zoo.getAnimalsByClass(Eagle.class));
         Room room3 = new Room("room 3", itemList2, zoo.getAnimalsByClass(Tiger.class));
         Room room4 = new Room("room 4", itemList3, zoo.getAnimalsByClass(Lion.class));

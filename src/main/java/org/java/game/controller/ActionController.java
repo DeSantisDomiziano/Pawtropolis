@@ -1,19 +1,16 @@
-package org.java.animals.controller;
-
-import org.java.animals.entity.Bag;
-import org.java.animals.entity.Item;
-import org.java.animals.entity.Room;
+package org.java.game.controller;
+import org.java.game.entity.Bag;
+import org.java.game.entity.Item;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.stream.IntStream;
 
-import static org.java.animals.controller.MapController.roomMap;
+import static org.java.game.controller.MapController.roomMap;
 
-import static org.java.animals.controller.MoveController.userPosition;
+import static org.java.game.controller.MoveController.userPosition;
 
 public class ActionController {
-    private Bag bag = new Bag(new ArrayList<Item>(), 20.0);
-    private Room room;
+    private Bag bag = new Bag(new ArrayList<>(), 20.0);
 
     private static ActionController instance = null;
     public static ActionController getInstance() {
@@ -23,6 +20,15 @@ public class ActionController {
         return instance;
     }
 
+    public void printNotEnoughSpace(){
+        System.out.println("Not enough space");
+    }
+    public void printItemsNotFound(){
+        System.out.println("Item not found");
+    }
+    public void printHaveNothing(){
+        System.out.println("you don't have anything");
+    }
     private double getTotalWeightItem(){
 
         return bag.getItems().stream()
@@ -30,12 +36,14 @@ public class ActionController {
                 .sum();
     }
 
+
+
     public void addItem(Item item){
         if (bag.getSlotBag() > getTotalWeightItem() + item.getSlotsRequired()){
             bag.getItems().add(item);
             roomMap.get(userPosition).getListItem().remove(item);
         }else {
-            System.out.println("Not enough space");
+            printNotEnoughSpace();
         }
     }
 
@@ -47,7 +55,7 @@ public class ActionController {
             roomMap.get(userPosition).getListItem().add(item);
 
         }else {
-            System.out.println("Item not found");
+            printItemsNotFound();
         }
     }
 
@@ -60,26 +68,21 @@ public class ActionController {
     public Item getItemFromBag(int i){
         return bag.getItems().get(i);
     }
-
     public void lookBag(){
 
         if (bag.getItems().isEmpty()) {
-            System.out.println("you don't have anything madaffakka");
+            printHaveNothing();
         } else {
-            System.out.print("bag: ");
-            for (int i = 0; i < bag.getItems().size(); i++) {
-                System.out.print(i + 1 + ")" +bag.getItems().get(i).getName() + " ");
-            }
+            IntStream.range(0, bag.getItems().size())
+                    .forEach(i -> System.out.print(i + 1 + ")" + bag.getItems().get(i).getName() + " "));
             System.out.println();
         }
     }
 
     public void lookItems(){
-
-        for(int i = 0; i < roomMap.get(userPosition).getListItem().size() ; i++){
-
-            System.out.println(i + 1 + ")"  + roomMap.get(userPosition).getListItem().get(i).getName());
-        }
+        roomMap.get(userPosition).getListItem().stream()
+                .map(item -> roomMap.get(userPosition).getListItem().indexOf(item) + 1 + ") " + item.getName())
+                .forEach(System.out::println);
     }
 
 

@@ -1,9 +1,10 @@
-package org.java.animals.controller;
+package org.java.game.controller;
 
-import org.java.animals.entity.Coordinate;
+import org.java.game.entity.Coordinate;
 
-import static org.java.animals.controller.MapController.roomMap;
+import static org.java.game.controller.MapController.roomMap;
 public class MoveController {
+
 
     private static MoveController instance = null;
     public static MoveController getInstance() {
@@ -16,15 +17,27 @@ public class MoveController {
 
     private Coordinate coordinate;
 
+    public void printRoomNotFound(){
+        System.out.println("room not found");
+    }
+    public void printYouAreHere(){
+        System.out.println("you are here:  " + roomMap.get(userPosition).getName());
+    }
+
+    public void  printCommandNotFound(){
+        System.out.println("Command not found. Repeat the command");
+
+    }
+
 
     private void goToNorth() {
         coordinate = new Coordinate(userPosition.getY() - 1, userPosition.getX());
 
         if(roomMap.containsKey(coordinate)) {
             userPosition.minusY();
-            System.out.println("you are here:  " + roomMap.get(userPosition).getName());
+            printYouAreHere();
         }else {
-            System.out.println("room not found");
+            printRoomNotFound();
         }
     }
     private void goToEast(){
@@ -32,9 +45,9 @@ public class MoveController {
 
         if(roomMap.containsKey(coordinate)) {
             userPosition.plusX();
-            System.out.println("you are here:  " + roomMap.get(userPosition).getName());
+            printYouAreHere();
         }else {
-            System.out.println("room not found");
+            printRoomNotFound();
         }
     }
     private void goToSouth(){
@@ -42,9 +55,9 @@ public class MoveController {
 
         if(roomMap.containsKey(coordinate)) {
             userPosition.plusY();
-            System.out.println("you are here:  " + roomMap.get(userPosition).getName());
+            printYouAreHere();
         }else {
-            System.out.println("room not found");
+            printRoomNotFound();
         }
     }
 
@@ -53,9 +66,9 @@ public class MoveController {
 
         if(roomMap.containsKey(coordinate)) {
             userPosition.minusX();
-            System.out.println("you are here: " + roomMap.get(userPosition).getName());
+            printYouAreHere();
         }else {
-            System.out.println("room not found");
+            printRoomNotFound();
         }
     }
 
@@ -76,7 +89,7 @@ public class MoveController {
                 goToEast();
                 break;
             default:
-                System.out.println("command not found");
+                printCommandNotFound();
         }
     }
 
