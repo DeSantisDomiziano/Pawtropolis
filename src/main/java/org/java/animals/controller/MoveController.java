@@ -60,20 +60,19 @@ public class MoveController {
     }
 
 
-    public void changeRoom(String inputPosition ){
-        String command = inputPosition.toLowerCase();
+    public void changeRoom(int inputPosition){
 
-        switch (command) {
-            case "go north":
+        switch (inputPosition) {
+            case 1:
                 goToNorth();
                 break;
-            case "go south":
+            case 2:
                 goToSouth();
                 break;
-            case "go west":
+            case 3:
                 goToWest();
                 break;
-            case "go east":
+            case 4:
                 goToEast();
                 break;
             default:

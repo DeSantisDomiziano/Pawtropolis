@@ -19,6 +19,7 @@ public class MapController {
     }
 
     public void createMap() {
+
         Coordinate coordinateOfStart = new Coordinate(0, 0);
         Coordinate coordinate1 = new Coordinate(0, 1);
         Coordinate coordinate2 = new Coordinate(1, 0);
@@ -48,6 +49,11 @@ public class MapController {
         itemList.add(item3);
         itemList.add(item4);
         itemList.add(item5);
+        List<Item> itemList1 = new ArrayList<>(itemList);
+        List<Item> itemList2 = new ArrayList<>(itemList);
+        List<Item> itemList3 = new ArrayList<>(itemList);
+
+
 
         zoo.addAnimal(t1);
         zoo.addAnimal(t2);
@@ -62,9 +68,9 @@ public class MapController {
         zoo.addAnimal(e3);
 
         Room roomOfStart = new Room(" room of start", itemList, zoo.getAnimalsByClass(Lion.class));
-        Room room2 = new Room("room 2", itemList, zoo.getAnimalsByClass(Eagle.class));
-        Room room3 = new Room("room 3", itemList, zoo.getAnimalsByClass(Tiger.class));
-        Room room4 = new Room("room 4", itemList, zoo.getAnimalsByClass(Lion.class));
+        Room room2 = new Room("room 2", itemList1, zoo.getAnimalsByClass(Eagle.class));
+        Room room3 = new Room("room 3", itemList2, zoo.getAnimalsByClass(Tiger.class));
+        Room room4 = new Room("room 4", itemList3, zoo.getAnimalsByClass(Lion.class));
 
         roomMap.put(coordinateOfStart, roomOfStart);
         roomMap.put(coordinate1, room2);
