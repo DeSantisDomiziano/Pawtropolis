@@ -24,16 +24,28 @@ public class GameController {
 
 
     public void printRoomName(){
-        System.out.println("the room you are in is : " + MapController.roomMap.get(MoveController.userPosition).getName());
+        System.out.println("You are here: " + MapController.roomMap.get(MoveController.userPosition).getName() + "\n");
     }
     public void printInputCommand(){
-        System.out.println("type the number to give the command:\n1)go to\n2)get items\n3)drop\n4)look\n5)bag\n6)exit");
+        System.out.println("Type the number to give the command:" +
+                "\n1) - go to" +
+                "\n2) - get items" +
+                "\n3) - drop" +
+                "\n4) - look" +
+                "\n5) - bag" +
+                "\n6) - exit" +
+                "\n");
     }
     public void printMoveCommand(){
-        System.out.println("choose direction: go to\n1)north\n2)south\n3)west\n4)east");
+        System.out.println("Choose direction: go to" +
+                "\n1) - north" +
+                "\n2) - south" +
+                "\n3) - west" +
+                "\n4) - east" +
+                "\n");
     }
     public void printTurnOff(){
-        System.out.println("Turn off");
+        System.out.println("Turn off\n");
     }
 
     public void startGame() {
