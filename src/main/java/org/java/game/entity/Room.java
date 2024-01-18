@@ -8,10 +8,10 @@ public class Room {
 
     private String name;
     private List<Item> listItem = new ArrayList<>();
-    private List<? extends Animal> listAnimal = new ArrayList<>();
+    private List<Animal> listAnimal = new ArrayList<>();
     private List<Room> listRoom = new ArrayList<>();
 
-    public Room(String name, List<Item> listItem, List<? extends Animal> listAnimal) {
+    public Room(String name, List<Item> listItem, List< Animal> listAnimal) {
         setName(name);
         setListAnimal(listAnimal);
         setListItem(listItem);
@@ -33,11 +33,11 @@ public class Room {
         this.listItem = listItem;
     }
 
-    public List<? extends Animal> getListAnimal() {
+    public List<Animal> getListAnimal() {
         return listAnimal;
     }
 
-    public void setListAnimal(List<? extends Animal> listAnimal) {
+    public void setListAnimal(List<Animal> listAnimal) {
         this.listAnimal = listAnimal;
     }
 

@@ -5,7 +5,6 @@ import org.java.game.entity.Coordinate;
 import static org.java.game.controller.MapController.roomMap;
 public class MoveController {
 
-
     private static MoveController instance = null;
     public static MoveController getInstance() {
         if( instance == null) {
@@ -13,7 +12,7 @@ public class MoveController {
         }
         return instance;
     }
-    public static Coordinate userPosition = new Coordinate(1,0);
+    public static Coordinate userPosition = new Coordinate(0,0);
 
     private Coordinate coordinate;
 
@@ -23,18 +22,11 @@ public class MoveController {
     public void printYouAreHere(){
         System.out.println("you are here:  " + roomMap.get(userPosition).getName());
     }
-
-    public void  printCommandNotFound(){
-        System.out.println("Command not found. Repeat the command");
-
-    }
-
-
+    public void  printCommandNotFound(){System.out.println("Command not found. Repeat the command");}
     private void goToNorth() {
         coordinate = new Coordinate(userPosition.getY() - 1, userPosition.getX());
-
         if(roomMap.containsKey(coordinate)) {
-            userPosition.minusY();
+            userPosition = coordinate;
             printYouAreHere();
         }else {
             printRoomNotFound();
@@ -44,8 +36,9 @@ public class MoveController {
         coordinate = new Coordinate(userPosition.getY(), userPosition.getX() + 1);
 
         if(roomMap.containsKey(coordinate)) {
-            userPosition.plusX();
+            userPosition = coordinate;
             printYouAreHere();
+
         }else {
             printRoomNotFound();
         }
@@ -54,7 +47,7 @@ public class MoveController {
         coordinate = new Coordinate(userPosition.getY() + 1, userPosition.getX());
 
         if(roomMap.containsKey(coordinate)) {
-            userPosition.plusY();
+            userPosition = coordinate;
             printYouAreHere();
         }else {
             printRoomNotFound();
@@ -65,13 +58,12 @@ public class MoveController {
         coordinate = new Coordinate(userPosition.getY(), userPosition.getX() - 1);
 
         if(roomMap.containsKey(coordinate)) {
-            userPosition.minusX();
+            userPosition = coordinate;
             printYouAreHere();
         }else {
             printRoomNotFound();
         }
     }
-
 
     public void changeRoom(int inputPosition){
 

@@ -27,22 +27,6 @@ public class Coordinate {
         this.y = y;
     }
 
-    public void plusY(){
-        this.y = getY() + 1;
-    }
-
-    public void plusX(){
-        this.x = getX() + 1;
-    }
-
-    public void minusX(){
-        this.x = getX() - 1;
-    }
-
-    public void minusY(){
-        this.y = getY() - 1;
-    }
-
 
     @Override
     public String toString() {

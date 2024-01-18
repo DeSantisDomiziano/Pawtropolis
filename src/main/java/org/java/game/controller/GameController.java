@@ -1,8 +1,5 @@
-package org.java.game;
+package org.java.game.controller;
 
-import org.java.game.controller.ActionController;
-import org.java.game.controller.MapController;
-import org.java.game.controller.MoveController;
 import org.java.game.entity.Item;
 
 import java.util.Scanner;
@@ -10,26 +7,46 @@ import java.util.Scanner;
 import static org.java.game.controller.MapController.roomMap;
 import static org.java.game.controller.MoveController.userPosition;
 
-public class GameMain {
-    public static void main(String[] args) {
+public class GameController {
 
-        ActionController actionController = ActionController.getInstance();
-        MapController mapController = MapController.getInstance();
-        MoveController moveController = MoveController.getInstance();
+    private static GameController instance = null;
+    public static GameController getInstance() {
+        if( instance == null) {
+            instance = new GameController();
+        }
+        return instance;
+    }
+    ActionController actionController = ActionController.getInstance();
+    MapController mapController = MapController.getInstance();
+    MoveController moveController = MoveController.getInstance();
+    Scanner scanner = new Scanner(System.in);
 
-        Scanner scanner = new Scanner(System.in);
+
+
+    public void printRoomName(){
+        System.out.println("the room you are in is : " + MapController.roomMap.get(MoveController.userPosition).getName());
+    }
+    public void printInputCommand(){
+        System.out.println("type the number to give the command:\n1)go to\n2)get items\n3)drop\n4)look\n5)bag\n6)exit");
+    }
+    public void printMoveCommand(){
+        System.out.println("choose direction: go to\n1)north\n2)south\n3)west\n4)east");
+    }
+    public void printTurnOff(){
+        System.out.println("Turn off");
+    }
+
+    public void startGame() {
         mapController.createMap();
-
-        System.out.println("the room you are in is : " + MapController.roomMap.get(MoveController.userPosition));
-
+        printRoomName();
         do {
-            System.out.println("type the number to give the command:\n1)go to\n2)get items\n3)drop\n4)look\n5)bag\n6)exit");
+            printInputCommand();
             int input = scanner.nextInt();
             scanner.nextLine();
 
             switch (input) {
                 case 1:
-                    System.out.println("choose direction: go to\n1)north\n2)south\n3)west\n4)east");
+                    printMoveCommand();
                     int command = scanner.nextInt();
                     scanner.nextLine();
                     moveController.changeRoom(command);
@@ -54,7 +71,7 @@ public class GameMain {
                     actionController.lookBag();
                     break;
                 case 6:
-                    System.out.println("Turn off");
+                    printTurnOff();
                     scanner.close();
                     System.exit(0);
                     break;
@@ -62,6 +79,6 @@ public class GameMain {
                     moveController.printCommandNotFound();
             }
         } while (true);
-
     }
+
 }

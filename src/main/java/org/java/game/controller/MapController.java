@@ -1,18 +1,24 @@
 package org.java.game.controller;
-import org.java.animals.entity.*;
+
+import org.java.animals.entity.Zoo;
 import org.java.game.entity.Coordinate;
 import org.java.game.entity.Item;
 import org.java.game.entity.Room;
-import java.time.LocalDate;
-import java.util.*;
+import org.java.game.factory.RoomFactory;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class MapController {
-    Zoo zoo = Zoo.getInstance();
 
+    Zoo zoo = Zoo.getInstance();
     public static Map<Coordinate, Room> roomMap = new HashMap<>();
     private static MapController instance = null;
+
     public static MapController getInstance() {
-        if( instance == null) {
+        if (instance == null) {
             instance = new MapController();
         }
         return instance;
@@ -31,44 +37,17 @@ public class MapController {
         Item item4 = new Item("collar", "is a collar", 5.0);
         Item item5 = new Item("helmet", "is an helmet", 5.0);
 
-        Tiger t1 = new Tiger("Sid", "eagle", 3, LocalDate.now(), 100.75f,130, 30);
-        Tiger t2 = new Tiger("Gino", "pony", 5, LocalDate.now(), 150.3f,140, 55);
-        Tiger t3 = new Tiger("George", "cat", 3, LocalDate.now(), 154.5f,144, 39);
-
-        Lion l1 = new Lion("Alex", "zebra", 6, LocalDate.now(), 80.8f, 110,40);
-        Lion l2 = new Lion("Manny", "dog", 2, LocalDate.now(), 63.8f, 94,32);
-        Lion l3 = new Lion("Annawrella", "human", 4, LocalDate.now(), 87.8f, 122,46);
-
-        Eagle e1 = new Eagle("Spirit", "worm", 4, LocalDate.now(), 22.35f, 60, 62);
-        Eagle e2 = new Eagle("Bomber", "balls", 2, LocalDate.now(), 20.3f, 54, 55);
-        Eagle e3 = new Eagle("Fulvio", "other", 5, LocalDate.now(), 23.35f, 62, 59);
-
         List<Item> itemList = new ArrayList<>();
         itemList.add(item1);
         itemList.add(item2);
         itemList.add(item3);
         itemList.add(item4);
         itemList.add(item5);
-        List<Item> itemList1 = new ArrayList<>(itemList);
-        List<Item> itemList2 = new ArrayList<>(itemList);
-        List<Item> itemList3 = new ArrayList<>(itemList);
 
-        zoo.addAnimal(t1);
-        zoo.addAnimal(t2);
-        zoo.addAnimal(t3);
-
-        zoo.addAnimal(l1);
-        zoo.addAnimal(l2);
-        zoo.addAnimal(l3);
-
-        zoo.addAnimal(e1);
-        zoo.addAnimal(e2);
-        zoo.addAnimal(e3);
-
-        Room roomOfStart = new Room("room of start", itemList, zoo.getAnimalsByClass(Lion.class));
-        Room room2 = new Room("room 2", itemList1, zoo.getAnimalsByClass(Eagle.class));
-        Room room3 = new Room("room 3", itemList2, zoo.getAnimalsByClass(Tiger.class));
-        Room room4 = new Room("room 4", itemList3, zoo.getAnimalsByClass(Lion.class));
+        Room roomOfStart = RoomFactory.createRandomRoom("room of start", itemList, zoo.getAllAnimal());
+        Room room2 = RoomFactory.createRandomRoom("room 2", itemList, zoo.getAllAnimal());
+        Room room3 = RoomFactory.createRandomRoom("room 3", itemList, zoo.getAllAnimal());
+        Room room4 = RoomFactory.createRandomRoom("room 4", itemList, zoo.getAllAnimal());
 
         roomMap.put(coordinateOfStart, roomOfStart);
         roomMap.put(coordinate1, room2);
@@ -76,9 +55,5 @@ public class MapController {
         roomMap.put(coordinate3, room4);
     }
 
-
-
-
-
-
 }
+
