@@ -1,4 +1,4 @@
-package org.java.animals.entity;
+package org.java.game.entity;
 
 import java.util.Objects;
 
@@ -6,7 +6,7 @@ public class Coordinate {
     private int x;
     private int y;
 
-    public Coordinate( int y, int x) {
+    public Coordinate(int y, int x) {
         setX(x);
         setY(y);
     }
@@ -26,6 +26,7 @@ public class Coordinate {
     public void setY(int y) {
         this.y = y;
     }
+
 
     @Override
     public String toString() {

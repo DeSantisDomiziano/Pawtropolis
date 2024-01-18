@@ -10,11 +10,15 @@ import java.util.stream.Collectors;
 public class Zoo {
 
     //Start Bill Pugh Singleton
-    private Zoo(){}
+    private Zoo(){
+        animals = new ArrayList<>();
+    }
 
     private static class SingletonHelper {
         private static final Zoo INSTANCE = new Zoo();
     }
+
+    List<Animal> animals;
 
     public static Zoo getInstance() {
         return  SingletonHelper.INSTANCE;
@@ -25,6 +29,7 @@ public class Zoo {
 
     public void addAnimal(Animal animal) {
         allAnimals.computeIfAbsent(animal.getClass(), k -> new ArrayList<>()).add(animal);
+        animals.add(animal);
     }
 
     @SuppressWarnings("unchecked")
@@ -38,6 +43,9 @@ public class Zoo {
                 .filter(clazz::isInstance)
                 .map(clazz::cast)
                 .collect(Collectors.toList());
+    }
+    public List<Animal> getAllAnimal() {
+        return animals;
     }
 
     public <T extends Animal> T getHeaviestByClass(Class<T> clazz){
