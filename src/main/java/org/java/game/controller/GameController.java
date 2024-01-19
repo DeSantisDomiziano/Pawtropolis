@@ -67,14 +67,23 @@ public class GameController {
                     actionController.lookItems();
                     int indexItemToGet = scanner.nextInt();
                     scanner.nextLine();
-                    actionController.addItem(roomMap.get(userPosition).getListItem().get(indexItemToGet - 1));
+                    if (indexItemToGet <= roomMap.get(userPosition).getListItem().size() -1){
+                        actionController.addItem(roomMap.get(userPosition).getListItem().get(indexItemToGet - 1));
+                    }else {
+                        moveController.printCommandNotFound();
+                    }
                     break;
                 case 3:
                     actionController.lookBag();
                     int indexItemToDrop = scanner.nextInt();
                     scanner.nextLine();
-                    Item itemToDrop = actionController.getItemFromBag(indexItemToDrop - 1);
-                    actionController.removeItem(itemToDrop);
+                    if (indexItemToDrop <= actionController.getTotalWeightItem()){
+                        Item itemToDrop = actionController.getItemFromBag(indexItemToDrop - 1);
+                        actionController.removeItem(itemToDrop);
+                    }else {
+                        moveController.printCommandNotFound();
+                    }
+
                     break;
                 case 4:
                     actionController.lookRoom();

@@ -39,7 +39,7 @@ public class ActionController {
         System.out.printf("%s item removed from bag and added to %s%n%n", item.getName(), roomMap.get(userPosition).getName());
     }
 
-    private double getTotalWeightItem(){
+    public double getTotalWeightItem(){
 
         return bag.getItems().stream()
                 .mapToDouble(Item::getSlotsRequired)
