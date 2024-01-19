@@ -57,6 +57,7 @@ public class GameController {
             scanner.nextLine();
 
             switch (input) {
+
                 case 1:
                     printMoveCommand();
                     int command = scanner.nextInt();
