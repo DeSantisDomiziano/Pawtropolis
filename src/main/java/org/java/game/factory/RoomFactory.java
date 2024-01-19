@@ -7,7 +7,6 @@ import org.java.game.entity.Room;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Random;
 
 public class RoomFactory {
     public static Room createRandomRoom(String name, List<Item> items, List<Animal> animals) {
