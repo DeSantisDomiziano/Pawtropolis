@@ -16,12 +16,13 @@ public class MoveController {
     private Coordinate coordinate;
 
     public void printRoomNotFound(){
-        System.out.println("room not found");
+        System.out.println("Room not found\n");
     }
     public void printYouAreHere(){
-        System.out.println("you are here:  " + roomMap.get(userPosition).getName());
+        System.out.println("You are here:  " + roomMap.get(userPosition).getName() + "\n");
     }
-    public void  printCommandNotFound(){System.out.println("Command not found. Repeat the command");}
+    public void  printCommandNotFound(){System.out.println("Command not found. Repeat the command\n");}
+
     private void goToNorth() {
         coordinate = new Coordinate(userPosition.getY() - 1, userPosition.getX());
         if(roomMap.containsKey(coordinate)) {

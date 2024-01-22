@@ -40,7 +40,7 @@ public class MapController {
         itemList.add(item4);
         itemList.add(item5);
 
-        Room roomOfStart = RoomFactory.createRandomRoom("room of start", itemList, zoo.getAllAnimal());
+        Room roomOfStart = RoomFactory.createRandomRoom("entrance room", itemList, zoo.getAllAnimal());
         Room room2 = RoomFactory.createRandomRoom("room 2", itemList, zoo.getAllAnimal());
         Room room3 = RoomFactory.createRandomRoom("room 3", itemList, zoo.getAllAnimal());
         Room room4 = RoomFactory.createRandomRoom("room 4", itemList, zoo.getAllAnimal());

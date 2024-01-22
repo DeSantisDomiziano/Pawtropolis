@@ -1,9 +1,13 @@
 package org.java.game.controller;
 import org.java.game.entity.Bag;
 import org.java.game.entity.Item;
+import org.java.game.entity.Room;
+
 import java.util.ArrayList;
 import java.util.stream.IntStream;
+
 import static org.java.game.controller.MapController.roomMap;
+
 import static org.java.game.controller.MoveController.userPosition;
 
 public class ActionController {
@@ -18,15 +22,25 @@ public class ActionController {
     }
 
     public void printNotEnoughSpace(){
-        System.out.println("Not enough space");
+        System.out.println("Not enough space\n");
     }
     public void printItemsNotFound(){
-        System.out.println("Item not found");
+        System.out.println("Item not found\n");
     }
     public void printHaveNothing(){
-        System.out.println("you don't have anything");
+        System.out.println("You don't have anything\n");
     }
+
+    public void printItemAddedToBag(Item item){
+        System.out.printf("%s item added to bag and removed from room%n%n", item.getName());
+    }
+
+    public void printItemRemovedFromBag(Item item){
+        System.out.printf("%s item removed from bag and added to %s%n%n", item.getName(), roomMap.get(userPosition).getName());
+    }
+
     public double getTotalWeightItem(){
+
         return bag.getItems().stream()
                 .mapToDouble(Item::getSlotsRequired)
                 .sum();
@@ -38,27 +52,36 @@ public class ActionController {
         if (bag.getSlotBag() > getTotalWeightItem() + item.getSlotsRequired()){
             bag.getItems().add(item);
             roomMap.get(userPosition).getListItem().remove(item);
+            printItemAddedToBag(item);
         }else {
             printNotEnoughSpace();
         }
     }
 
     public void removeItem(Item item){
+
         if (bag.getItems().contains(item)){
+
             bag.getItems().remove(item);
             roomMap.get(userPosition).getListItem().add(item);
+            printItemRemovedFromBag(item);
         }else {
             printItemsNotFound();
         }
     }
 
     public void lookRoom(){
-        System.out.println("You are in " + roomMap.get(userPosition).getName()
-                            + "\nItems: " + roomMap.get(userPosition).getListItem().toString()
-                            + "\nNPC: " + roomMap.get(userPosition).getListAnimal().toString());
+        System.out.println("You are here: " + roomMap.get(userPosition).getName() + "\n"
+                + "\nItems: " + roomMap.get(userPosition).getListItem().toString()
+                + "\nNPC: " + roomMap.get(userPosition).getListAnimal().toString() + "\n");
     }
 
+    /*public Item getItemFromBag(int i){
+        return bag.getItems().get(i);
+    }*/
+
     public void lookBag(){
+
         if (bag.getItems().isEmpty()) {
             printHaveNothing();
         } else {
