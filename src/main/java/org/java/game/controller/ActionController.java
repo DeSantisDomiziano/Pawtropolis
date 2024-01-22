@@ -1,16 +1,13 @@
 package org.java.game.controller;
 import org.java.game.entity.Bag;
 import org.java.game.entity.Item;
-
 import java.util.ArrayList;
 import java.util.stream.IntStream;
-
 import static org.java.game.controller.MapController.roomMap;
-
 import static org.java.game.controller.MoveController.userPosition;
 
 public class ActionController {
-    private Bag bag = new Bag(new ArrayList<>(), 20.0);
+    Bag bag = new Bag(new ArrayList<>(), 20.0);
 
     private static ActionController instance = null;
     public static ActionController getInstance() {
@@ -29,8 +26,7 @@ public class ActionController {
     public void printHaveNothing(){
         System.out.println("you don't have anything");
     }
-    private double getTotalWeightItem(){
-
+    public double getTotalWeightItem(){
         return bag.getItems().stream()
                 .mapToDouble(Item::getSlotsRequired)
                 .sum();
@@ -48,12 +44,9 @@ public class ActionController {
     }
 
     public void removeItem(Item item){
-
         if (bag.getItems().contains(item)){
-
             bag.getItems().remove(item);
             roomMap.get(userPosition).getListItem().add(item);
-
         }else {
             printItemsNotFound();
         }
@@ -65,11 +58,7 @@ public class ActionController {
                             + "\nNPC: " + roomMap.get(userPosition).getListAnimal().toString());
     }
 
-    public Item getItemFromBag(int i){
-        return bag.getItems().get(i);
-    }
     public void lookBag(){
-
         if (bag.getItems().isEmpty()) {
             printHaveNothing();
         } else {
@@ -79,10 +68,21 @@ public class ActionController {
         }
     }
 
-    public void lookItems(){
-        roomMap.get(userPosition).getListItem().stream()
-                .map(item -> roomMap.get(userPosition).getListItem().indexOf(item) + 1 + ") " + item.getName())
-                .forEach(System.out::println);
+    public void printItems(){
+        if (!roomMap.get(userPosition).getListItem().isEmpty()){
+            roomMap.get(userPosition).getListItem().stream()
+                    .map(item -> roomMap.get(userPosition).getListItem().indexOf(item) + 1 + ") " + item.getName())
+                    .forEach(System.out::println);
+        }
+    }
+
+    public boolean isItems(){
+        if (!roomMap.get(userPosition).getListItem().isEmpty()){
+            return true;
+        }else {
+            System.out.println("Items not found\n");
+            return false;
+        }
     }
 
 

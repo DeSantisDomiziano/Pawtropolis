@@ -13,7 +13,6 @@ public class Zoo {
     private Zoo(){
         animals = new ArrayList<>();
     }
-
     private static class SingletonHelper {
         private static final Zoo INSTANCE = new Zoo();
     }

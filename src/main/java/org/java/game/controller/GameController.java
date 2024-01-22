@@ -1,9 +1,6 @@
 package org.java.game.controller;
-
 import org.java.game.entity.Item;
-
 import java.util.Scanner;
-
 import static org.java.game.controller.MapController.roomMap;
 import static org.java.game.controller.MoveController.userPosition;
 
@@ -20,8 +17,6 @@ public class GameController {
     MapController mapController = MapController.getInstance();
     MoveController moveController = MoveController.getInstance();
     Scanner scanner = new Scanner(System.in);
-
-
 
     public void printRoomName(){
         System.out.println("the room you are in is : " + MapController.roomMap.get(MoveController.userPosition).getName());
@@ -41,28 +36,38 @@ public class GameController {
         printRoomName();
         do {
             printInputCommand();
-            int input = scanner.nextInt();
-            scanner.nextLine();
+            int input =  Integer.parseInt(scanner.nextLine());
 
             switch (input) {
                 case 1:
                     printMoveCommand();
-                    int command = scanner.nextInt();
-                    scanner.nextLine();
+                    int command = Integer.parseInt(scanner.nextLine());
                     moveController.changeRoom(command);
                     break;
                 case 2:
-                    actionController.lookItems();
-                    int indexItemToGet = scanner.nextInt();
-                    scanner.nextLine();
-                    actionController.addItem(roomMap.get(userPosition).getListItem().get(indexItemToGet - 1));
+                    if (actionController.isItems()){
+                        actionController.printItems();
+                    }else {
+                        break;
+                    }
+
+                    int indexItemToGet = Integer.parseInt(scanner.nextLine());
+                    if (indexItemToGet <= roomMap.get(userPosition).getListItem().size()){
+                        actionController.addItem(roomMap.get(userPosition).getListItem().get(indexItemToGet - 1));
+                    }else {
+                        moveController.printCommandNotFound();
+                    }
                     break;
                 case 3:
                     actionController.lookBag();
-                    int indexItemToDrop = scanner.nextInt();
-                    scanner.nextLine();
-                    Item itemToDrop = actionController.getItemFromBag(indexItemToDrop - 1);
-                    actionController.removeItem(itemToDrop);
+                    int indexItemToDrop = Integer.parseInt(scanner.nextLine());
+                    if (indexItemToDrop <= actionController.bag.getItems().size()){
+                        Item itemToDrop = actionController.bag.getItems().get(indexItemToDrop);
+                        actionController.removeItem(itemToDrop);
+                    }else {
+                        moveController.printCommandNotFound();
+                    }
+
                     break;
                 case 4:
                     actionController.lookRoom();

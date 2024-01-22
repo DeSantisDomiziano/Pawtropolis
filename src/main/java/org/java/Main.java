@@ -7,6 +7,7 @@ public class Main {
     public static void main(String[] args) {
 
 
+
         Zoo zoo = Zoo.getInstance();
         // System.out.println(zoo.getLongestTailByClass(AnimalWithTail.class));
         /*

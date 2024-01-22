@@ -1,17 +1,14 @@
 package org.java.game.entity;
 
 public class Item {
-
     private String name;
     private String description;
     private double slotsRequired;
-
     public Item(String name, String description, double slotsRequired) {
         setName(name);
         setDescription(description);
         setSlotsRequired(slotsRequired);
     }
-
     public String getName() {
         return name;
     }

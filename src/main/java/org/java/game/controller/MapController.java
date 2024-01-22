@@ -5,7 +5,6 @@ import org.java.game.entity.Coordinate;
 import org.java.game.entity.Item;
 import org.java.game.entity.Room;
 import org.java.game.factory.RoomFactory;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -16,16 +15,13 @@ public class MapController {
     Zoo zoo = Zoo.getInstance();
     public static Map<Coordinate, Room> roomMap = new HashMap<>();
     private static MapController instance = null;
-
     public static MapController getInstance() {
         if (instance == null) {
             instance = new MapController();
         }
         return instance;
     }
-
     public void createMap() {
-
         Coordinate coordinateOfStart = new Coordinate(0, 0);
         Coordinate coordinate1 = new Coordinate(0, 1);
         Coordinate coordinate2 = new Coordinate(1, 0);
@@ -54,6 +50,5 @@ public class MapController {
         roomMap.put(coordinate2, room3);
         roomMap.put(coordinate3, room4);
     }
-
 }
 

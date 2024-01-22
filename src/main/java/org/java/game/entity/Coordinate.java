@@ -1,5 +1,4 @@
 package org.java.game.entity;
-
 import java.util.Objects;
 
 public class Coordinate {

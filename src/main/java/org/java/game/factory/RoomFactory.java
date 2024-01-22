@@ -3,11 +3,9 @@ package org.java.game.factory;
 import org.java.animals.abst.Animal;
 import org.java.game.entity.Item;
 import org.java.game.entity.Room;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Random;
 
 public class RoomFactory {
     public static Room createRandomRoom(String name, List<Item> items, List<Animal> animals) {
@@ -31,7 +29,6 @@ public class RoomFactory {
     private static void addRandomAnimals(Room room, List<Animal> animals) {
         int maxAnimalsToAdd = Math.min(4, animals.size());
         int numAnimalsToAdd = (maxAnimalsToAdd > 0) ? (int) (Math.random() * maxAnimalsToAdd) + 1 : 0;
-
         if (numAnimalsToAdd > 0) {
             Collections.shuffle(animals);
             List<Animal> randomAnimals = animals.subList(0, numAnimalsToAdd);

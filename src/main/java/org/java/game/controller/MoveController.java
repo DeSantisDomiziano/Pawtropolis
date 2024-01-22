@@ -1,7 +1,6 @@
 package org.java.game.controller;
 
 import org.java.game.entity.Coordinate;
-
 import static org.java.game.controller.MapController.roomMap;
 public class MoveController {
 
