@@ -46,6 +46,8 @@ public class Main {
         Eagle e2 = new Eagle("Bomber", "balls", 2, LocalDate.now(), 20.3f, 54, 55);
         Eagle e3 = new Eagle("Fulvio", "other", 5, LocalDate.now(), 23.35f, 62, 59);
 
+
+
         zoo.addAnimal(t1);
         zoo.addAnimal(t2);
         zoo.addAnimal(t3);

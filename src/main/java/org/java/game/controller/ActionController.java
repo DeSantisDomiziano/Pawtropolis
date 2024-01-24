@@ -1,10 +1,8 @@
 package org.java.game.controller;
 import org.java.game.entity.Bag;
 import org.java.game.entity.Item;
-import org.java.game.entity.Room;
 
 import java.util.ArrayList;
-import java.util.stream.IntStream;
 
 import static org.java.game.controller.MapController.roomMap;
 
@@ -32,11 +30,11 @@ public class ActionController {
     }
 
     public void printItemAddedToBag(Item item){
-        System.out.printf("%s item added to bag and removed from room%n%n", item.getName());
+        System.out.printf("%s added to bag and removed from %s%n%n", item.getName(), roomMap.get(userPosition).getName());
     }
 
     public void printItemRemovedFromBag(Item item){
-        System.out.printf("%s item removed from bag and added to %s%n%n", item.getName(), roomMap.get(userPosition).getName());
+        System.out.printf("%s removed from bag and added to %s%n%n", item.getName(), roomMap.get(userPosition).getName());
     }
 
     public double getTotalWeightItem(){
@@ -49,7 +47,7 @@ public class ActionController {
 
 
     public void addItem(Item item){
-        if (bag.getSlotBag() > getTotalWeightItem() + item.getSlotsRequired()){
+        if (bag.getSlotBag() >= getTotalWeightItem() + item.getSlotsRequired()){
             bag.getItems().add(item);
             roomMap.get(userPosition).getListItem().remove(item);
             printItemAddedToBag(item);
@@ -81,22 +79,19 @@ public class ActionController {
     }*/
 
     public void lookBag(){
-
         if (bag.getItems().isEmpty()) {
             printHaveNothing();
         } else {
-            IntStream.range(0, bag.getItems().size())
-                    .forEach(i -> System.out.print(i + 1 + ")" + bag.getItems().get(i).getName() + " "));
-            System.out.println();
+            bag.getItems().stream()
+                    .map(item -> bag.getItems().indexOf(item) + 1 + ") " + item.getName())
+                    .forEach(System.out::println);
         }
     }
 
     public void printItems(){
-        if (!roomMap.get(userPosition).getListItem().isEmpty()){
-            roomMap.get(userPosition).getListItem().stream()
-                    .map(item -> roomMap.get(userPosition).getListItem().indexOf(item) + 1 + ") " + item.getName())
-                    .forEach(System.out::println);
-        }
+        roomMap.get(userPosition).getListItem().stream()
+                .map(item -> roomMap.get(userPosition).getListItem().indexOf(item) + 1 + ") " + item.getName())
+                .forEach(System.out::println);
     }
 
     public boolean isItems(){

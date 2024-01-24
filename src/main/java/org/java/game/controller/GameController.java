@@ -81,7 +81,7 @@ public class GameController {
                     actionController.lookBag();
                     int indexItemToDrop = Integer.parseInt(scanner.nextLine());
                     if (indexItemToDrop <= actionController.bag.getItems().size()){
-                        Item itemToDrop = actionController.bag.getItems().get(indexItemToDrop);
+                        Item itemToDrop = actionController.bag.getItems().get(indexItemToDrop - 1);
                         actionController.removeItem(itemToDrop);
                     }else {
                         moveController.printCommandNotFound();
