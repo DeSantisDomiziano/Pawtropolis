@@ -9,7 +9,6 @@ public class Room {
     private String name;
     private List<Item> listItem = new ArrayList<>();
     private List<Animal> listAnimal = new ArrayList<>();
-    private List<Room> listRoom = new ArrayList<>();
 
     public Room(String name, List<Item> listItem, List< Animal> listAnimal) {
         setName(name);
@@ -39,5 +38,6 @@ public class Room {
     public void setListAnimal(List<Animal> listAnimal) {
         this.listAnimal = listAnimal;
     }
+
 
 }
