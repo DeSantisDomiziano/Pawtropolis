@@ -123,7 +123,6 @@ public class GameController {
                     printInsertValidNumber();
                     scanner.nextLine();
                 }
-
             } while (true);
         }
     }

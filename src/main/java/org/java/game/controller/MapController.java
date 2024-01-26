@@ -35,6 +35,7 @@ public class MapController {
         Item item6 = new Item("poison", "is a poison", 20.0);
 
 
+
         List<Item> itemList = new ArrayList<>();
         itemList.add(item1);
         itemList.add(item2);

@@ -82,7 +82,6 @@ public class MoveController {
 
     private void goToWest(){
         coordinate = new Coordinate(userPosition.getY(), userPosition.getX() - 1);
-
         if(roomMap.containsKey(coordinate)) {
             userPosition = coordinate;
             printYouAreHere();
