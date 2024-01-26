@@ -3,7 +3,7 @@ package org.java.game.entity;
 public class Player {
 
     private String name;
-    private int lifePoints = 100;
+    private int lifePoints;
 
     public Player(String name, int lifePoints) {
         setName(name);

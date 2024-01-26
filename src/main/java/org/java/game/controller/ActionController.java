@@ -1,13 +1,12 @@
 package org.java.game.controller;
 import org.java.game.entity.Bag;
 import org.java.game.entity.Item;
-import org.java.game.entity.Room;
-
 import java.util.ArrayList;
-import java.util.stream.IntStream;
+import java.util.InputMismatchException;
 
+import static org.java.game.controller.GameController.printInsertValidNumber;
+import static org.java.game.controller.GameController.scanner;
 import static org.java.game.controller.MapController.roomMap;
-
 import static org.java.game.controller.MoveController.userPosition;
 
 public class ActionController {
@@ -20,6 +19,7 @@ public class ActionController {
         }
         return instance;
     }
+    MoveController moveController = MoveController.getInstance();
 
     public void printNotEnoughSpace(){
         System.out.println("Not enough space\n");
@@ -38,30 +38,90 @@ public class ActionController {
     public void printItemRemovedFromBag(Item item){
         System.out.printf("%s item removed from bag and added to %s%n%n", item.getName(), roomMap.get(userPosition).getName());
     }
+    public void printObjectsPresent(){
+        System.out.println("these are the objects present, if you want to remove them type 1, if you want to exit type 2");
+    }
 
     public double getTotalWeightItem(){
-
         return bag.getItems().stream()
                 .mapToDouble(Item::getSlotsRequired)
                 .sum();
     }
 
-
-
     public void addItem(Item item){
-        if (bag.getSlotBag() > getTotalWeightItem() + item.getSlotsRequired()){
-            bag.getItems().add(item);
-            roomMap.get(userPosition).getListItem().remove(item);
-            printItemAddedToBag(item);
-        }else {
-            printNotEnoughSpace();
+                if (bag.getSlotBag() > getTotalWeightItem() + item.getSlotsRequired()) {
+                    bag.getItems().add(item);
+                    roomMap.get(userPosition).getListItem().remove(item);
+                    printItemAddedToBag(item);
+                } else {
+                    printNotEnoughSpace();
+                }
+    }
+
+    public void addItemsToBag(){
+        if (isItems()) {
+            printItems();
+        }
+        printObjectsPresent();
+        try{
+            int inputChoose= Integer.parseInt(scanner.nextLine());
+            switch (inputChoose) {
+                case 1:
+                    if (isItems()) {
+                        printItems();
+                     }
+                    int indexItemToGet = Integer.parseInt(scanner.nextLine());
+                    if (indexItemToGet <= roomMap.get(userPosition).getListItem().size()) {
+                    addItem(roomMap.get(userPosition).getListItem().get(indexItemToGet - 1));
+                    } else {
+                        moveController.printCommandNotFound();
+                    }
+                break;
+                case 2:
+                break;
+                default:
+                    moveController.printCommandNotFound();
+                break;
+            }
+        }catch (InputMismatchException | NumberFormatException e) {
+            printInsertValidNumber();
+            scanner.nextLine();
         }
     }
 
+
+
+    public void removeItemsFromBag(){
+        lookBag();
+        printObjectsPresent();
+        try{
+            int inputChoose= Integer.parseInt(scanner.nextLine());
+            switch(inputChoose) {
+                case 1:
+                    lookBag();
+                    int indexItemToDrop = Integer.parseInt(scanner.nextLine());
+                    if (indexItemToDrop <= bag.getItems().size()) {
+                        Item itemToDrop = bag.getItems().get(indexItemToDrop);
+                        removeItem(itemToDrop);
+                    } else {
+                        moveController.printCommandNotFound();
+                    }
+                    break;
+                case 2:
+                    break;
+                default:
+                    moveController.printCommandNotFound();
+                    break;
+            }
+        }catch (InputMismatchException | NumberFormatException e) {
+            printInsertValidNumber();
+            scanner.nextLine();
+        }
+
+    }
+
     public void removeItem(Item item){
-
         if (bag.getItems().contains(item)){
-
             bag.getItems().remove(item);
             roomMap.get(userPosition).getListItem().add(item);
             printItemRemovedFromBag(item);
@@ -76,18 +136,13 @@ public class ActionController {
                 + "\nNPC: " + roomMap.get(userPosition).getListAnimal().toString() + "\n");
     }
 
-    /*public Item getItemFromBag(int i){
-        return bag.getItems().get(i);
-    }*/
-
     public void lookBag(){
-
         if (bag.getItems().isEmpty()) {
             printHaveNothing();
         } else {
-            IntStream.range(0, bag.getItems().size())
-                    .forEach(i -> System.out.print(i + 1 + ")" + bag.getItems().get(i).getName() + " "));
-            System.out.println();
+            bag.getItems().stream()
+                    .map(item -> bag.getItems().indexOf(item) + 1 + ") " + item.getName())
+                    .forEach(System.out::println);
         }
     }
 

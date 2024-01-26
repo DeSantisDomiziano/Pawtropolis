@@ -36,16 +36,8 @@ public class Room {
     public List<Animal> getListAnimal() {
         return listAnimal;
     }
-
     public void setListAnimal(List<Animal> listAnimal) {
         this.listAnimal = listAnimal;
     }
 
-    public List<Room> getListRoom() {
-        return listRoom;
-    }
-
-    public void setListRoom(List<Room> listRoom) {
-        this.listRoom = listRoom;
-    }
 }

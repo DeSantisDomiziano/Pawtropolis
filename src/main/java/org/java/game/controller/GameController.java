@@ -1,7 +1,10 @@
 package org.java.game.controller;
 
 import org.java.game.entity.Item;
-
+import org.java.game.entity.Player;
+import org.java.game.entity.Room;
+import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
 import static org.java.game.controller.MapController.roomMap;
@@ -19,12 +22,16 @@ public class GameController {
     ActionController actionController = ActionController.getInstance();
     MapController mapController = MapController.getInstance();
     MoveController moveController = MoveController.getInstance();
-    Scanner scanner = new Scanner(System.in);
+    public static Player player = new Player("", 100);
 
+    public static Scanner scanner = new Scanner(System.in);
 
 
     public void printRoomName(){
-        System.out.println("You are here: " + MapController.roomMap.get(MoveController.userPosition).getName() + "\n");
+        System.out.println("You are here: " + MapController.roomMap.get(userPosition).getName() + "\n");
+    }
+    public static void printInsertValidNumber(){
+        System.out.println("Insert a valid number.");
     }
     public void printInputCommand(){
         System.out.println("Type the number to give the command:" +
@@ -42,67 +49,83 @@ public class GameController {
                 "\n2) - south" +
                 "\n3) - west" +
                 "\n4) - east" +
+                "\n5) - exit" +
+
                 "\n");
     }
     public void printTurnOff(){
         System.out.println("Turn off\n");
     }
+    public void printQuestionName(){ System.out.println("Who's playing?");}
+    public void printWelcomeName(){ System.out.println("welcome " + player.getName());}
+
+    public static void printCurrentLifeOfPoint(){
+        System.out.println("your current life of point are : " + GameController.player.getLifePoints());
+    }
+
+    public static void pointOfPlayer(){
+        Room room= roomMap.get(userPosition);
+        List<Item> itemList = room.getListItem();
+        for( Item item: itemList) {
+            if(item.getName().equals("poison")) {
+                if(room.getListItem().contains(item)) {
+                    GameController.player.setLifePoints((int) (GameController.player.getLifePoints() - item.getSlotsRequired()));
+                }
+            }
+        }
+        printCurrentLifeOfPoint();
+    }
+
+
 
     public void startGame() {
         mapController.createMap();
-        printRoomName();
-        do {
-            printInputCommand();
-            int input = scanner.nextInt();
-            scanner.nextLine();
+        printQuestionName();
 
-            switch (input) {
-                case 1:
-                    printMoveCommand();
-                    int command = scanner.nextInt();
+        String name = scanner.nextLine();
+        if (name != null) {
+            printRoomName();
+            player.setName(name);
+            printWelcomeName();
+            do {
+                printInputCommand();
+                try {
+                    int input = scanner.nextInt();
                     scanner.nextLine();
-                    moveController.changeRoom(command);
-                    break;
-                case 2:
-                    if (actionController.isItems()){
-                        actionController.printItems();
-                    }else {
-                        break;
+                    switch (input) {
+                        case 1:
+                            printMoveCommand();
+                            int command = scanner.nextInt();
+                            scanner.nextLine();
+                            moveController.changeRoom(command);
+                            break;
+                        case 2:
+                            actionController.addItemsToBag();
+                            break;
+                        case 3:
+                            actionController.removeItemsFromBag();
+                            break;
+                        case 4:
+                            actionController.lookRoom();
+                            break;
+                        case 5:
+                            actionController.lookBag();
+                            break;
+                        case 6:
+                            printTurnOff();
+                            scanner.close();
+                            System.exit(0);
+                            break;
+                        default:
+                            moveController.printCommandNotFound();
                     }
+                } catch (InputMismatchException | NumberFormatException e) {
+                    printInsertValidNumber();
+                    scanner.nextLine();
+                }
 
-                    int indexItemToGet = Integer.parseInt(scanner.nextLine());
-                    if (indexItemToGet <= roomMap.get(userPosition).getListItem().size()){
-                        actionController.addItem(roomMap.get(userPosition).getListItem().get(indexItemToGet - 1));
-                    }else {
-                        moveController.printCommandNotFound();
-                    }
-                    break;
-                case 3:
-                    actionController.lookBag();
-                    int indexItemToDrop = Integer.parseInt(scanner.nextLine());
-                    if (indexItemToDrop <= actionController.bag.getItems().size()){
-                        Item itemToDrop = actionController.bag.getItems().get(indexItemToDrop);
-                        actionController.removeItem(itemToDrop);
-                    }else {
-                        moveController.printCommandNotFound();
-                    }
-
-                    break;
-                case 4:
-                    actionController.lookRoom();
-                    break;
-                case 5:
-                    actionController.lookBag();
-                    break;
-                case 6:
-                    printTurnOff();
-                    scanner.close();
-                    System.exit(0);
-                    break;
-                default:
-                    moveController.printCommandNotFound();
-            }
-        } while (true);
+            } while (true);
+        }
     }
 
 }
