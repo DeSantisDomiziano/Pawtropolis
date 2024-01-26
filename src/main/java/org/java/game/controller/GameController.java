@@ -62,6 +62,9 @@ public class GameController {
     public static void printCurrentLifeOfPoint(){
         System.out.println("your current life of point are : " + GameController.player.getLifePoints());
     }
+    public static void printLifeOfPointFinish(){
+        System.out.println(" GAME OVER " );
+    }
 
     public static void pointOfPlayer(){
         Room room= roomMap.get(userPosition);
@@ -69,11 +72,16 @@ public class GameController {
         for( Item item: itemList) {
             if(item.getName().equals("poison")) {
                 if(room.getListItem().contains(item)) {
-                    GameController.player.setLifePoints((int) (GameController.player.getLifePoints() - item.getSlotsRequired()));
+                    GameController.player.setLifePoints((int) (player.getLifePoints() - item.getSlotsRequired()));
                 }
             }
         }
-        printCurrentLifeOfPoint();
+        if (player.getLifePoints() == 0){
+            printLifeOfPointFinish();
+            System.exit(0);
+        } else {
+            printCurrentLifeOfPoint();
+        }
     }
 
 
