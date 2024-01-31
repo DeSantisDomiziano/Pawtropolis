@@ -1,9 +1,7 @@
 package org.java.game.controller;
 
-import org.java.animals.entity.Zoo;
 import org.java.game.entity.Coordinate;
 import org.java.game.entity.Item;
-import org.java.game.entity.Player;
 import org.java.game.entity.Room;
 import org.java.game.factory.RoomFactory;
 
@@ -11,7 +9,6 @@ import java.util.*;
 
 public class MapController {
 
-    Zoo zoo = Zoo.getInstance();
     public static Map<Coordinate, Room> roomMap = new HashMap<>();
     private static MapController instance = null;
     public static MapController getInstance() {
@@ -45,10 +42,10 @@ public class MapController {
         itemList.add(item6);
 
 
-        Room roomOfStart = RoomFactory.createRandomRoom("entrance room", itemList, zoo.getAllAnimal());
-        Room room2 = RoomFactory.createRandomRoom("room 2", itemList, zoo.getAllAnimal());
-        Room room3 = RoomFactory.createRandomRoom("room 3", itemList, zoo.getAllAnimal());
-        Room room4 = RoomFactory.createRandomRoom("room 4", itemList, zoo.getAllAnimal());
+        Room roomOfStart = RoomFactory.createRandomRoom("entrance room", itemList);
+        Room room2 = RoomFactory.createRandomRoom("room 2", itemList);
+        Room room3 = RoomFactory.createRandomRoom("room 3", itemList);
+        Room room4 = RoomFactory.createRandomRoom("room 4", itemList);
 
         roomMap.put(coordinateOfStart, roomOfStart);
         roomMap.put(coordinate1, room2);

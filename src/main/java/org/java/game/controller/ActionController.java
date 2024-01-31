@@ -101,7 +101,7 @@ public class ActionController {
                     lookBag();
                     int indexItemToDrop = Integer.parseInt(scanner.nextLine());
                     if (indexItemToDrop <= bag.getItems().size()) {
-                        Item itemToDrop = bag.getItems().get(indexItemToDrop);
+                        Item itemToDrop = bag.getItems().get(indexItemToDrop - 1);
                         removeItem(itemToDrop);
                     } else {
                         moveController.printCommandNotFound();

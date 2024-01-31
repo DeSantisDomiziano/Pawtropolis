@@ -1,38 +1,13 @@
 package org.java;
 import org.java.animals.entity.*;
 import org.java.game.controller.GameController;
+import org.java.game.entity.Item;
+
 import java.time.LocalDate;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-
-
-        Zoo zoo = Zoo.getInstance();
-        // System.out.println(zoo.getLongestTailByClass(AnimalWithTail.class));
-        /*
-        zoo.getAnimalsByClass(Tiger.class).forEach(System.out::println);
-
-        // TODO cerchiamo di far compilare il codice qua sotto
-        ArrayList<Lion> arrayListLion = new ArrayList<>(zoo.getAnimalsByClass(Lion.class));
-        arrayListLion.forEach(System.out::println);
-
-        Lion haviestLion = zoo.getHeaviestByClass(Lion.class);
-        System.out.println(haviestLion);
-
-        Lion tallestLion = zoo.getTallestByClass(Lion.class);
-        System.out.println(tallestLion);
-
-        System.out.println(zoo.getLongestTailByClass(Tiger.class));
-
-        System.out.println(zoo.getLongestWingsSpan(Eagle.class));
-
-        Eagle lightestEagle = zoo.getLightestByClass(Eagle.class);
-        System.out.println(lightestEagle);
-
-        Tiger shortestTiger = zoo.getShortestByClass(Tiger.class);
-        System.out.println(shortestTiger);
-        */
-
         Tiger t1 = new Tiger("Sid", "eagle", 3, LocalDate.now(), 100.75f, 130, 30);
         Tiger t2 = new Tiger("Gino", "pony", 5, LocalDate.now(), 150.3f, 140, 55);
         Tiger t3 = new Tiger("George", "cat", 3, LocalDate.now(), 154.5f, 144, 39);
@@ -45,6 +20,7 @@ public class Main {
         Eagle e2 = new Eagle("Bomber", "balls", 2, LocalDate.now(), 20.3f, 54, 55);
         Eagle e3 = new Eagle("Fulvio", "other", 5, LocalDate.now(), 23.35f, 62, 59);
 
+        Zoo zoo = Zoo.getInstance();
 
 
         zoo.addAnimal(t1);
