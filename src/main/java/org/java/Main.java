@@ -1,10 +1,8 @@
 package org.java;
 import org.java.animals.entity.*;
 import org.java.game.controller.GameController;
-import org.java.game.entity.Item;
 
 import java.time.LocalDate;
-import java.util.List;
 
 public class Main {
     public static void main(String[] args) {

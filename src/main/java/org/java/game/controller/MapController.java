@@ -11,6 +11,11 @@ public class MapController {
 
     public static Map<Coordinate, Room> roomMap = new HashMap<>();
     private static MapController instance = null;
+
+    private MapController(){
+
+    }
+
     public static MapController getInstance() {
         if (instance == null) {
             instance = new MapController();

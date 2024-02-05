@@ -8,20 +8,26 @@ import java.util.List;
 import java.util.Scanner;
 
 import static org.java.game.controller.MapController.roomMap;
+import static org.java.game.controller.MoveController.printCommandNotFound;
 import static org.java.game.controller.MoveController.userPosition;
 
 public class GameController {
 
     private static GameController instance = null;
+
+    private GameController(){
+
+    }
+
     public static GameController getInstance() {
         if( instance == null) {
             instance = new GameController();
         }
         return instance;
     }
-    ActionController actionController = ActionController.getInstance();
-    MapController mapController = MapController.getInstance();
-    MoveController moveController = MoveController.getInstance();
+    private final ActionController actionController = ActionController.getInstance();
+    private final MapController mapController = MapController.getInstance();
+    private final MoveController moveController = MoveController.getInstance();
     public static Player player = new Player("", 100);
 
     public static Scanner scanner = new Scanner(System.in);
@@ -34,24 +40,29 @@ public class GameController {
         System.out.println("Insert a valid number.");
     }
     public void printInputCommand(){
-        System.out.println("Type the number to give the command:" +
-                "\n1) - go to" +
-                "\n2) - get items" +
-                "\n3) - drop" +
-                "\n4) - look" +
-                "\n5) - bag" +
-                "\n6) - exit" +
-                "\n");
+        System.out.println("""
+                Type the number to give the command:
+                1) - go to
+                2) - get items
+                3) - drop
+                4) - look
+                5) - bag
+                6) - exit
+                """);
+
+        System.out.println();
     }
     public void printMoveCommand(){
-        System.out.println("Choose direction: go to" +
-                "\n1) - north" +
-                "\n2) - south" +
-                "\n3) - west" +
-                "\n4) - east" +
-                "\n5) - exit" +
+        System.out.println("""
+                Choose direction: go to
+                1) - north
+                2) - south
+                3) - west
+                4) - east
+                5) - exit
+                """);
 
-                "\n");
+        System.out.println();
     }
     public void printTurnOff(){
         System.out.println("Turn off\n");
@@ -125,7 +136,7 @@ public class GameController {
                             System.exit(0);
                             break;
                         default:
-                            moveController.printCommandNotFound();
+                            printCommandNotFound();
                     }
                 } catch (InputMismatchException | NumberFormatException e) {
                     printInsertValidNumber();

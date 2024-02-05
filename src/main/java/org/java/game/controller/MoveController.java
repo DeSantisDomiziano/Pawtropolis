@@ -10,6 +10,11 @@ import static org.java.game.controller.MapController.roomMap;
 public class MoveController {
 
     private static MoveController instance = null;
+
+    private MoveController(){
+
+    }
+
     public static MoveController getInstance() {
         if( instance == null) {
             instance = new MoveController();
@@ -45,7 +50,7 @@ public class MoveController {
             System.out.println(direction + ": " + adjacentRoom.getName());
         }
     }
-    public void  printCommandNotFound(){System.out.println("Command not found. Repeat the command\n");}
+    public static void  printCommandNotFound(){System.out.println("Command not found. Repeat the command\n");}
 
 
 

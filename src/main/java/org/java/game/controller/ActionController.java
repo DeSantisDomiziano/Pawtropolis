@@ -7,19 +7,24 @@ import java.util.InputMismatchException;
 import static org.java.game.controller.GameController.printInsertValidNumber;
 import static org.java.game.controller.GameController.scanner;
 import static org.java.game.controller.MapController.roomMap;
+import static org.java.game.controller.MoveController.printCommandNotFound;
 import static org.java.game.controller.MoveController.userPosition;
 
 public class ActionController {
     Bag bag = new Bag(new ArrayList<>(), 20.0);
 
     private static ActionController instance = null;
+
+    private ActionController(){
+
+    }
+
     public static ActionController getInstance() {
         if( instance == null) {
             instance = new ActionController();
         }
         return instance;
     }
-    MoveController moveController = MoveController.getInstance();
 
     public void printNotEnoughSpace(){
         System.out.println("Not enough space\n");
@@ -49,7 +54,7 @@ public class ActionController {
     }
 
     public void addItem(Item item){
-                if (bag.getSlotBag() > getTotalWeightItem() + item.getSlotsRequired()) {
+                if (bag.getSlotBag() >= getTotalWeightItem() + item.getSlotsRequired()) {
                     bag.getItems().add(item);
                     roomMap.get(userPosition).getListItem().remove(item);
                     printItemAddedToBag(item);
@@ -74,13 +79,13 @@ public class ActionController {
                     if (indexItemToGet <= roomMap.get(userPosition).getListItem().size()) {
                     addItem(roomMap.get(userPosition).getListItem().get(indexItemToGet - 1));
                     } else {
-                        moveController.printCommandNotFound();
+                        printCommandNotFound();
                     }
                 break;
                 case 2:
                 break;
                 default:
-                    moveController.printCommandNotFound();
+                    printCommandNotFound();
                 break;
             }
         }catch (InputMismatchException | NumberFormatException e) {
@@ -104,13 +109,13 @@ public class ActionController {
                         Item itemToDrop = bag.getItems().get(indexItemToDrop - 1);
                         removeItem(itemToDrop);
                     } else {
-                        moveController.printCommandNotFound();
+                        printCommandNotFound();
                     }
                     break;
                 case 2:
                     break;
                 default:
-                    moveController.printCommandNotFound();
+                    printCommandNotFound();
                     break;
             }
         }catch (InputMismatchException | NumberFormatException e) {
