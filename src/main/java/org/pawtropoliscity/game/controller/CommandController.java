@@ -1,23 +1,21 @@
 package org.pawtropoliscity.game.controller;
+
 import org.pawtropoliscity.game.entity.Bag;
-import org.pawtropoliscity.game.entity.Item;
+import org.pawtropoliscity.game.entity.Player;
+import org.pawtropoliscity.game.entity.Room;
+
 import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.util.Scanner;
 
-import static org.pawtropoliscity.game.controller.GameController.printInsertValidNumber;
-import static org.pawtropoliscity.game.controller.GameController.scanner;
-import static org.pawtropoliscity.game.controller.MapController.roomMap;
 import static org.pawtropoliscity.game.controller.MoveController.printCommandNotFound;
 import static org.pawtropoliscity.game.controller.MoveController.userPosition;
 
 public class CommandController {
-    Bag bag = new Bag(new ArrayList<>(), 20.0);
 
     private static CommandController instance = null;
 
-    private CommandController(){
-
-    }
+    private CommandController(){}
 
     public static CommandController getInstance() {
         if( instance == null) {
@@ -25,27 +23,118 @@ public class CommandController {
         }
         return instance;
     }
+    private final Bag bag = new Bag(new ArrayList<>(), 20);
+    private final Room room = new Room("", new ArrayList<>(), new ArrayList<>());
+    private final MapController mapController = MapController.getInstance();
+    private final MoveController moveController = MoveController.getInstance();
+    public static Player player = new Player("", 100);
 
-    public void printNotEnoughSpace(){
-        System.out.println("Not enough space\n");
+    public static Scanner scanner = new Scanner(System.in);
+
+
+    public void printRoomName(){
+        System.out.println("You are here: " + MapController.roomMap.get(userPosition).getName() + "\n");
     }
-    public void printItemsNotFound(){
-        System.out.println("Item not found\n");
+    public static void printInsertValidNumber(){
+        System.out.println("Insert a valid number.");
     }
-    public void printHaveNothing(){
-        System.out.println("You don't have anything\n");
+    public void printTurnOff(){
+        System.out.println("Turn off\n");
+    }
+    public void printQuestionName(){ System.out.println("Who's playing?");}
+    public void printWelcomeName(){ System.out.println("welcome " + player.getName());}
+
+    public static void printCurrentLifeOfPoint(){
+        System.out.println("your current life of point are : " + CommandController.player.getLifePoints());
+    }
+    public static void printLifeOfPointFinish(){
+        System.out.println(" GAME OVER " );
     }
 
-    public void printItemAddedToBag(Item item){
-        System.out.printf("%s item added to bag and removed from room%n%n", item.getName());
+    private void printCommand(){
+        System.out.println("Write a command:\n");
+    }
+    public void printExit(){
+        System.out.println("You exit\n");
     }
 
-    public void printItemRemovedFromBag(Item item){
-        System.out.printf("%s item removed from bag and added to %s%n%n", item.getName(), roomMap.get(userPosition).getName());
-    }
-    public void printObjectsPresent(){
-        System.out.println("these are the objects present, if you want to remove them type 1, if you want to exit type 2");
-    }
+   /* public static void pointOfPlayer(){
+        Room room= roomMap.get(userPosition);
+        List<Item> itemList = room.getListItem();
+        for( Item item: itemList) {
+            if(item.getName().equals("poison")) {
+                if(room.getListItem().contains(item)) {
+                    CommandController.player.setLifePoints((int) (player.getLifePoints() - item.getSlotsRequired()));
+                }
+            }
+        }
+        if (player.getLifePoints() == 0){
+            printLifeOfPointFinish();
+            System.exit(0);
+        } else {
+            printCurrentLifeOfPoint();
+        }
+    }*/
 
+
+
+    public void startGame() {
+        mapController.createMap();
+        printQuestionName();
+
+        String name = scanner.nextLine();
+        if (name != null) {
+            printRoomName();
+            player.setName(name);
+            printWelcomeName();
+            do {
+                printCommand();
+                try {
+                    String command = scanner.nextLine();
+                    switch (command) {
+                        case "go north":
+                            moveController.goToNorth();
+                            break;
+                        case "go south":
+                            moveController.goToSouth();
+                            break;
+                        case "go west":
+                            moveController.goToWest();
+                            break;
+                        case "go east":
+                            moveController.goToEast();
+                            break;
+                        case "get item":
+                            room.printItems();
+                            String itemNameToAdd = scanner.nextLine();
+                            bag.addItem(itemNameToAdd);
+                            room.removeItem(itemNameToAdd);
+                            break;
+                        case "drop item":
+                            bag.printItem();
+                            String itemNameToRemove = scanner.nextLine();
+                            room.addItem(itemNameToRemove);
+                            bag.removeItem(itemNameToRemove);
+                            break;
+                        case "look room":
+                            room.lookRoom();
+                            break;
+                        case "look bag":
+                            bag.lookBag();
+                            break;
+                        case "exit":
+                            printExit();
+                            System.exit(0);
+                        default:
+                            printCommandNotFound();
+                            break;
+                    }
+                } catch (InputMismatchException | NumberFormatException e) {
+                    printInsertValidNumber();
+                    scanner.nextLine();
+                }
+            } while (true);
+        }
+    }
 
 }

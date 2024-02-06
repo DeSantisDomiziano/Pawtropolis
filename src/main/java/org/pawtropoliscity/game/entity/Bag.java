@@ -7,11 +7,11 @@ import static org.pawtropoliscity.game.controller.MoveController.userPosition;
 
 public class Bag {
 
-    private List<Item> items = new ArrayList<>();
+    private static List<Item> items = new ArrayList<>();
     private double slotsCapacity;
 
     public Bag(List<Item> items, double slotsCapacity) {
-        this.items = items;
+        Bag.items = items;
         setSlotsCapacity(slotsCapacity);
     }
 
@@ -30,32 +30,62 @@ public class Bag {
                 .sum();
     }
 
-    public void addItem(Item item){
-        if (getSlotsCapacity() >= getTotalWeightItem() + item.getSlotsRequired()) items.add(item);
-
-    }
-
-
-    public void removeItem(Item item){
-        if (getItems().contains(item)){
-            getItems().remove(item);
-            roomMap.get(userPosition).getListItem().add(item);
-            printItemRemovedFromBag(item);
+    public boolean checkWeight(Item item){
+        if (getSlotsCapacity() >= getTotalWeightItem() + item.getSlotsRequired()){
+            return true;
         }else {
-            printItemsNotFound();
+            System.out.println("Not enough space");
+            return false;
         }
     }
 
-
     public void lookBag(){
-        if (getItems().isEmpty()) {
-            printHaveNothing();
+        if (items.isEmpty()) {
+            System.out.println("There are no items\n");
         } else {
-            bag.getItems().stream()
-                    .map(item -> getItems().indexOf(item) + 1 + ") " + item.getName())
+            items.stream()
+                    .map(item -> items.indexOf(item) + 1 + ") " + item.getName())
                     .forEach(System.out::println);
         }
     }
+
+    public static Item getItemFromBag(String itemName){
+        return items.stream()
+                .filter(item -> item.getName().equalsIgnoreCase(itemName))
+                .findFirst()
+                .orElse(null);
+    }
+
+    public void addItem(String itemName){
+        Item item = Room.getItemFromRoom(itemName);
+        if (item != null){
+            if (checkWeight(item)){
+                items.add(item);
+            }else {
+                System.out.println("There are no items\n");
+            }
+        }
+    }
+
+    public void removeItem(String itemName){
+        Item item = getItemFromBag(itemName);
+        if (item != null){
+            items.remove(item);
+        }else {
+            System.out.println("There are no items\n");
+        }
+    }
+
+    public void printItem(){
+        if (!items.isEmpty()){
+            items.stream()
+                    .map(item -> items.indexOf(item) + 1 + ") " + item.getName())
+                    .forEach(System.out::println);
+        }
+    }
+}
+
+
 
 
 
@@ -142,4 +172,4 @@ public class Bag {
 
     }
     */
-}
+

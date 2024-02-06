@@ -5,7 +5,7 @@ import org.pawtropoliscity.game.entity.Room;
 
 import java.util.InputMismatchException;
 
-import static org.pawtropoliscity.game.controller.GameController.*;
+import static org.pawtropoliscity.game.controller.CommandController.*;
 import static org.pawtropoliscity.game.controller.MapController.roomMap;
 public class MoveController {
 
@@ -31,7 +31,7 @@ public class MoveController {
     }
 
     public void printYouAreHere() {
-        System.out.println( GameController.player.getName() + " You are here:  " + roomMap.get(userPosition).getName() + "\n");
+        System.out.println( CommandController.player.getName() + " You are here:  " + roomMap.get(userPosition).getName() + "\n");
 
             System.out.println("Adjacent Rooms:");
 
@@ -54,73 +54,48 @@ public class MoveController {
 
 
 
-    private void goToNorth() {
+    public void goToNorth() {
         coordinate = new Coordinate(userPosition.getY() - 1, userPosition.getX());
         if(roomMap.containsKey(coordinate)) {
             userPosition = coordinate;
             printYouAreHere();
-            pointOfPlayer();
+            //pointOfPlayer();
         }else {
             printRoomNotFound();
         }
     }
-    private void goToEast(){
+    public void goToEast(){
         coordinate = new Coordinate(userPosition.getY(), userPosition.getX() + 1);
         if(roomMap.containsKey(coordinate)) {
             userPosition = coordinate;
             printYouAreHere();
-            pointOfPlayer();
+            //pointOfPlayer();
         }else {
             printRoomNotFound();
         }
     }
-    private void goToSouth(){
+    public void goToSouth(){
         coordinate = new Coordinate(userPosition.getY() + 1, userPosition.getX());
         if(roomMap.containsKey(coordinate)) {
             userPosition = coordinate;
             printYouAreHere();
-            pointOfPlayer();
+            //pointOfPlayer();
         }else {
             printRoomNotFound();
         }
     }
 
-    private void goToWest(){
+    public void goToWest(){
         coordinate = new Coordinate(userPosition.getY(), userPosition.getX() - 1);
         if(roomMap.containsKey(coordinate)) {
             userPosition = coordinate;
             printYouAreHere();
-            pointOfPlayer();
+            //pointOfPlayer();
         }else {
             printRoomNotFound();
         }
     }
 
-    public void changeRoom(int inputPosition){
-      try{
-        switch (inputPosition) {
-            case 1:
-                goToNorth();
-                break;
-            case 2:
-                goToSouth();
-                break;
-            case 3:
-                goToWest();
-                break;
-            case 4:
-                goToEast();
-                break;
-            case 5:
-                break;
-            default:
-                printCommandNotFound();
-        }
-      }catch (InputMismatchException | NumberFormatException e) {
-          printInsertValidNumber();
-          scanner.nextLine();
-      }
-    }
 
 
 

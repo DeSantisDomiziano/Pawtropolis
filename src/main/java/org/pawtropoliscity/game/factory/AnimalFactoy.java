@@ -21,7 +21,7 @@ public class AnimalFactoy {
         return instance;
     }
 
-    private Random random;
+    private final Random random = new Random();
 
     public List<Animal> createRandomAnimalList(){
         int numIterator = random.nextInt(1, 6);

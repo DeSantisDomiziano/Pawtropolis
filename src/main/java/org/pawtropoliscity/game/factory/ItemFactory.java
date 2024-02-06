@@ -20,7 +20,7 @@ public class ItemFactory {
         return instance;
     }
 
-    private Random random;
+    private final Random random = new Random();
 
     private final List<Item> itemList = List.of(
             new Item("Torch", "is a torch", 5),
