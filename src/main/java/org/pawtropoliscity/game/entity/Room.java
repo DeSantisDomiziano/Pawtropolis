@@ -13,7 +13,7 @@ public class Room {
     private List<Item> listItem = new ArrayList<>();
     private List<Animal> listAnimal = new ArrayList<>();
 
-    public Room(String name, List<Item> listItem, List< Animal> listAnimal) {
+    public Room(String name, List<Item> listItem, List<Animal> listAnimal) {
         setName(name);
         setListAnimal(listAnimal);
         this.listItem = listItem;
@@ -31,61 +31,74 @@ public class Room {
     public List<Animal> getListAnimal() {
         return listAnimal;
     }
+
     public void setListAnimal(List<Animal> listAnimal) {
         this.listAnimal = listAnimal;
     }
 
 
-
-    public void lookRoom(){
+    public void lookRoom() {
         System.out.println("You are here: " + roomMap.get(userPosition).getName() + "\n"
                 + "\nItems: " + roomMap.get(userPosition).listItem.toString()
                 + "\nNPC: " + roomMap.get(userPosition).getListAnimal().toString() + "\n");
     }
 
-    public void printItems(){
-        if (!roomMap.get(userPosition).listItem.isEmpty()){
+    public void printItems() {
+        if (!roomMap.get(userPosition).listItem.isEmpty()) {
             roomMap.get(userPosition).listItem.stream()
                     .map(item -> roomMap.get(userPosition).listItem.indexOf(item) + 1 + ") " + item.getName())
                     .forEach(System.out::println);
         }
     }
 
-    public boolean isItems(){
+    public boolean isItems() {
         roomMap.get(userPosition);
-        if (!listItem.isEmpty()){
+        if (!listItem.isEmpty()) {
             return true;
-        }else {
+        } else {
             System.out.println("Items not found\n");
             return false;
         }
     }
 
-    public void addItem(String itemName){
+    public void addItem(String itemName) {
         Item item = Bag.getItemFromBag(itemName);
-        if (item != null){
-                roomMap.get(userPosition).listItem.add(item);
-            }else {
-                System.out.println("There are no items\n");
-            }
+        if (item != null) {
+            roomMap.get(userPosition).listItem.add(item);
+        } else {
+            System.out.println("There are no items\n");
+        }
     }
 
 
-    public Item getItemFromRoom(String itemName){
+    public Item getItemFromRoom(String itemName) {
         return listItem.stream()
                 .filter(item -> item.getName().equalsIgnoreCase(itemName))
                 .findFirst()
                 .orElse(null);
     }
 
-    public void removeItem(String itemName){
+    public void removeItem(String itemName) {
         Item item = roomMap.get(userPosition).getItemFromRoom(itemName);
-        if (item != null){
+        if (item != null) {
             roomMap.get(userPosition).listItem.remove(item);
-        }else {
+        } else {
             System.out.println("Item not found");
         }
 
+    }
+
+    public static Item checkPoison() {
+        Room room = roomMap.get(userPosition);
+        List<Item> itemList = room.listItem;
+        for (Item item : itemList) {
+            if (item.getName().equalsIgnoreCase("poison")) {
+                if (itemList.contains(item)) {
+                    return item;
+                }
+            }
+        }
+        return null;
     }
 
 

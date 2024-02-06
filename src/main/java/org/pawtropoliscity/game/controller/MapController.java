@@ -1,7 +1,6 @@
 package org.pawtropoliscity.game.controller;
 
 import org.pawtropoliscity.game.entity.Coordinate;
-import org.pawtropoliscity.game.entity.Item;
 import org.pawtropoliscity.game.entity.Room;
 import org.pawtropoliscity.game.factory.RoomFactory;
 

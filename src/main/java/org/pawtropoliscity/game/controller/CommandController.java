@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import static org.pawtropoliscity.game.controller.MapController.roomMap;
 import static org.pawtropoliscity.game.controller.MoveController.printCommandNotFound;
 import static org.pawtropoliscity.game.controller.MoveController.userPosition;
 
@@ -33,7 +34,7 @@ public class CommandController {
 
 
     public void printRoomName(){
-        System.out.println("You are here: " + MapController.roomMap.get(userPosition).getName() + "\n");
+        System.out.println("You are here: " + roomMap.get(userPosition).getName() + "\n");
     }
     public static void printInsertValidNumber(){
         System.out.println("Insert a valid number.");
@@ -58,23 +59,7 @@ public class CommandController {
         System.out.println("You exit\n");
     }
 
-   /* public static void pointOfPlayer(){
-        Room room= roomMap.get(userPosition);
-        List<Item> itemList = room.getListItem();
-        for( Item item: itemList) {
-            if(item.getName().equals("poison")) {
-                if(room.getListItem().contains(item)) {
-                    CommandController.player.setLifePoints((int) (player.getLifePoints() - item.getSlotsRequired()));
-                }
-            }
-        }
-        if (player.getLifePoints() == 0){
-            printLifeOfPointFinish();
-            System.exit(0);
-        } else {
-            printCurrentLifeOfPoint();
-        }
-    }*/
+
 
 
 
@@ -125,6 +110,7 @@ public class CommandController {
                         case "exit":
                             printExit();
                             System.exit(0);
+                            break;
                         default:
                             printCommandNotFound();
                             break;

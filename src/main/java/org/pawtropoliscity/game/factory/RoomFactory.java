@@ -19,6 +19,6 @@ public class RoomFactory {
 
     public Room createRandomRoom(String name){
         return new Room(name, itemFactory.createRandomItemList(), animalFactoy.createRandomAnimalList());
-
     }
+
 }

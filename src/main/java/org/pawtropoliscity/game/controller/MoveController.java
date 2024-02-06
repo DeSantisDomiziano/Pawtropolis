@@ -2,8 +2,7 @@ package org.pawtropoliscity.game.controller;
 
 import org.pawtropoliscity.game.entity.Coordinate;
 import org.pawtropoliscity.game.entity.Room;
-
-import java.util.InputMismatchException;
+import java.util.Objects;
 
 import static org.pawtropoliscity.game.controller.CommandController.*;
 import static org.pawtropoliscity.game.controller.MapController.roomMap;
@@ -25,6 +24,8 @@ public class MoveController {
     public static Coordinate userPosition = new Coordinate(0,0);
 
     private Coordinate coordinate;
+
+
 
     public void printRoomNotFound(){
         System.out.println("Room not found\n");
@@ -52,14 +53,24 @@ public class MoveController {
     }
     public static void  printCommandNotFound(){System.out.println("Command not found. Repeat the command\n");}
 
-
+    public void pointOfPlayer() {
+        if(Room.checkPoison()!= null) {
+            player.setLifePoints((int) (player.getLifePoints() - Objects.requireNonNull(Room.checkPoison()).getSlotsRequired()));
+        }
+        if (player.getLifePoints() == 0){
+            printLifeOfPointFinish();
+            System.exit(0);
+        } else {
+            printCurrentLifeOfPoint();
+        }
+    }
 
     public void goToNorth() {
         coordinate = new Coordinate(userPosition.getY() - 1, userPosition.getX());
         if(roomMap.containsKey(coordinate)) {
             userPosition = coordinate;
             printYouAreHere();
-            //pointOfPlayer();
+            pointOfPlayer();
         }else {
             printRoomNotFound();
         }
@@ -69,7 +80,7 @@ public class MoveController {
         if(roomMap.containsKey(coordinate)) {
             userPosition = coordinate;
             printYouAreHere();
-            //pointOfPlayer();
+            pointOfPlayer();
         }else {
             printRoomNotFound();
         }
@@ -79,7 +90,7 @@ public class MoveController {
         if(roomMap.containsKey(coordinate)) {
             userPosition = coordinate;
             printYouAreHere();
-            //pointOfPlayer();
+            pointOfPlayer();
         }else {
             printRoomNotFound();
         }
@@ -90,7 +101,7 @@ public class MoveController {
         if(roomMap.containsKey(coordinate)) {
             userPosition = coordinate;
             printYouAreHere();
-            //pointOfPlayer();
+            pointOfPlayer();
         }else {
             printRoomNotFound();
         }
