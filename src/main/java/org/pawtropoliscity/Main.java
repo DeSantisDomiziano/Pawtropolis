@@ -35,6 +35,5 @@ public class Main {
 
         CommandController commandController = CommandController.getInstance();
         commandController.startGame();
-
     }
 }

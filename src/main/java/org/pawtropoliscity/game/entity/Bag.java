@@ -1,4 +1,6 @@
 package org.pawtropoliscity.game.entity;
+import org.pawtropoliscity.game.factory.ItemFactory;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -57,7 +59,7 @@ public class Bag {
     }
 
     public void addItem(String itemName){
-        Item item = Room.getItemFromRoom(itemName);
+        Item item = roomMap.get(userPosition).getItemFromRoom(itemName);
         if (item != null){
             if (checkWeight(item)){
                 items.add(item);

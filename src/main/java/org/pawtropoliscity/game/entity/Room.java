@@ -10,13 +10,13 @@ import static org.pawtropoliscity.game.controller.MoveController.userPosition;
 public class Room {
 
     private String name;
-    private static List<Item> listItem = new ArrayList<>();
+    private List<Item> listItem = new ArrayList<>();
     private List<Animal> listAnimal = new ArrayList<>();
 
     public Room(String name, List<Item> listItem, List< Animal> listAnimal) {
         setName(name);
         setListAnimal(listAnimal);
-        Room.listItem = listItem;
+        this.listItem = listItem;
     }
 
     public String getName() {
@@ -53,7 +53,7 @@ public class Room {
 
     public boolean isItems(){
         roomMap.get(userPosition);
-        if (!Room.listItem.isEmpty()){
+        if (!listItem.isEmpty()){
             return true;
         }else {
             System.out.println("Items not found\n");
@@ -64,14 +64,14 @@ public class Room {
     public void addItem(String itemName){
         Item item = Bag.getItemFromBag(itemName);
         if (item != null){
-                listItem.add(item);
+                roomMap.get(userPosition).listItem.add(item);
             }else {
                 System.out.println("There are no items\n");
             }
     }
 
 
-    public static Item getItemFromRoom(String itemName){
+    public Item getItemFromRoom(String itemName){
         return listItem.stream()
                 .filter(item -> item.getName().equalsIgnoreCase(itemName))
                 .findFirst()
@@ -79,9 +79,9 @@ public class Room {
     }
 
     public void removeItem(String itemName){
-        Item item = getItemFromRoom(itemName);
+        Item item = roomMap.get(userPosition).getItemFromRoom(itemName);
         if (item != null){
-            listItem.remove(item);
+            roomMap.get(userPosition).listItem.remove(item);
         }else {
             System.out.println("Item not found");
         }
