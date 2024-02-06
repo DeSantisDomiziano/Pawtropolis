@@ -1,4 +1,6 @@
 package org.pawtropoliscity.game.entity;
+import org.pawtropoliscity.game.controller.CommandController;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +12,9 @@ public class Bag {
     private static List<Item> items = new ArrayList<>();
     private double slotsCapacity;
 
+    public Bag(double slotsCapacity){
+        setSlotsCapacity(slotsCapacity);
+    }
     public Bag(List<Item> items, double slotsCapacity) {
         Bag.items = items;
         setSlotsCapacity(slotsCapacity);
@@ -34,14 +39,14 @@ public class Bag {
         if (getSlotsCapacity() >= getTotalWeightItem() + item.getSlotsRequired()){
             return true;
         }else {
-            System.out.println("Not enough space");
+            CommandController.notSpace();
             return false;
         }
     }
 
     public void lookBag(){
         if (items.isEmpty()) {
-            System.out.println("There are no items\n");
+            CommandController.notItem();
         } else {
             items.stream()
                     .map(item -> items.indexOf(item) + 1 + ") " + item.getName())
@@ -62,7 +67,8 @@ public class Bag {
             if (checkWeight(item)){
                 items.add(item);
             }else {
-                System.out.println("There are no items\n");
+                CommandController.notItem();
+
             }
         }
     }
@@ -72,7 +78,8 @@ public class Bag {
         if (item != null){
             items.remove(item);
         }else {
-            System.out.println("There are no items\n");
+            CommandController.notItem();
+
         }
     }
 

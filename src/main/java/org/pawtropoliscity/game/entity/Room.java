@@ -1,6 +1,8 @@
 package org.pawtropoliscity.game.entity;
 
 import org.pawtropoliscity.animals.abst.Animal;
+import org.pawtropoliscity.game.controller.CommandController;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +15,7 @@ public class Room {
     private List<Item> listItem = new ArrayList<>();
     private List<Animal> listAnimal = new ArrayList<>();
 
+    public Room(){}
     public Room(String name, List<Item> listItem, List<Animal> listAnimal) {
         setName(name);
         setListAnimal(listAnimal);
@@ -56,7 +59,7 @@ public class Room {
         if (!listItem.isEmpty()) {
             return true;
         } else {
-            System.out.println("Items not found\n");
+            CommandController.itemNotFound();
             return false;
         }
     }
@@ -66,7 +69,8 @@ public class Room {
         if (item != null) {
             roomMap.get(userPosition).listItem.add(item);
         } else {
-            System.out.println("There are no items\n");
+            CommandController.notItem();
+
         }
     }
 
@@ -83,7 +87,8 @@ public class Room {
         if (item != null) {
             roomMap.get(userPosition).listItem.remove(item);
         } else {
-            System.out.println("Item not found");
+            CommandController.itemNotFound();
+
         }
 
     }

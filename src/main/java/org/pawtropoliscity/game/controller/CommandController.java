@@ -24,8 +24,8 @@ public class CommandController {
         }
         return instance;
     }
-    private final Bag bag = new Bag(new ArrayList<>(), 20);
-    private final Room room = new Room("", new ArrayList<>(), new ArrayList<>());
+    private final Bag bag = new Bag(20);
+    private final Room room = new Room();
     private final MapController mapController = MapController.getInstance();
     private final MoveController moveController = MoveController.getInstance();
     public static Player player = new Player("", 100);
@@ -58,6 +58,12 @@ public class CommandController {
     public void printExit(){
         System.out.println("You exit\n");
     }
+
+    public static void notSpace(){ System.out.println("Not enough space");}
+
+    public static void notItem() {System.out.println("There are no items\n");}
+
+    public static void itemNotFound(){System.out.println("Items not found\n");}
 
 
 
