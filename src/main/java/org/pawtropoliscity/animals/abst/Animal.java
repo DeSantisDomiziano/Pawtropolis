@@ -1,8 +1,6 @@
-package org.java.animals.abst;
+package org.pawtropoliscity.animals.abst;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Date;
 
 public abstract class Animal {
     private String name;

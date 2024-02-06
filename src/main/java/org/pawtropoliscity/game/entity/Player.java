@@ -1,4 +1,4 @@
-package org.java.game.entity;
+package org.pawtropoliscity.game.entity;
 
 public class Player {
 

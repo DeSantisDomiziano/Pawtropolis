@@ -1,23 +1,21 @@
-package org.java.game.controller;
+package org.pawtropoliscity.game.controller;
 
-import org.java.game.entity.Item;
-import org.java.game.entity.Player;
-import org.java.game.entity.Room;
+import org.pawtropoliscity.game.entity.Item;
+import org.pawtropoliscity.game.entity.Player;
+import org.pawtropoliscity.game.entity.Room;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
-import static org.java.game.controller.MapController.roomMap;
-import static org.java.game.controller.MoveController.printCommandNotFound;
-import static org.java.game.controller.MoveController.userPosition;
+import static org.pawtropoliscity.game.controller.MapController.roomMap;
+import static org.pawtropoliscity.game.controller.MoveController.printCommandNotFound;
+import static org.pawtropoliscity.game.controller.MoveController.userPosition;
 
 public class GameController {
 
     private static GameController instance = null;
 
-    private GameController(){
-
-    }
+    private GameController(){}
 
     public static GameController getInstance() {
         if( instance == null) {
@@ -25,7 +23,7 @@ public class GameController {
         }
         return instance;
     }
-    private final ActionController actionController = ActionController.getInstance();
+    private final CommandController commandController = CommandController.getInstance();
     private final MapController mapController = MapController.getInstance();
     private final MoveController moveController = MoveController.getInstance();
     public static Player player = new Player("", 100);
@@ -119,16 +117,16 @@ public class GameController {
                             moveController.changeRoom(command);
                             break;
                         case 2:
-                            actionController.addItemsToBag();
+                            commandController.addItemsToBag();
                             break;
                         case 3:
-                            actionController.removeItemsFromBag();
+                            commandController.removeItemsFromBag();
                             break;
                         case 4:
-                            actionController.lookRoom();
+                            commandController.lookRoom();
                             break;
                         case 5:
-                            actionController.lookBag();
+                            commandController.lookBag();
                             break;
                         case 6:
                             printTurnOff();

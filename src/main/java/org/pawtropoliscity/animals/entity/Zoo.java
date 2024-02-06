@@ -1,8 +1,8 @@
-package org.java.animals.entity;
+package org.pawtropoliscity.animals.entity;
 
-import org.java.animals.abst.Animal;
-import org.java.animals.abst.AnimalWithTail;
-import org.java.animals.abst.AnimalWithWings;
+import org.pawtropoliscity.animals.abst.Animal;
+import org.pawtropoliscity.animals.abst.AnimalWithTail;
+import org.pawtropoliscity.animals.abst.AnimalWithWings;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -24,7 +24,7 @@ public class Zoo {
     }
     //End Bill Pugh Singleton
 
-    private Map<Class<? extends Animal>, ArrayList<Animal>> allAnimals = new HashMap<>();
+    private static Map<Class<? extends Animal>, ArrayList<Animal>> allAnimals = new HashMap<>();
 
     public void addAnimal(Animal animal) {
         allAnimals.computeIfAbsent(animal.getClass(), k -> new ArrayList<>()).add(animal);
@@ -32,7 +32,7 @@ public class Zoo {
     }
 
     @SuppressWarnings("unchecked")
-    public <T extends Animal> List<T> getAnimalsByClass(Class<T> clazz){
+    public static <T extends Animal> List<T>  getAnimalsByClass(Class<T> clazz){
         if (allAnimals.get(clazz) != null){
             return (ArrayList<T>) allAnimals.get(clazz);
         }

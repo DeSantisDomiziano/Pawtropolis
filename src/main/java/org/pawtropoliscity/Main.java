@@ -1,6 +1,6 @@
-package org.java;
-import org.java.animals.entity.*;
-import org.java.game.controller.GameController;
+package org.pawtropoliscity;
+import org.pawtropoliscity.animals.entity.*;
+import org.pawtropoliscity.game.controller.GameController;
 
 import java.time.LocalDate;
 
@@ -35,5 +35,14 @@ public class Main {
 
         GameController gameController = GameController.getInstance();
         gameController.startGame();
+
+        /*
+            2. input da int  a string
+             4. togliere static dai metodi,
+             5. aggiungere una Factory per items e una per animals
+               7.  Creare un metodo nella bag per fare i controlli dello spazio nella borsa
+
+                8. Le direzioni potrebbero essere più di 4
+         */
     }
 }

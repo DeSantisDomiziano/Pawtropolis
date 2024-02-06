@@ -1,12 +1,12 @@
-package org.java.game.controller;
+package org.pawtropoliscity.game.controller;
 
-import org.java.game.entity.Coordinate;
-import org.java.game.entity.Room;
+import org.pawtropoliscity.game.entity.Coordinate;
+import org.pawtropoliscity.game.entity.Room;
 
 import java.util.InputMismatchException;
 
-import static org.java.game.controller.GameController.*;
-import static org.java.game.controller.MapController.roomMap;
+import static org.pawtropoliscity.game.controller.GameController.*;
+import static org.pawtropoliscity.game.controller.MapController.roomMap;
 public class MoveController {
 
     private static MoveController instance = null;
