@@ -28,6 +28,7 @@ public class CommandController {
             System.out.println("Invalid command\n");
         }
 
+
         public Bag getBag() {
             return bag;
         }
@@ -66,5 +67,6 @@ public class CommandController {
         public void lookBag(){
             bag.printItemList();
         }
+
     }
 

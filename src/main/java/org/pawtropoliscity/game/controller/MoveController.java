@@ -52,7 +52,6 @@ public class MoveController {
             System.out.println(direction + ": " + adjacentRoom.getName());
         }
     }
-    public static void  printCommandNotFound(){System.out.println("Command not found. Repeat the command\n");}
 
     public void pointOfPlayer() {
         Room room = roomMap.get(player.getCoordinate());

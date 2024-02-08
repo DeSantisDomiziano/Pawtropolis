@@ -6,6 +6,11 @@ import static org.pawtropoliscity.game.entity.Player.player;
 public class GameController {
 
     private static GameController instance = null;
+    private final MapController mapController = MapController.getInstance();
+    private final MoveController moveController = MoveController.getInstance();
+    private final CommandController commandController = CommandController.getInstance();
+    public static Scanner scanner = new Scanner(System.in);
+    private boolean exit = false;
 
     private GameController(){}
 
@@ -15,12 +20,6 @@ public class GameController {
         }
         return instance;
     }
-    private final MapController mapController = MapController.getInstance();
-    private final MoveController moveController = MoveController.getInstance();
-    private final CommandController commandController = CommandController.getInstance();
-
-
-    public static Scanner scanner = new Scanner(System.in);
 
 
     public void printRoomName(){
@@ -42,11 +41,7 @@ public class GameController {
     private void printCommand(){
         System.out.println("Write a command:\n");
     }
-
-    private void exit(){System.out.println("game closed");}
-
-
-
+    private void printExit(){System.out.println("Game closed");}
 
 
 
@@ -59,9 +54,10 @@ public class GameController {
         printWelcomeName();
         printRoomName();
 
+
         do{
             printCommand();
-            String command = scanner.nextLine();
+            String command = scanner.nextLine().toLowerCase().trim();
 
             switch (command){
                 case "go north":
@@ -79,14 +75,14 @@ public class GameController {
                 case "get item":
                     MapController.roomMap.get(player.getCoordinate()).printItemList();
                     if (MapController.roomMap.get(player.getCoordinate()).checkEmptyListItem()){
-                        String itemNameToAdd = scanner.nextLine().toLowerCase();
+                        String itemNameToAdd = scanner.nextLine().toLowerCase().trim();
                         commandController.getItem(itemNameToAdd);
                     }
                     break;
                 case "drop item":
                     commandController.getBag().printItemList();
                     if (commandController.getBag().checkEmptyListItem()){
-                        String itemNameToRemove = scanner.nextLine().toLowerCase();
+                        String itemNameToRemove = scanner.nextLine().toLowerCase().trim();
                         commandController.dropItem(itemNameToRemove);
                     }
                     break;
@@ -97,13 +93,14 @@ public class GameController {
                     commandController.lookBag();
                     break;
                 case "exit":
-                    exit();
+                    printExit();
+                    exit = true;
                     break;
                 default:
                     printInvalidCommand();
                     break;
             }
-        }while (true);
+        }while (!exit);
     }
 
 }

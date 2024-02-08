@@ -9,7 +9,7 @@ public class Bag {
 
     public Bag(List<Item> itemList, int slotsCapacity) {
         this.itemList = itemList;
-        this.slotsCapacity = slotsCapacity;
+        setSlotsCapacity(slotsCapacity);
     }
 
     public Bag(int slotsCapacity){

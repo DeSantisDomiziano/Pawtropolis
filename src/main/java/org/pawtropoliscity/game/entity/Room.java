@@ -13,7 +13,7 @@ public class Room {
     private final List<Animal> animalList;
 
     public Room(String name, List<Item> itemList, List<Animal> animalList) {
-        this.name = name;
+        setName(name);
         this.itemList = itemList;
         this.animalList = animalList;
     }
