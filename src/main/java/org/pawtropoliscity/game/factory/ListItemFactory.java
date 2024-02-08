@@ -1,21 +1,19 @@
 package org.pawtropoliscity.game.factory;
 
 import org.pawtropoliscity.game.entity.Item;
-import org.pawtropoliscity.game.entity.Room;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class ItemFactory {
+public class ListItemFactory {
 
-    private static ItemFactory instance = null;
+    private static ListItemFactory instance = null;
 
-    private ItemFactory(){}
+    private ListItemFactory(){}
 
-    public static ItemFactory getInstance() {
+    public static ListItemFactory getInstance() {
         if( instance == null) {
-            instance = new ItemFactory();
+            instance = new ListItemFactory();
         }
         return instance;
     }
@@ -31,7 +29,7 @@ public class ItemFactory {
             new Item("Poison", "is a poison", 10)
     );
 
-    public List<Item> createRandomItemList(){
+    public List<Item> getRandomItemList(){
         int numIterator = random.nextInt(1, 6);
         List<Item> randomItemList = new ArrayList<>();
 

@@ -1,25 +1,21 @@
 package org.pawtropoliscity.game.entity;
 
 import org.pawtropoliscity.animals.abst.Animal;
-import org.pawtropoliscity.game.controller.CommandController;
-
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.pawtropoliscity.game.controller.MapController.roomMap;
-import static org.pawtropoliscity.game.controller.MoveController.userPosition;
+import static org.pawtropoliscity.game.entity.Player.player;
 
 public class Room {
-
     private String name;
-    private List<Item> listItem = new ArrayList<>();
-    private List<Animal> listAnimal = new ArrayList<>();
+    private final List<Item> itemList;
 
-    public Room(){}
-    public Room(String name, List<Item> listItem, List<Animal> listAnimal) {
-        setName(name);
-        setListAnimal(listAnimal);
-        this.listItem = listItem;
+    private final List<Animal> animalList;
+
+    public Room(String name, List<Item> itemList, List<Animal> animalList) {
+        this.name = name;
+        this.itemList = itemList;
+        this.animalList = animalList;
     }
 
     public String getName() {
@@ -30,72 +26,40 @@ public class Room {
         this.name = name;
     }
 
-
-    public List<Animal> getListAnimal() {
-        return listAnimal;
+    public void addItem(Item item){
+        itemList.add(item);
     }
 
-    public void setListAnimal(List<Animal> listAnimal) {
-        this.listAnimal = listAnimal;
+    public void removeItem(Item item){
+        itemList.remove(item);
     }
 
-
-    public void lookRoom() {
-        System.out.println("You are here: " + roomMap.get(userPosition).getName() + "\n"
-                + "\nItems: " + roomMap.get(userPosition).listItem.toString()
-                + "\nNPC: " + roomMap.get(userPosition).getListAnimal().toString() + "\n");
-    }
-
-    public void printItems() {
-        if (!roomMap.get(userPosition).listItem.isEmpty()) {
-            roomMap.get(userPosition).listItem.stream()
-                    .map(item -> roomMap.get(userPosition).listItem.indexOf(item) + 1 + ") " + item.getName())
-                    .forEach(System.out::println);
-        }
-    }
-
-    public boolean isItems() {
-        roomMap.get(userPosition);
-        if (!listItem.isEmpty()) {
-            return true;
-        } else {
-            CommandController.itemNotFound();
-            return false;
-        }
-    }
-
-    public void addItem(String itemName) {
-        Item item = Bag.getItemFromBag(itemName);
-        if (item != null) {
-            roomMap.get(userPosition).listItem.add(item);
-        } else {
-            CommandController.notItem();
-
-        }
-    }
-
-
-    public Item getItemFromRoom(String itemName) {
-        return listItem.stream()
-                .filter(item -> item.getName().equalsIgnoreCase(itemName))
+    public Item getItemFromRoom(String name){
+        return itemList.stream()
+                .filter(item -> item.getName().equalsIgnoreCase(name))
                 .findFirst()
                 .orElse(null);
     }
 
-    public void removeItem(String itemName) {
-        Item item = roomMap.get(userPosition).getItemFromRoom(itemName);
-        if (item != null) {
-            roomMap.get(userPosition).listItem.remove(item);
-        } else {
-            CommandController.itemNotFound();
-
-        }
-
+    public void printItemList(){
+        System.out.printf("Item: %s%n", itemList);
     }
 
-    public static Item checkPoison() {
-        Room room = roomMap.get(userPosition);
-        List<Item> itemList = room.listItem;
+    public void printAnimalList(){
+        System.out.printf("NPC: %s%n", animalList);
+    }
+
+    public boolean checkEmptyListItem(){
+        return !roomMap.get(player.getCoordinate()).itemList.isEmpty();
+    }
+
+    public boolean checkItemInRoom(Item item){
+        return roomMap.get(player.getCoordinate()).itemList.contains(item);
+    }
+
+    public Item checkPoison() {
+        Room room = roomMap.get(player.getCoordinate());
+        List<Item> itemList = room.itemList;
         for (Item item : itemList) {
             if (item.getName().equalsIgnoreCase("poison")) {
                 if (itemList.contains(item)) {

@@ -5,9 +5,12 @@ public class Player {
     private String name;
     private int lifePoints;
 
-    public Player(String name, int lifePoints) {
+    private Coordinate coordinate;
+
+    public Player(String name, int lifePoints, Coordinate coordinate) {
         setName(name);
         setLifePoints(lifePoints);
+        setCoordinate(coordinate);
     }
 
     public String getName() {
@@ -25,4 +28,11 @@ public class Player {
     public void setLifePoints(int lifePoints) {
         this.lifePoints = lifePoints;
     }
+    public Coordinate getCoordinate() {
+        return coordinate;
+    }
+    public void setCoordinate(Coordinate coordinate) {
+        this.coordinate = coordinate;
+    }
+    public static Player player = new Player("", 100, new Coordinate(0,0));
 }

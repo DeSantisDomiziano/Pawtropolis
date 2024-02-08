@@ -1,6 +1,6 @@
 package org.pawtropoliscity;
 import org.pawtropoliscity.animals.entity.*;
-import org.pawtropoliscity.game.controller.CommandController;
+import org.pawtropoliscity.game.controller.GameController;
 
 import java.time.LocalDate;
 
@@ -33,7 +33,7 @@ public class Main {
         zoo.addAnimal(e2);
         zoo.addAnimal(e3);
 
-        CommandController commandController = CommandController.getInstance();
-        commandController.startGame();
+        GameController gameController = GameController.getInstance();
+        gameController.startGame();
     }
 }
