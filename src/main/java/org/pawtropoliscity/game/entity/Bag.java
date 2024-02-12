@@ -20,10 +20,6 @@ public class Bag {
         return slotsCapacity;
     }
 
-    public void setSlotsCapacity(int slotsCapacity) {
-        this.slotsCapacity = slotsCapacity;
-    }
-
     public void addItem(Item item){
         itemList.add(item);
     }
@@ -45,8 +41,10 @@ public class Bag {
                 .sum();
     }
 
-    public void printItemList(){
-        System.out.printf("Item: %s%n", itemList);
+    public List<String> getBagsItems(){
+        return itemList.stream()
+                .map(Item::getName)
+                .toList();
     }
 
     public boolean checkSlotsCapacity(Item item){

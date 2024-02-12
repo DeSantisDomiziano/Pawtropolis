@@ -3,6 +3,9 @@ package org.pawtropoliscity.game.controller;
 import org.pawtropoliscity.game.entity.Bag;
 import org.pawtropoliscity.game.entity.Item;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import static org.pawtropoliscity.game.entity.Player.player;
 
 public class CommandController {
@@ -65,7 +68,16 @@ public class CommandController {
         }
 
         public void lookBag(){
-            bag.printItemList();
+            List<String> bagsItems = bag.getBagsItems();
+            String result = "Items: " + String.join(", ", bagsItems);
+
+            if (!bagsItems.isEmpty()) {
+                result += ".";
+            } else {
+                result += "you don't have items";
+            }
+
+            System.out.println(result);
         }
 
     }
