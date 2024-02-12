@@ -1,4 +1,6 @@
 package org.pawtropoliscity.game.controller;
+import org.pawtropoliscity.game.entity.Bag;
+import org.pawtropoliscity.game.entity.Item;
 import org.pawtropoliscity.game.entity.Move;
 
 import java.util.Scanner;
@@ -20,6 +22,7 @@ public class GameController {
     private final MapController mapController = MapController.getInstance();
     private final MoveController moveController = MoveController.getInstance();
     private final CommandController commandController = CommandController.getInstance();
+    private boolean exit = false;
 
 
     public static Scanner scanner = new Scanner(System.in);
@@ -42,14 +45,10 @@ public class GameController {
     }
 
     private void printCommand(){
-        System.out.println("Write a command:\n");
+        System.out.print("Write a command:\n> ");
     }
 
-    private void exit(){System.out.println("game closed");}
-
-
-
-
+    private void printExitMessage(){System.out.println("game closed");}
 
 
     public void startGame(){
@@ -63,42 +62,47 @@ public class GameController {
 
         do{
             printCommand();
-            String command = scanner.nextLine();
+            String command = scanner.nextLine().trim();
 
-            if (command.trim().startsWith("go")) {
-                Move move = Move.valueOf(command.substring(3).toUpperCase().trim());
-                moveController.movePlayer(move);
+            if (command.startsWith("go")) {
+                try {
+                    Move move = Move.valueOf(command.substring(3).toUpperCase().trim());
+                    moveController.movePlayer(move);
+                }catch (IllegalArgumentException e) {
+                    System.out.println("direction not exists");
+                }
+
+            }else if(command.startsWith("get") || command.startsWith("drop")) {
+                String[] splitCommand = command.split(" ");
+                String nameItem = splitCommand[splitCommand.length -1];
+                String actionCommand = splitCommand[0];
+
+                switch (actionCommand) {
+                    case "get":
+                        commandController.getItem(nameItem);
+                        break;
+                    case "drop":
+                        commandController.dropItem(nameItem);
+                        break;
+                }
 
             } else {
                 switch (command){
-                    case "get item":
-                        MapController.roomMap.get(player.getCoordinate()).printItemList();
-                        if (MapController.roomMap.get(player.getCoordinate()).checkEmptyListItem()){
-                            String itemNameToAdd = scanner.nextLine().toLowerCase();
-                            commandController.getItem(itemNameToAdd);
-                        }
-                        break;
-                    case "drop item":
-                        commandController.getBag().printItemList();
-                        if (commandController.getBag().checkEmptyListItem()){
-                            String itemNameToRemove = scanner.nextLine().toLowerCase();
-                            commandController.dropItem(itemNameToRemove);
-                        }
-                        break;
-                    case "look room":
+                    case "look":
                         commandController.lookRoom();
                         break;
-                    case "look bag":
+                    case "bag":
                         commandController.lookBag();
                         break;
                     case "exit":
-                        exit();
+                        exit = !exit;
+                        printExitMessage();
                         break;
                     default:
                         printInvalidCommand();
                         break;
                 }
             }
-        } while (true);
+        } while (!exit);
     }
 }
