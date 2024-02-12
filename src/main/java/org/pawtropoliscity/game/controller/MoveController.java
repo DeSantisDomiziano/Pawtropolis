@@ -1,6 +1,7 @@
 package org.pawtropoliscity.game.controller;
 
 import org.pawtropoliscity.game.entity.Coordinate;
+import org.pawtropoliscity.game.entity.Move;
 import org.pawtropoliscity.game.entity.Room;
 import java.util.Objects;
 
@@ -67,6 +68,35 @@ public class MoveController {
         }
     }
 
+
+
+    public void movePlayer(Move move) {
+
+        switch (move){
+            case NORTH:
+                coordinate = new Coordinate(player.getCoordinate().getY() + Move.NORTH.getY(), player.getCoordinate().getX());
+                break;
+            case SOUTH:
+                coordinate = new Coordinate(player.getCoordinate().getY() + Move.SOUTH.getY(), player.getCoordinate().getX());
+                break;
+            case WEST:
+                coordinate = new Coordinate(player.getCoordinate().getY(), player.getCoordinate().getX() + Move.WEST.getX());
+                break;
+            case EAST:
+                coordinate = new Coordinate(player.getCoordinate().getY(), player.getCoordinate().getX() + Move.EAST.getX());
+                break;
+        }
+
+        if (roomMap.containsKey(coordinate)) {
+            player.setCoordinate(coordinate);
+            printYouAreHere();
+        }else {
+            printRoomNotFound();
+        }
+
+    }
+
+    /*
     public void goToNorth() {
         coordinate = new Coordinate(player.getCoordinate().getY() - 1, player.getCoordinate().getX());
         if(roomMap.containsKey(coordinate)) {
@@ -108,10 +138,7 @@ public class MoveController {
             printRoomNotFound();
         }
     }
-
-
-
-
+     */
 
 
 }
