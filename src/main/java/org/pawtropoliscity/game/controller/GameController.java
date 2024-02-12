@@ -1,4 +1,6 @@
 package org.pawtropoliscity.game.controller;
+import org.pawtropoliscity.game.entity.Move;
+
 import java.util.Scanner;
 import static org.pawtropoliscity.game.controller.MapController.roomMap;
 import static org.pawtropoliscity.game.entity.Player.player;
@@ -6,11 +8,6 @@ import static org.pawtropoliscity.game.entity.Player.player;
 public class GameController {
 
     private static GameController instance = null;
-    private final MapController mapController = MapController.getInstance();
-    private final MoveController moveController = MoveController.getInstance();
-    private final CommandController commandController = CommandController.getInstance();
-    public static Scanner scanner = new Scanner(System.in);
-    private boolean exit = false;
 
     private GameController(){}
 
@@ -20,6 +17,12 @@ public class GameController {
         }
         return instance;
     }
+    private final MapController mapController = MapController.getInstance();
+    private final MoveController moveController = MoveController.getInstance();
+    private final CommandController commandController = CommandController.getInstance();
+
+
+    public static Scanner scanner = new Scanner(System.in);
 
 
     public void printRoomName(){
@@ -41,7 +44,11 @@ public class GameController {
     private void printCommand(){
         System.out.println("Write a command:\n");
     }
-    private void printExit(){System.out.println("Game closed");}
+
+    private void exit(){System.out.println("game closed");}
+
+
+
 
 
 
@@ -54,53 +61,44 @@ public class GameController {
         printWelcomeName();
         printRoomName();
 
-
         do{
             printCommand();
-            String command = scanner.nextLine().toLowerCase().trim();
+            String command = scanner.nextLine();
 
-            switch (command){
-                case "go north":
-                    moveController.goToNorth();
-                    break;
-                case "go south":
-                    moveController.goToSouth();
-                    break;
-                case "go west":
-                    moveController.goToWest();
-                    break;
-                case "go east":
-                    moveController.goToEast();
-                    break;
-                case "get item":
-                    MapController.roomMap.get(player.getCoordinate()).printItemList();
-                    if (MapController.roomMap.get(player.getCoordinate()).checkEmptyListItem()){
-                        String itemNameToAdd = scanner.nextLine().toLowerCase().trim();
-                        commandController.getItem(itemNameToAdd);
-                    }
-                    break;
-                case "drop item":
-                    commandController.getBag().printItemList();
-                    if (commandController.getBag().checkEmptyListItem()){
-                        String itemNameToRemove = scanner.nextLine().toLowerCase().trim();
-                        commandController.dropItem(itemNameToRemove);
-                    }
-                    break;
-                case "look room":
-                    commandController.lookRoom();
-                    break;
-                case "look bag":
-                    commandController.lookBag();
-                    break;
-                case "exit":
-                    printExit();
-                    exit = true;
-                    break;
-                default:
-                    printInvalidCommand();
-                    break;
+            if (command.trim().startsWith("go")) {
+                Move move = Move.valueOf(command.substring(3).toUpperCase().trim());
+                moveController.movePlayer(move);
+
+            } else {
+                switch (command){
+                    case "get item":
+                        MapController.roomMap.get(player.getCoordinate()).printItemList();
+                        if (MapController.roomMap.get(player.getCoordinate()).checkEmptyListItem()){
+                            String itemNameToAdd = scanner.nextLine().toLowerCase();
+                            commandController.getItem(itemNameToAdd);
+                        }
+                        break;
+                    case "drop item":
+                        commandController.getBag().printItemList();
+                        if (commandController.getBag().checkEmptyListItem()){
+                            String itemNameToRemove = scanner.nextLine().toLowerCase();
+                            commandController.dropItem(itemNameToRemove);
+                        }
+                        break;
+                    case "look room":
+                        commandController.lookRoom();
+                        break;
+                    case "look bag":
+                        commandController.lookBag();
+                        break;
+                    case "exit":
+                        exit();
+                        break;
+                    default:
+                        printInvalidCommand();
+                        break;
+                }
             }
-        }while (!exit);
+        } while (true);
     }
-
 }
