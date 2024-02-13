@@ -3,8 +3,8 @@ package org.pawtropoliscity.game.entity;
 public class Item {
     private String name;
     private String description;
-    private double slotsRequired;
-    public Item(String name, String description, double slotsRequired) {
+    private int slotsRequired;
+    public Item(String name, String description, int slotsRequired) {
         setName(name);
         setDescription(description);
         setSlotsRequired(slotsRequired);
@@ -25,11 +25,11 @@ public class Item {
         this.description = description;
     }
 
-    public double getSlotsRequired() {
+    public int getSlotsRequired() {
         return slotsRequired;
     }
 
-    public void setSlotsRequired(double slotsRequired) {
+    public void setSlotsRequired(int slotsRequired) {
         this.slotsRequired = slotsRequired;
     }
 

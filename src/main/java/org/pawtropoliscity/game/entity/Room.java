@@ -41,23 +41,11 @@ public class Room {
                 .orElse(null);
     }
 
-    public void printItemList(){
-        System.out.printf("Item: %s%n", itemList);
-    }
-
-    public void printAnimalList(){
-        System.out.printf("NPC: %s%n", animalList);
-    }
-
-    public boolean checkEmptyListItem(){
-        return !roomMap.get(player.getCoordinate()).itemList.isEmpty();
-    }
-
-    public boolean checkItemInRoom(Item item){
+    public boolean containsItemInRoom(Item item){
         return roomMap.get(player.getCoordinate()).itemList.contains(item);
     }
 
-    public Item checkPoison() {
+    public Item poisonItem() {
         Room room = roomMap.get(player.getCoordinate());
         List<Item> itemList = room.itemList;
         for (Item item : itemList) {
@@ -68,6 +56,18 @@ public class Room {
             }
         }
         return null;
+    }
+
+    public List<String> getRoomItems(){
+        return itemList.stream()
+                .map(Item::getName)
+                .toList();
+    }
+
+    public List<String> getRoomAnimals(){
+        return animalList.stream()
+                .map(Animal::getName)
+                .toList();
     }
 
 
