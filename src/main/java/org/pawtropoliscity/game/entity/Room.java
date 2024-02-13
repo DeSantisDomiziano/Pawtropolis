@@ -45,7 +45,7 @@ public class Room {
         return roomMap.get(player.getCoordinate()).itemList.contains(item);
     }
 
-    public Item poisonItem() {
+    public Item getPoisonItem() {
         Room room = roomMap.get(player.getCoordinate());
         List<Item> itemList = room.itemList;
         for (Item item : itemList) {
@@ -66,7 +66,7 @@ public class Room {
 
     public List<String> getRoomAnimals(){
         return animalList.stream()
-                .map(Animal::getName)
+                .map(animal -> animal.getName() + " (" + animal.getClass().getSimpleName() + ")")
                 .toList();
     }
 

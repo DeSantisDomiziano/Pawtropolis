@@ -39,8 +39,8 @@ public class Player {
     public static Player player = new Player("", 100, new Coordinate(0,0));
 
     public void decrementLifePoints(Room room){
-        if(room.poisonItem()!= null) {
-            player.setLifePoints((player.getLifePoints() - Objects.requireNonNull(room.poisonItem()).getSlotsRequired()));
+        if(room.getPoisonItem()!= null) {
+            player.setLifePoints((player.getLifePoints() - Objects.requireNonNull(room.getPoisonItem()).getSlotsRequired()));
         }
     }
 
