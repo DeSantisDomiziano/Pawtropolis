@@ -1,7 +1,6 @@
 package org.pawtropoliscity.game.controller;
-import org.pawtropoliscity.game.entity.Bag;
-import org.pawtropoliscity.game.entity.Item;
 import org.pawtropoliscity.game.entity.Move;
+import org.pawtropoliscity.game.entity.Room;
 
 import java.util.Scanner;
 import static org.pawtropoliscity.game.controller.MapController.roomMap;
@@ -37,10 +36,10 @@ public class GameController {
     public void printQuestionName(){ System.out.println("Who's playing?");}
     public void printWelcomeName(){ System.out.println("welcome " + player.getName());}
 
-    public static void printCurrentLifeOfPoint(){
+    public void printCurrentLifeOfPoint(){
         System.out.println("your current life of point are : " + player.getLifePoints());
     }
-    public static void printLifeOfPointFinish(){
+    public void printGameOver(){
         System.out.println(" GAME OVER " );
     }
 
@@ -49,6 +48,17 @@ public class GameController {
     }
 
     private void printExitMessage(){System.out.println("game closed");}
+
+    public void currentLifePoints() {
+        Room room = roomMap.get(player.getCoordinate());
+        player.decrementLifePoints(room);
+        printCurrentLifeOfPoint();
+
+        if (player.isDead()){
+            printGameOver();
+            System.exit(0);
+        }
+    }
 
 
     public void startGame(){
@@ -68,6 +78,7 @@ public class GameController {
                 try {
                     Move move = Move.valueOf(command.substring(3).toUpperCase().trim());
                     moveController.movePlayer(move);
+                    currentLifePoints();
                 }catch (IllegalArgumentException e) {
                     System.out.println("direction not exists");
                 }

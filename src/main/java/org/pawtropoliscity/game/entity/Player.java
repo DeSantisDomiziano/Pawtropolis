@@ -1,5 +1,7 @@
 package org.pawtropoliscity.game.entity;
 
+import java.util.Objects;
+
 public class Player {
 
     private String name;
@@ -35,4 +37,14 @@ public class Player {
         this.coordinate = coordinate;
     }
     public static Player player = new Player("", 100, new Coordinate(0,0));
+
+    public void decrementLifePoints(Room room){
+        if(room.poisonItem()!= null) {
+            player.setLifePoints((player.getLifePoints() - Objects.requireNonNull(room.poisonItem()).getSlotsRequired()));
+        }
+    }
+
+    public boolean isDead(){
+        return player.getLifePoints() == 0;
+    }
 }

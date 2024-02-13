@@ -3,9 +3,7 @@ package org.pawtropoliscity.game.controller;
 import org.pawtropoliscity.game.entity.Coordinate;
 import org.pawtropoliscity.game.entity.Move;
 import org.pawtropoliscity.game.entity.Room;
-import java.util.Objects;
 
-import static org.pawtropoliscity.game.controller.GameController.*;
 import static org.pawtropoliscity.game.controller.MapController.roomMap;
 import static org.pawtropoliscity.game.entity.Player.player;
 
@@ -32,7 +30,7 @@ public class MoveController {
         System.out.println("Room not found\n");
     }
 
-    public void printYouAreHere() {
+    public void printCurrentRoomDescription() {
 
         System.out.println( player.getName() + " You are here:  " + roomMap.get(player.getCoordinate()).getName() + "\n");
 
@@ -54,20 +52,6 @@ public class MoveController {
         }
     }
 
-    public void pointOfPlayer() {
-        Room room = roomMap.get(player.getCoordinate());
-        if(room.checkPoison()!= null) {
-            player.setLifePoints((int) (player.getLifePoints() - Objects.requireNonNull(room.checkPoison()).getSlotsRequired()));
-        }
-        if (player.getLifePoints() == 0){
-            printLifeOfPointFinish();
-            System.exit(0);
-        } else {
-            printCurrentLifeOfPoint();
-        }
-    }
-
-
 
     public void movePlayer(Move move) {
 
@@ -88,7 +72,7 @@ public class MoveController {
 
         if (roomMap.containsKey(coordinate)) {
             player.setCoordinate(coordinate);
-            printYouAreHere();
+            printCurrentRoomDescription();
         }else {
             printRoomNotFound();
         }

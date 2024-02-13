@@ -5,15 +5,16 @@ import java.util.List;
 
 public class Bag {
     private final List<Item> itemList;
-    private int slotsCapacity;
+    private final int MAX_SLOTS_CAPACITY = 20;
 
-    public Bag(List<Item> itemList, int slotsCapacity) {
+    private int slotsCapacity = MAX_SLOTS_CAPACITY;
+
+    public Bag(List<Item> itemList){
         this.itemList = itemList;
-        setSlotsCapacity(slotsCapacity);
     }
 
-    public Bag(int slotsCapacity){
-        this(new ArrayList<>(), slotsCapacity);
+    public Bag(){
+        this(new ArrayList<>());
     }
 
     public int getSlotsCapacity() {
@@ -35,28 +36,26 @@ public class Bag {
                 .orElse(null);
     }
 
-    public double getSlotsCapacityRemain(){
-        return itemList.stream()
-                .mapToDouble(Item::getSlotsRequired)
-                .sum();
-    }
-
     public List<String> getBagsItems(){
         return itemList.stream()
                 .map(Item::getName)
                 .toList();
     }
 
-    public boolean checkSlotsCapacity(Item item){
-        return getSlotsCapacity() >= getSlotsCapacityRemain() + item.getSlotsRequired();
+    public boolean canFitInBag(Item item){
+        return slotsCapacity >= item.getSlotsRequired();
     }
 
-    public boolean checkItemInBag(Item item){
+    public void decrementSlotsCapacity(Item item){
+        slotsCapacity -= item.getSlotsRequired();
+    }
+
+    public void incrementSlotsCapacity(Item item){
+        slotsCapacity += item.getSlotsRequired();
+    }
+
+    public boolean containsItemInBag(Item item){
         return itemList.contains(item);
-    }
-
-    public boolean checkEmptyListItem(){
-        return !itemList.isEmpty();
     }
 
 }
