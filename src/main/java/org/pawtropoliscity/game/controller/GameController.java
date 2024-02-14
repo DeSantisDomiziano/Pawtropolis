@@ -76,7 +76,9 @@ public class GameController {
 
             if (command.startsWith("go")) {
                 try {
-                    Move move = Move.valueOf(command.substring(3).toUpperCase().trim());
+                    String[] splitOperator = command.split(" ");
+                    String direction = splitOperator[splitOperator.length - 1];
+                    Move move = Move.valueOf(direction.toUpperCase().trim());
                     moveController.movePlayer(move);
                     currentLifePoints();
                 }catch (IllegalArgumentException e) {
