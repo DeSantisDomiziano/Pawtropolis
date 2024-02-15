@@ -55,20 +55,7 @@ public class MoveController {
 
     public void changeRoom(Direction direction) {
 
-        switch (direction){
-            case NORTH:
-                coordinate = new Coordinate(player.getCoordinate().getY() + Direction.NORTH.getY(), player.getCoordinate().getX());
-                break;
-            case SOUTH:
-                coordinate = new Coordinate(player.getCoordinate().getY() + Direction.SOUTH.getY(), player.getCoordinate().getX());
-                break;
-            case WEST:
-                coordinate = new Coordinate(player.getCoordinate().getY(), player.getCoordinate().getX() + Direction.WEST.getX());
-                break;
-            case EAST:
-                coordinate = new Coordinate(player.getCoordinate().getY(), player.getCoordinate().getX() + Direction.EAST.getX());
-                break;
-        }
+        coordinate = new Coordinate(player.getCoordinate().getY() + direction.getY(), player.getCoordinate().getX() + direction.getX());
 
         if (roomMap.containsKey(coordinate)) {
             player.setCoordinate(coordinate);

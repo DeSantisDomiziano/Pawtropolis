@@ -39,14 +39,21 @@ public class GameController {
     public void printCurrentLifeOfPoint(){
         System.out.println("your current life of point are : " + player.getLifePoints());
     }
-    public void printGameOver(){
+    private void printGameOver(){
         System.out.println(" GAME OVER " );
     }
 
-    private void print1WriteACommand(){
+    private void printWriteACommand(){
         System.out.print("Write a command:\n> ");
     }
 
+    private void printHelpCommandsMessage() {
+        System.out.println("these are all commands:\n👀look\n👜bag" +
+                "\n🏃‍♀️go <choose direction> example -> 1)go north OR 2)go north_east" +
+                "\n🗑️drop <name item>\n🛒get <name item>\nexit");
+
+
+    }
     private void printExitMessage(){System.out.println("game closed");}
 
     public void currentLifePoints() {
@@ -71,21 +78,25 @@ public class GameController {
         printRoomName();
 
         do{
-            print1WriteACommand();
+            printWriteACommand();
             String command = scanner.nextLine().trim();
 
             if (command.startsWith("go")) {
+
                 try {
                     String[] splitCommand = command.split(" ");
                     String direction = splitCommand[splitCommand.length - 1];
                     Direction move = Direction.valueOf(direction.toUpperCase().trim());
                     moveController.changeRoom(move);
                     currentLifePoints();
+
                 }catch (IllegalArgumentException e) {
                     System.out.println("direction not exists");
+
                 }
 
             }else if(command.startsWith("get") || command.startsWith("drop")) {
+
                 String[] splitCommand = command.split(" ");
                 String nameItem = splitCommand[splitCommand.length -1];
                 String actionCommand = splitCommand[0];
@@ -101,6 +112,9 @@ public class GameController {
 
             } else {
                 switch (command){
+                    case "help":
+                        printHelpCommandsMessage();
+                        break;
                     case "look":
                         commandController.lookRoom();
                         break;
