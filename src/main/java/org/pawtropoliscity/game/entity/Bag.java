@@ -46,16 +46,28 @@ public class Bag {
         return slotsCapacity >= item.getSlotsRequired();
     }
 
-    public void decrementSlotsCapacity(Item item){
+    public void decrementCurrentSlotsCapacity(Item item){
         slotsCapacity -= item.getSlotsRequired();
     }
 
-    public void incrementSlotsCapacity(Item item){
+    public void incrementCurrentSlotsCapacity(Item item){
         slotsCapacity += item.getSlotsRequired();
     }
 
     public boolean containsItemInBag(Item item){
         return itemList.contains(item);
+    }
+
+    public void printItems(){
+        String result;
+
+        if (!getBagsItems().isEmpty()) {
+            result = "Items: " + String.join(", ", getBagsItems()) + ".";
+        } else {
+            result = "you don't have items";
+        }
+
+        System.out.println(result);
     }
 
 }

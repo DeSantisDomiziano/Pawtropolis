@@ -1,6 +1,7 @@
 package org.pawtropoliscity.game.entity;
 
 import org.pawtropoliscity.animals.abst.Animal;
+
 import java.util.List;
 
 import static org.pawtropoliscity.game.controller.MapController.roomMap;
@@ -68,6 +69,31 @@ public class Room {
         return animalList.stream()
                 .map(animal -> animal.getName() + " (" + animal.getClass().getSimpleName() + ")")
                 .toList();
+    }
+
+    public void printItems(){
+
+        String result;
+
+        if (!getRoomItems().isEmpty()) {
+            result = "Items: " + String.join(", ", getRoomItems()) + ".";
+        } else {
+            result = "you don't have items";
+        }
+
+        System.out.println(result);
+    }
+
+    public void printAnimals(){
+        String result;
+
+        if (!getRoomAnimals().isEmpty()) {
+            result = "NPC: " + String.join(", ", getRoomAnimals()) + ".";
+        } else {
+            result = "you don't have items";
+        }
+
+        System.out.println(result);
     }
 
 

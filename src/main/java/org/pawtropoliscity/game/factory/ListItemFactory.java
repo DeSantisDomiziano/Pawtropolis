@@ -29,15 +29,15 @@ public class ListItemFactory {
             new Item("Poison", "is a poison", 10)
     );
 
-    public List<Item> getRandomItemList(){
+    public List<Item> getRandomItem(){
         int numIterator = random.nextInt(1, 6);
-        List<Item> randomItemList = new ArrayList<>();
+        List<Item> randomItems = new ArrayList<>();
 
         for (int i = 0; i < numIterator; i++){
             int selectedIndex = random.nextInt(itemList.size());
             Item item = itemList.get(selectedIndex);
-            randomItemList.add(item);
+            randomItems.add(item);
         }
-        return randomItemList;
+        return randomItems;
     }
 }

@@ -1,5 +1,5 @@
 package org.pawtropoliscity.game.controller;
-import org.pawtropoliscity.game.entity.Move;
+import org.pawtropoliscity.game.entity.Direction;
 import org.pawtropoliscity.game.entity.Room;
 
 import java.util.Scanner;
@@ -43,7 +43,7 @@ public class GameController {
         System.out.println(" GAME OVER " );
     }
 
-    private void printCommand(){
+    private void print1WriteACommand(){
         System.out.print("Write a command:\n> ");
     }
 
@@ -71,15 +71,15 @@ public class GameController {
         printRoomName();
 
         do{
-            printCommand();
+            print1WriteACommand();
             String command = scanner.nextLine().trim();
 
             if (command.startsWith("go")) {
                 try {
                     String[] splitOperator = command.split(" ");
                     String direction = splitOperator[splitOperator.length - 1];
-                    Move move = Move.valueOf(direction.toUpperCase().trim());
-                    moveController.movePlayer(move);
+                    Direction move = Direction.valueOf(direction.toUpperCase().trim());
+                    moveController.changeRoom(move);
                     currentLifePoints();
                 }catch (IllegalArgumentException e) {
                     System.out.println("direction not exists");
