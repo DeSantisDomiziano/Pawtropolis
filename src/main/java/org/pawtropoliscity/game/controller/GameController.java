@@ -76,8 +76,8 @@ public class GameController {
 
             if (command.startsWith("go")) {
                 try {
-                    String[] splitOperator = command.split(" ");
-                    String direction = splitOperator[splitOperator.length - 1];
+                    String[] splitCommand = command.split(" ");
+                    String direction = splitCommand[splitCommand.length - 1];
                     Direction move = Direction.valueOf(direction.toUpperCase().trim());
                     moveController.changeRoom(move);
                     currentLifePoints();
