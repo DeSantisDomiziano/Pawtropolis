@@ -23,21 +23,18 @@ public class ListAnimalFactory {
         return instance;
     }
 
-    public List<Animal> getRandomAnimalList() {
+    public List<Animal> getRandomAnimal() {
         int numIterator = random.nextInt(1, 6);
-        List<Animal> randomAnimalList = new ArrayList<>();
+        List<Animal> randomAnimal = new ArrayList<>();
 
         for (int i = 0; i < numIterator; i++) {
             int selectedIndex = random.nextInt(animalList.size());
             Animal animal = animalList.get(selectedIndex);
 
-            if (!randomAnimalList.contains(animal)) {
-                randomAnimalList.add(animal);
-            } else {
-                randomAnimalList.remove(animal);
-                randomAnimalList.add(animal);
+            if (!randomAnimal.contains(animal)) {
+                randomAnimal.add(animal);
             }
         }
-        return randomAnimalList;
+        return randomAnimal;
     }
 }

@@ -1,6 +1,6 @@
 package org.pawtropoliscity.game.entity;
 
-public enum Move {
+public enum Direction {
     NORTH(-1, 0),
     SOUTH(1,0),
     WEST(0,-1),
@@ -11,7 +11,7 @@ public enum Move {
 
 
 
-    Move(int y, int x) {
+    Direction(int y, int x) {
         this.y = y;
         this.x = x;
     }

@@ -3,8 +3,6 @@ package org.pawtropoliscity.game.controller;
 import org.pawtropoliscity.game.entity.Bag;
 import org.pawtropoliscity.game.entity.Item;
 
-import java.util.List;
-
 import static org.pawtropoliscity.game.entity.Player.player;
 
 public class CommandController {
@@ -38,7 +36,7 @@ public class CommandController {
                 if (bag.canFitInBag(item)){
                     bag.addItem(item);
                     MapController.roomMap.get(player.getCoordinate()).removeItem(item);
-                    bag.decrementSlotsCapacity(item);
+                    bag.decrementCurrentSlotsCapacity(item);
                 }else {
                     printNotEnoughSpace();
                 }
@@ -53,55 +51,23 @@ public class CommandController {
             if (bag.containsItemInBag(item)){
                 MapController.roomMap.get(player.getCoordinate()).addItem(item);
                 bag.removeItem(item);
-                bag.incrementSlotsCapacity(item);
+                bag.incrementCurrentSlotsCapacity(item);
             }else {
                 printNoItem();
             }
         }
 
         public void lookRoom(){
-            lookItemInRoom();
-            lookAnimalInRoom();
+            MapController.roomMap.get(player.getCoordinate()).printItems();
+            MapController.roomMap.get(player.getCoordinate()).printAnimals();
+
         }
 
         public void lookBag(){
-            List<String> bagsItems = bag.getBagsItems();
-            String result = "Items: " + String.join(", ", bagsItems);
-
-            if (!bagsItems.isEmpty()) {
-                result += ".";
-            } else {
-                result += "you don't have items";
-            }
-
-            System.out.println(result);
+            bag.printItems();
         }
 
-    public void lookItemInRoom(){
-        List<String> roomItems = MapController.roomMap.get(player.getCoordinate()).getRoomItems();
-        String result = "Items: " + String.join(", ", roomItems);
 
-        if (!roomItems.isEmpty()) {
-            result += ".";
-        } else {
-            result += "you don't have items";
-        }
 
-        System.out.println(result);
-    }
-
-    public void lookAnimalInRoom(){
-        List<String> roomAnimals = MapController.roomMap.get(player.getCoordinate()).getRoomAnimals();
-        String result = "NPC: " + String.join(", ", roomAnimals);
-
-        if (!roomAnimals.isEmpty()) {
-            result += ".";
-        } else {
-            result += "you don't have items";
-        }
-
-        System.out.println(result);
-    }
-
-    }
+}
 

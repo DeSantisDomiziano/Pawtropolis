@@ -31,10 +31,10 @@ public class MapController {
         Coordinate coordinate3 = new Coordinate(0, 1);
         Coordinate coordinate4 = new Coordinate(1, 1);
 
-        Room room1 = new Room("Room 1", listItemFactory.getRandomItemList(), listAnimalFactory.getRandomAnimalList());
-        Room room2 = new Room("Room 2", listItemFactory.getRandomItemList(), listAnimalFactory.getRandomAnimalList());
-        Room room3 = new Room("Room 3", listItemFactory.getRandomItemList(), listAnimalFactory.getRandomAnimalList());
-        Room room4 = new Room("Room 4", listItemFactory.getRandomItemList(), listAnimalFactory.getRandomAnimalList());
+        Room room1 = new Room("Room 1", listItemFactory.getRandomItem(), listAnimalFactory.getRandomAnimal());
+        Room room2 = new Room("Room 2", listItemFactory.getRandomItem(), listAnimalFactory.getRandomAnimal());
+        Room room3 = new Room("Room 3", listItemFactory.getRandomItem(), listAnimalFactory.getRandomAnimal());
+        Room room4 = new Room("Room 4", listItemFactory.getRandomItem(), listAnimalFactory.getRandomAnimal());
 
         roomMap.put(coordinate1, room1);
         roomMap.put(coordinate2, room2);

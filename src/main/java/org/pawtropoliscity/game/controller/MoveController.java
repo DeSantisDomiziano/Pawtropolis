@@ -1,7 +1,7 @@
 package org.pawtropoliscity.game.controller;
 
 import org.pawtropoliscity.game.entity.Coordinate;
-import org.pawtropoliscity.game.entity.Move;
+import org.pawtropoliscity.game.entity.Direction;
 import org.pawtropoliscity.game.entity.Room;
 
 import static org.pawtropoliscity.game.controller.MapController.roomMap;
@@ -53,20 +53,20 @@ public class MoveController {
     }
 
 
-    public void movePlayer(Move move) {
+    public void changeRoom(Direction direction) {
 
-        switch (move){
+        switch (direction){
             case NORTH:
-                coordinate = new Coordinate(player.getCoordinate().getY() + Move.NORTH.getY(), player.getCoordinate().getX());
+                coordinate = new Coordinate(player.getCoordinate().getY() + Direction.NORTH.getY(), player.getCoordinate().getX());
                 break;
             case SOUTH:
-                coordinate = new Coordinate(player.getCoordinate().getY() + Move.SOUTH.getY(), player.getCoordinate().getX());
+                coordinate = new Coordinate(player.getCoordinate().getY() + Direction.SOUTH.getY(), player.getCoordinate().getX());
                 break;
             case WEST:
-                coordinate = new Coordinate(player.getCoordinate().getY(), player.getCoordinate().getX() + Move.WEST.getX());
+                coordinate = new Coordinate(player.getCoordinate().getY(), player.getCoordinate().getX() + Direction.WEST.getX());
                 break;
             case EAST:
-                coordinate = new Coordinate(player.getCoordinate().getY(), player.getCoordinate().getX() + Move.EAST.getX());
+                coordinate = new Coordinate(player.getCoordinate().getY(), player.getCoordinate().getX() + Direction.EAST.getX());
                 break;
         }
 
