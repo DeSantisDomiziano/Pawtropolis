@@ -17,6 +17,8 @@ public class Item {
         this.name = name;
     }
 
+
+    @SuppressWarnings("unused")
     public String getDescription() {
         return description;
     }
