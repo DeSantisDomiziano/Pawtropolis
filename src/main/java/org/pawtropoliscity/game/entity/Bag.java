@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Bag {
     private final List<Item> itemList;
-    private final int MAX_SLOTS_CAPACITY = 20;
+    private static final int MAX_SLOTS_CAPACITY = 20;
 
     private int slotsCapacity = MAX_SLOTS_CAPACITY;
 
