@@ -1,7 +1,4 @@
 package org.pawtropoliscity.game.controller;
-import org.pawtropoliscity.game.entity.Direction;
-import org.pawtropoliscity.game.entity.Room;
-
 import java.util.Scanner;
 import static org.pawtropoliscity.game.controller.MapController.roomMap;
 import static org.pawtropoliscity.game.entity.Player.player;
@@ -9,6 +6,10 @@ import static org.pawtropoliscity.game.entity.Player.player;
 public class GameController {
 
     private static GameController instance = null;
+    protected static boolean exit = false;
+
+
+
 
     private GameController(){}
 
@@ -19,10 +20,7 @@ public class GameController {
         return instance;
     }
     private final MapController mapController = MapController.getInstance();
-    private final MoveController moveController = MoveController.getInstance();
     private final CommandController commandController = CommandController.getInstance();
-    private boolean exit = false;
-
 
     public static Scanner scanner = new Scanner(System.in);
 
@@ -30,106 +28,27 @@ public class GameController {
     public void printRoomName(){
         System.out.println("You are here: " + roomMap.get(player.getCoordinate()).getName() + "\n");
     }
-    public static void printInvalidCommand(){
-        System.out.println("Insert a valid command.");
-    }
     public void printQuestionName(){ System.out.println("Who's playing?");}
     public void printWelcomeName(){ System.out.println("welcome " + player.getName());}
-
-    public void printCurrentLifeOfPoint(){
-        System.out.println("your current life of point are : " + player.getLifePoints());
-    }
-    private void printGameOver(){
-        System.out.println(" GAME OVER " );
-    }
 
     private void printWriteACommand(){
         System.out.print("Write a command:\n> ");
     }
 
-    private void printHelpCommandsMessage() {
-        System.out.println("these are all commands:\n👀look\n👜bag" +
-                "\n🏃‍♀️go <choose direction> example -> 1)go north OR 2)go north_east" +
-                "\n🗑️drop <name item>\n🛒get <name item>\nexit");
 
-
-    }
-    private void printExitMessage(){System.out.println("game closed");}
-
-    public void currentLifePoints() {
-        Room room = roomMap.get(player.getCoordinate());
-        player.decrementLifePoints(room);
-        printCurrentLifeOfPoint();
-
-        if (player.isDead()){
-            printGameOver();
-            System.exit(0);
-        }
-    }
-
-
-    public void startGame(){
-
+    public void startGame() {
         mapController.createRoom();
-
         printQuestionName();
         player.setName(scanner.nextLine());
         printWelcomeName();
         printRoomName();
 
-        do{
+        do {
             printWriteACommand();
             String command = scanner.nextLine().trim();
-
-            if (command.startsWith("go")) {
-
-                try {
-                    String[] splitCommand = command.split(" ");
-                    String direction = splitCommand[splitCommand.length - 1];
-                    Direction move = Direction.valueOf(direction.toUpperCase().trim());
-                    moveController.changeRoom(move);
-                    currentLifePoints();
-
-                }catch (IllegalArgumentException e) {
-                    System.out.println("direction not exists");
-
-                }
-
-            }else if(command.startsWith("get") || command.startsWith("drop")) {
-
-                String[] splitCommand = command.split(" ");
-                String nameItem = splitCommand[splitCommand.length -1];
-                String actionCommand = splitCommand[0];
-
-                switch (actionCommand) {
-                    case "get":
-                        commandController.getItem(nameItem);
-                        break;
-                    case "drop":
-                        commandController.dropItem(nameItem);
-                        break;
-                }
-
-            } else {
-                switch (command){
-                    case "help":
-                        printHelpCommandsMessage();
-                        break;
-                    case "look":
-                        commandController.lookRoom();
-                        break;
-                    case "bag":
-                        commandController.lookBag();
-                        break;
-                    case "exit":
-                        exit = !exit;
-                        printExitMessage();
-                        break;
-                    default:
-                        printInvalidCommand();
-                        break;
-                }
-            }
+            commandController.locateCommand(command);
         } while (!exit);
     }
+
+
 }

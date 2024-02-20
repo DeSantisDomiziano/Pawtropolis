@@ -59,13 +59,13 @@ public class Room {
         return null;
     }
 
-    public List<String> getRoomItems(){
+    private List<String> getRoomItems(){
         return itemList.stream()
                 .map(Item::getName)
                 .toList();
     }
 
-    public List<String> getRoomAnimals(){
+    private List<String> getRoomAnimals(){
         return animalList.stream()
                 .map(animal -> animal.getName() + " (" + animal.getClass().getSimpleName() + ")")
                 .toList();

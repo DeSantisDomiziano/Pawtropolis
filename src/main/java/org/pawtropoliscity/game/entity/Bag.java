@@ -36,7 +36,7 @@ public class Bag {
                 .orElse(null);
     }
 
-    public List<String> getBagsItems(){
+    private List<String> getBagsItems(){
         return itemList.stream()
                 .map(Item::getName)
                 .toList();
