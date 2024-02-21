@@ -49,31 +49,29 @@ public class CommandController {
 
     }
 
-    public void isExit(){
+    private void isExit(){
             GameController.exit = !GameController.exit;
     }
 
 
-    public void locateCommand(String command){
-            Map<String,String> commandItemMap = stringConverter(command);
-            commandMapper.put("go", () -> moveController.executeCommand(command));
-            commandMapper.put("get", ()-> getItem(commandItemMap.get("get")));
-            commandMapper.put("drop", () -> dropItem(commandItemMap.get("drop")));
+    protected void locateCommand(String command){
+            String[] splitCommand = command.split(" ");
+            String nameItem = splitCommand[splitCommand.length -1];
+            String actionCommand = splitCommand[0];
+
+            commandMapper.put("go", () -> moveController.moveCommand(command));
+            commandMapper.put("get", ()-> getItem(nameItem));
+            commandMapper.put("drop", () -> dropItem(nameItem));
             commandMapper.put("look", this::lookRoom);
             commandMapper.put("bag", this::lookBag);
             commandMapper.put("help", this::printHelpCommandsMessage);
             commandMapper.put("exit", this::isExit);
 
-        executeCommand(command);
+        executeCommand(actionCommand);
     }
     
-    public void executeCommand(String command){
-        Map<String,String> commandItemMap = stringConverter(command);
-        String lastKey = null;
-        for (String key : commandItemMap.keySet()) {
-            lastKey = key;
-        }
-        Runnable execute = commandMapper.get(lastKey);
+    private void executeCommand(String actionCommand){
+        Runnable execute = commandMapper.get(actionCommand);
         if(execute != null) {
             execute.run();
             printCurrentSlotsLeft();
@@ -82,52 +80,44 @@ public class CommandController {
         }
     }
 
-    public Map<String, String> stringConverter(String command){
-        String[] splitCommand = command.split(" ");
-        String nameItem = splitCommand[splitCommand.length -1];
-        String actionCommand = splitCommand[0];
-        Map<String,String> commandItemMap= new HashMap<>();
-        commandItemMap.put(actionCommand, nameItem);
-            return commandItemMap;
+
+    private void getItem(String name){
+        Item item = MapController.roomMap.get(player.getCoordinate()).getItemFromRoom(name);
+
+        if (MapController.roomMap.get(player.getCoordinate()).containsItemInRoom(item)){
+            if (bag.canFitInBag(item)){
+                bag.addItem(item);
+                MapController.roomMap.get(player.getCoordinate()).removeItem(item);
+                bag.decrementCurrentSlotsCapacity(item);
+            }else {
+                printNotEnoughSpace();
+            }
+        }else {
+            printInvalidCommand();
+        }
     }
 
-        public void getItem(String name){
-            Item item = MapController.roomMap.get(player.getCoordinate()).getItemFromRoom(name);
+    private void dropItem(String name){
+        Item item = bag.getItemFromBag(name);
 
-            if (MapController.roomMap.get(player.getCoordinate()).containsItemInRoom(item)){
-                if (bag.canFitInBag(item)){
-                    bag.addItem(item);
-                    MapController.roomMap.get(player.getCoordinate()).removeItem(item);
-                    bag.decrementCurrentSlotsCapacity(item);
-                }else {
-                    printNotEnoughSpace();
-                }
-            }else {
-                printInvalidCommand();
-            }
+        if (bag.containsItemInBag(item)){
+            MapController.roomMap.get(player.getCoordinate()).addItem(item);
+            bag.removeItem(item);
+            bag.incrementCurrentSlotsCapacity(item);
+        }else {
+            printNoItem();
         }
+    }
 
-        public void dropItem(String name){
-            Item item = bag.getItemFromBag(name);
+    private void lookRoom(){
+        MapController.roomMap.get(player.getCoordinate()).printItems();
+        MapController.roomMap.get(player.getCoordinate()).printAnimals();
 
-            if (bag.containsItemInBag(item)){
-                MapController.roomMap.get(player.getCoordinate()).addItem(item);
-                bag.removeItem(item);
-                bag.incrementCurrentSlotsCapacity(item);
-            }else {
-                printNoItem();
-            }
-        }
+    }
 
-        public void lookRoom(){
-            MapController.roomMap.get(player.getCoordinate()).printItems();
-            MapController.roomMap.get(player.getCoordinate()).printAnimals();
-
-        }
-
-        public void lookBag(){
-            bag.printItems();
-        }
+    private void lookBag(){
+        bag.printItems();
+    }
 
 
 

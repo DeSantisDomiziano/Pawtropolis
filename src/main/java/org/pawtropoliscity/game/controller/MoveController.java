@@ -62,17 +62,9 @@ public class MoveController {
         }
     }
 
-    private final Map<String, Direction> moveCommandMapper;
+    private final Map<String, Direction>  moveCommandMapper = new HashMap<>();;
     private MoveController(){
-        moveCommandMapper = new HashMap<>();
-        moveCommandMapper.put("go north", Direction.NORTH);
-        moveCommandMapper.put("go south", Direction.SOUTH);
-        moveCommandMapper.put("go east", Direction.EAST);
-        moveCommandMapper.put("go west", Direction.WEST);
-        moveCommandMapper.put("go north east", Direction.NORTH_EAST);
-        moveCommandMapper.put("go north west", Direction.NORTH_WEST);
-        moveCommandMapper.put("go south east", Direction.SOUTH_EAST);
-        moveCommandMapper.put("go south west", Direction.SOUTH_WEST);
+
     }
 
     public static MoveController getInstance() {
@@ -82,7 +74,7 @@ public class MoveController {
         return instance;
     }
 
-    public void executeCommand(String input) {
+    private void executeCommand(String input) {
         Direction move = moveCommandMapper.get(input.toLowerCase().trim());
 
         if(move != null) {
@@ -92,6 +84,19 @@ public class MoveController {
         } else  {
             commandNotFound(input);
         }
+    }
+
+    protected void moveCommand(String input){
+        moveCommandMapper.put("go north", Direction.NORTH);
+        moveCommandMapper.put("go south", Direction.SOUTH);
+        moveCommandMapper.put("go east", Direction.EAST);
+        moveCommandMapper.put("go west", Direction.WEST);
+        moveCommandMapper.put("go north east", Direction.NORTH_EAST);
+        moveCommandMapper.put("go north west", Direction.NORTH_WEST);
+        moveCommandMapper.put("go south east", Direction.SOUTH_EAST);
+        moveCommandMapper.put("go south west", Direction.SOUTH_WEST);
+
+        executeCommand(input);
     }
 
     private void changeRoom(Direction direction) {
