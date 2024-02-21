@@ -8,10 +8,9 @@ public class GameController {
     private static GameController instance = null;
     protected static boolean exit = false;
 
+    private GameController(){
 
-
-
-    private GameController(){}
+    }
 
     public static GameController getInstance() {
         if( instance == null) {
@@ -28,8 +27,8 @@ public class GameController {
     public void printRoomName(){
         System.out.println("You are here: " + roomMap.get(player.getCoordinate()).getName() + "\n");
     }
-    public void printQuestionName(){ System.out.println("Who's playing?");}
-    public void printWelcomeName(){ System.out.println("welcome " + player.getName());}
+    public void printQuestionName(){ System.out.println("Who's playing?\n");}
+    public void printWelcomeName(){ System.out.println("welcome " + player.getName() + "\n");}
 
     private void printWriteACommand(){
         System.out.print("Write a command:\n> ");

@@ -25,6 +25,7 @@ public class MapController {
         }
         return instance;
     }
+
     public void createRoom(){
         Coordinate coordinate1 = new Coordinate(0, 0);
         Coordinate coordinate2 = new Coordinate(1, 0);

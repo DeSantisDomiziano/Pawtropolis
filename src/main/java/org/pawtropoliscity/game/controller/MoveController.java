@@ -13,24 +13,25 @@ public class MoveController {
 
     private static MoveController instance = null;
 
+    private MoveController(){
 
+    }
 
     public void printRoomNotFound(){
         System.out.println("Room not found\n");
     }
 
     public void printCurrentRoomDescription() {
-
         System.out.println( player.getName() + " You are here:  " + roomMap.get(player.getCoordinate()).getName() + "\n");
 
-            System.out.println("Adjacent Rooms:");
+        System.out.println("Adjacent Rooms:");
 
-            printAdjacentRoom(player.getCoordinate().getY() - 1, player.getCoordinate().getX(), "North");
-            printAdjacentRoom(player.getCoordinate().getY() + 1, player.getCoordinate().getX(), "South");
-            printAdjacentRoom(player.getCoordinate().getY(), player.getCoordinate().getX() - 1, "West");
-            printAdjacentRoom(player.getCoordinate().getY(), player.getCoordinate().getX() + 1 , "East");
+        printAdjacentRoom(player.getCoordinate().getY() - 1, player.getCoordinate().getX(), "North");
+        printAdjacentRoom(player.getCoordinate().getY() + 1, player.getCoordinate().getX(), "South");
+        printAdjacentRoom(player.getCoordinate().getY(), player.getCoordinate().getX() - 1, "West");
+        printAdjacentRoom(player.getCoordinate().getY(), player.getCoordinate().getX() + 1 , "East");
 
-            System.out.println();
+        System.out.println();
     }
     public void printCurrentLifeOfPoint(){
         System.out.println("your current life of point are : " + player.getLifePoints());
@@ -62,10 +63,7 @@ public class MoveController {
         }
     }
 
-    private final Map<String, Direction>  moveCommandMapper = new HashMap<>();;
-    private MoveController(){
-
-    }
+    private final Map<String, Direction>  moveCommandMapper = new HashMap<>();
 
     public static MoveController getInstance() {
         if( instance == null) {

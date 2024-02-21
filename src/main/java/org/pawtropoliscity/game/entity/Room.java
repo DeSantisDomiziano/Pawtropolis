@@ -94,6 +94,7 @@ public class Room {
         }
 
         System.out.println(result);
+        System.out.println();
     }
 
 

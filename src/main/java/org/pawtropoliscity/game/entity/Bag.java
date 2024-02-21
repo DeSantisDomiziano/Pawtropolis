@@ -68,6 +68,7 @@ public class Bag {
         }
 
         System.out.println(result);
+        System.out.println();
     }
 
 }

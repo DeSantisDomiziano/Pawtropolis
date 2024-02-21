@@ -9,63 +9,63 @@ import java.util.Map;
 import static org.pawtropoliscity.game.entity.Player.player;
 
 public class CommandController {
-        private static CommandController instance = null;
-        private final Bag bag = new Bag();
+    private static CommandController instance = null;
+    private final Bag bag = new Bag();
     private final MoveController moveController = MoveController.getInstance();
 
-        private final Map<String, Runnable> commandMapper = new HashMap<>();
+    private final Map<String, Runnable> commandMapper = new HashMap<>();
 
-        public static CommandController getInstance(){
-            if (instance == null){
-                instance = new CommandController();
-            }
-            return instance;
+    public static CommandController getInstance(){
+        if (instance == null){
+            instance = new CommandController();
         }
-        public void printCurrentSlotsLeft(){
-            System.out.printf("Slots left: %s%n%n", bag.getSlotsCapacity());
-        }
+        return instance;
+    }
+    public void printCurrentSlotsLeft(){
+        System.out.printf("Slots left: %s%n%n", bag.getSlotsCapacity());
+    }
 
-        private void printNotEnoughSpace(){
-            System.out.println("Not enough space\n");
-        }
+    private void printNotEnoughSpace(){
+        System.out.println("Not enough space\n");
+    }
 
-        private void printNoItem(){
-            System.out.println("Item not found\n");
-        }
+    private void printNoItem(){
+        System.out.println("Item not found\n");
+    }
 
-        private void printInvalidCommand(){
-            System.out.println("Invalid command\n");
-        }
-        private void printHelpCommandsMessage() {
-          System.out.println("""
-                these are all commands:\s
-                👀look
-                👜bag
-                🏃‍♀️go <choose direction> example -> 1)go north OR 2)go north_east
-                🗑️drop <name item>
-                🛒get <name item>
-                exit""");
+    private void printInvalidCommand(){
+        System.out.println("Invalid command\n");
+    }
+    private void printHelpCommandsMessage() {
+      System.out.println("""
+            these are all commands:\s
+            👀look
+            👜bag
+            🏃‍♀️go <choose direction> example -> 1)go north OR 2)go north_east
+            🗑️drop <name item>
+            🛒get <name item>
+            exit""");
 
 
     }
 
     private void isExit(){
-            GameController.exit = !GameController.exit;
+        GameController.exit = !GameController.exit;
     }
 
 
     protected void locateCommand(String command){
-            String[] splitCommand = command.split(" ");
-            String nameItem = splitCommand[splitCommand.length -1];
-            String actionCommand = splitCommand[0];
+        String[] splitCommand = command.split(" ");
+        String nameItem = splitCommand[splitCommand.length -1];
+        String actionCommand = splitCommand[0];
 
-            commandMapper.put("go", () -> moveController.moveCommand(command));
-            commandMapper.put("get", ()-> getItem(nameItem));
-            commandMapper.put("drop", () -> dropItem(nameItem));
-            commandMapper.put("look", this::lookRoom);
-            commandMapper.put("bag", this::lookBag);
-            commandMapper.put("help", this::printHelpCommandsMessage);
-            commandMapper.put("exit", this::isExit);
+        commandMapper.put("go", () -> moveController.moveCommand(command));
+        commandMapper.put("get", ()-> getItem(nameItem));
+        commandMapper.put("drop", () -> dropItem(nameItem));
+        commandMapper.put("look", this::lookRoom);
+        commandMapper.put("bag", this::lookBag);
+        commandMapper.put("help", this::printHelpCommandsMessage);
+        commandMapper.put("exit", this::isExit);
 
         executeCommand(actionCommand);
     }
@@ -112,7 +112,6 @@ public class CommandController {
     private void lookRoom(){
         MapController.roomMap.get(player.getCoordinate()).printItems();
         MapController.roomMap.get(player.getCoordinate()).printAnimals();
-
     }
 
     private void lookBag(){
