@@ -1,4 +1,4 @@
-package org.pawtropoliscity.game.entity;
+package org.pawtropolis.game.entity;
 
 public class Item {
     private String name;

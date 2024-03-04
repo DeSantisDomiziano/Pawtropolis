@@ -1,11 +1,8 @@
-package org.pawtropoliscity.game.entity;
+package org.pawtropolis.game.entity;
 
-import org.pawtropoliscity.animals.abst.Animal;
+import org.pawtropolis.animal.abst.Animal;
 
 import java.util.List;
-
-import static org.pawtropoliscity.game.controller.MapController.roomMap;
-import static org.pawtropoliscity.game.entity.Player.player;
 
 public class Room {
     private String name;
@@ -43,12 +40,10 @@ public class Room {
     }
 
     public boolean containsItemInRoom(Item item){
-        return roomMap.get(player.getCoordinate()).itemList.contains(item);
+        return itemList.contains(item);
     }
 
     public Item getPoisonItem() {
-        Room room = roomMap.get(player.getCoordinate());
-        List<Item> itemList = room.itemList;
         for (Item item : itemList) {
             if (item.getName().equalsIgnoreCase("poison")) {
                 if (itemList.contains(item)) {

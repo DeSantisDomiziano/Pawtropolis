@@ -1,6 +1,6 @@
-package org.pawtropoliscity.game.factory;
+package org.pawtropolis.game.factory;
 
-import org.pawtropoliscity.game.entity.Item;
+import org.pawtropolis.game.entity.Item;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;

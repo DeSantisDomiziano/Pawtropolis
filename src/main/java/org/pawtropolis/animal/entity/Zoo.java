@@ -1,8 +1,8 @@
-package org.pawtropoliscity.animals.entity;
+package org.pawtropolis.animal.entity;
 
-import org.pawtropoliscity.animals.abst.Animal;
-import org.pawtropoliscity.animals.abst.AnimalWithTail;
-import org.pawtropoliscity.animals.abst.AnimalWithWings;
+import org.pawtropolis.animal.abst.Animal;
+import org.pawtropolis.animal.abst.AnimalWithTail;
+import org.pawtropolis.animal.abst.AnimalWithWings;
 
 import java.util.*;
 import java.util.stream.Collectors;

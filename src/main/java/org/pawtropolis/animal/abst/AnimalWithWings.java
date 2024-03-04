@@ -1,4 +1,4 @@
-package org.pawtropoliscity.animals.abst;
+package org.pawtropolis.animal.abst;
 
 import java.time.LocalDate;
 

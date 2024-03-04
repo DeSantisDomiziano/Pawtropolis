@@ -1,15 +1,15 @@
-package org.pawtropoliscity.game.controller;
+package org.pawtropolis.game.controller;
 
-import org.pawtropoliscity.game.entity.Coordinate;
-import org.pawtropoliscity.game.entity.Room;
-import org.pawtropoliscity.game.factory.ListAnimalFactory;
-import org.pawtropoliscity.game.factory.ListItemFactory;
+import org.pawtropolis.game.entity.Coordinate;
+import org.pawtropolis.game.entity.Room;
+import org.pawtropolis.game.factory.ListAnimalFactory;
+import org.pawtropolis.game.factory.ListItemFactory;
 
 import java.util.*;
 
 public class MapController {
 
-    public static Map<Coordinate, Room> roomMap = new HashMap<>();
+    private final Map<Coordinate, Room> roomMap = new HashMap<>();
     private static MapController instance = null;
     private final ListAnimalFactory listAnimalFactory = ListAnimalFactory.getInstance();
     private final ListItemFactory listItemFactory = ListItemFactory.getInstance();
@@ -41,6 +41,14 @@ public class MapController {
         roomMap.put(coordinate2, room2);
         roomMap.put(coordinate3, room3);
         roomMap.put(coordinate4, room4);
+    }
+
+    public boolean containsCoordinate(Coordinate coordinate){
+        return roomMap.containsKey(coordinate);
+    }
+
+    public Room getRoom(Coordinate coordinate){
+        return roomMap.get(coordinate);
     }
 }
 

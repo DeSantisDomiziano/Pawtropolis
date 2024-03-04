@@ -1,4 +1,4 @@
-package org.pawtropoliscity.game.entity;
+package org.pawtropolis.game.entity;
 
 public enum Direction {
     NORTH(-1, 0),

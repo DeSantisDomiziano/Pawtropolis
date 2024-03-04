@@ -1,4 +1,4 @@
-package org.pawtropoliscity.game.entity;
+package org.pawtropolis.game.entity;
 import java.util.Objects;
 
 public class Coordinate {

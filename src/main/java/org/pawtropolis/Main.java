@@ -1,6 +1,6 @@
-package org.pawtropoliscity;
-import org.pawtropoliscity.animals.entity.*;
-import org.pawtropoliscity.game.controller.GameController;
+package org.pawtropolis;
+import org.pawtropolis.animal.entity.*;
+import org.pawtropolis.game.controller.GameController;
 
 import java.time.LocalDate;
 

@@ -1,4 +1,4 @@
-package org.pawtropoliscity.game.entity;
+package org.pawtropolis.game.entity;
 
 import java.util.Objects;
 
@@ -13,6 +13,10 @@ public class Player {
         setName(name);
         setLifePoints(lifePoints);
         setCoordinate(coordinate);
+    }
+
+    public Player(){
+        this("", 100, new Coordinate(0, 0));
     }
 
     public String getName() {
@@ -36,15 +40,15 @@ public class Player {
     public void setCoordinate(Coordinate coordinate) {
         this.coordinate = coordinate;
     }
-    public static Player player = new Player("", 100, new Coordinate(0,0));
+//    public static Player player = new Player("", 100, new Coordinate(0,0));
 
     public void decrementLifePoints(Room room){
         if(room.getPoisonItem()!= null) {
-            player.setLifePoints((player.getLifePoints() - Objects.requireNonNull(room.getPoisonItem()).getSlotsRequired()));
+            this.setLifePoints((this.getLifePoints() - Objects.requireNonNull(room.getPoisonItem()).getSlotsRequired()));
         }
     }
 
     public boolean isDead(){
-        return player.getLifePoints() == 0;
+        return this.getLifePoints() == 0;
     }
 }

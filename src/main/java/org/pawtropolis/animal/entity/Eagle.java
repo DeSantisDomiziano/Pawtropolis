@@ -1,6 +1,6 @@
-package org.pawtropoliscity.animals.entity;
+package org.pawtropolis.animal.entity;
 
-import org.pawtropoliscity.animals.abst.AnimalWithWings;
+import org.pawtropolis.animal.abst.AnimalWithWings;
 
 import java.time.LocalDate;
 

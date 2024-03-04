@@ -1,8 +1,8 @@
-package org.pawtropoliscity.game.factory;
+package org.pawtropolis.game.factory;
 
 
-import org.pawtropoliscity.animals.abst.Animal;
-import org.pawtropoliscity.animals.entity.Zoo;
+import org.pawtropolis.animal.abst.Animal;
+import org.pawtropolis.animal.entity.Zoo;
 
 import java.util.ArrayList;
 import java.util.List;
