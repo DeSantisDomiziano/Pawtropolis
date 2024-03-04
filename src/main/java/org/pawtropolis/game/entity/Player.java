@@ -7,16 +7,16 @@ public class Player {
     private String name;
     private int lifePoints;
 
-    private Coordinate coordinate;
+    private RoomNode currentRoom; // Modifica
 
-    public Player(String name, int lifePoints, Coordinate coordinate) {
+    public Player(String name, int lifePoints, RoomNode currentRoom) { // Modifica
         setName(name);
         setLifePoints(lifePoints);
-        setCoordinate(coordinate);
+        setCurrentRoom(currentRoom); // Modifica
     }
 
     public Player(){
-        this("", 100, new Coordinate(0, 0));
+        this("", 100,null  ); // Modifica
     }
 
     public String getName() {
@@ -34,13 +34,14 @@ public class Player {
     public void setLifePoints(int lifePoints) {
         this.lifePoints = lifePoints;
     }
-    public Coordinate getCoordinate() {
-        return coordinate;
+
+    public RoomNode getCurrentRoom() {
+        return currentRoom;
     }
-    public void setCoordinate(Coordinate coordinate) {
-        this.coordinate = coordinate;
+
+    public void setCurrentRoom(RoomNode currentRoomNode) {
+        this.currentRoom = currentRoomNode;
     }
-//    public static Player player = new Player("", 100, new Coordinate(0,0));
 
     public void decrementLifePoints(Room room){
         if(room.getPoisonItem()!= null) {

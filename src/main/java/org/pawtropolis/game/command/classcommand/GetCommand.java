@@ -35,7 +35,7 @@ public class GetCommand implements Command {
 
 
     private void getItem(String name){
-        Room currentRoom = mapController.getRoom(player.getCoordinate());
+        Room currentRoom = mapController.getRoom(player.getCurrentRoom());
         Item item = currentRoom.getItemFromRoom(name);
 
         if (currentRoom.containsItemInRoom(item)){

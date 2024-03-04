@@ -14,8 +14,8 @@ public class LookCommand implements Command {
     }
 
     private void lookRoom(){
-        mapController.getRoom(player.getCoordinate()).printItems();
-        mapController.getRoom(player.getCoordinate()).printAnimals();
+        mapController.getRoom(player.getCurrentRoom()).printItems();
+        mapController.getRoom(player.getCurrentRoom()).printAnimals();
     }
 
     @Override

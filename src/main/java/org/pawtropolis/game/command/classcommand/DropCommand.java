@@ -34,7 +34,7 @@ public class DropCommand implements Command {
         Item item = bag.getItemFromBag(name);
 
         if (bag.containsItemInBag(item)){
-            mapController.getRoom(player.getCoordinate()).addItem(item);
+            mapController.getRoom(player.getCurrentRoom()).addItem(item);
             bag.removeItem(item);
             bag.incrementCurrentSlotsCapacity(item);
             printCurrentSlotsLeft();

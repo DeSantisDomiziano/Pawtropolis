@@ -14,7 +14,6 @@ import java.util.function.Supplier;
 public class CommandController {
     private static CommandController instance = null;
     private final Bag bag = new Bag();
-    private boolean exit = false;
 
     private CommandController(){
 
@@ -25,10 +24,6 @@ public class CommandController {
             instance = new CommandController();
         }
         return instance;
-    }
-
-    protected boolean isExit() {
-        return exit;
     }
 
     private void printInvalidCommand(){

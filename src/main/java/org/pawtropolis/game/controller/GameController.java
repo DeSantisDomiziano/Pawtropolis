@@ -1,8 +1,11 @@
 package org.pawtropolis.game.controller;
 import org.pawtropolis.game.command.classcommand.ExitCommand;
 import org.pawtropolis.game.entity.Player;
+import org.pawtropolis.game.entity.RoomNode;
 
+import java.util.List;
 import java.util.Scanner;
+
 
 public class GameController {
 
@@ -24,10 +27,22 @@ public class GameController {
     public static Scanner scanner = new Scanner(System.in);
     private final ExitCommand exitCommand = new ExitCommand();
 
+   public void printRoomName(){
+       System.out.println("You are here: " + mapController.getRoom(player.getCurrentRoom()).getName() + "\n");
 
-    public void printRoomName(){
-        System.out.println("You are here: " + mapController.getRoom(player.getCoordinate()).getName() + "\n");
     }
+
+    public void printAdjacentRoom(){
+        RoomNode currentRoomNode = player.getCurrentRoom();
+        List<RoomNode> adjacentRooms = currentRoomNode.getAdjacentRooms();
+        System.out.println("Adjacent Rooms:");
+        for (RoomNode adjacentRoomNode : adjacentRooms) {
+            if (adjacentRoomNode != null) {
+                System.out.println(adjacentRoomNode.getName());
+            }
+        }
+    }
+
     public void printQuestionName(){ System.out.println("Who's playing?\n");}
     public void printWelcomeName(){ System.out.println("welcome " + player.getName() + "\n");}
 
@@ -37,13 +52,13 @@ public class GameController {
 
 
     public void startGame() {
-        mapController.createRoom();
+        mapController.createGraph(player);
         printQuestionName();
         player.setName(scanner.nextLine());
         printWelcomeName();
-        printRoomName();
-
         do {
+            printRoomName();
+            printAdjacentRoom();
             printWriteACommand();
             String command = scanner.nextLine().trim();
             commandController.launchCommand(command, mapController, player, exitCommand);
