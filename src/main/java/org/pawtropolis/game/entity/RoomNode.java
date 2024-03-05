@@ -12,16 +12,31 @@ public class RoomNode {
         this.adjacentRooms = new ArrayList<>();
     }
 
+    public RoomNode(){
+        this("");
+    }
+
     public String getName() {
         return name;
     }
 
-    public List<RoomNode> getAdjacentRooms() {
+    private List<RoomNode> getAdjacentRooms() {
         return adjacentRooms;
     }
 
     public void addAdjacentRoom(RoomNode roomNode) {
         adjacentRooms.add(roomNode);
+    }
+
+    public void printAdjacentRoom(Player player){
+        RoomNode currentRoomNode = player.getCurrentRoom();
+        List<RoomNode> adjacentRooms = currentRoomNode.getAdjacentRooms();
+        System.out.println("Adjacent Rooms:");
+        for (RoomNode adjacentRoomNode : adjacentRooms) {
+            if (adjacentRoomNode != null) {
+                System.out.println(adjacentRoomNode.getName());
+            }
+        }
     }
 }
 

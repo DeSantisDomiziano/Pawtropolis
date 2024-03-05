@@ -24,8 +24,7 @@ import org.pawtropolis.game.entity.Player;
 
         @Override
         public void execute() {
-            RoomNode currentRoomNode = mapController.getRoomNode(player.getCurrentRoom().getName());
-            RoomNode nextRoomNode = getAdjacentRoomNode(currentRoomNode, direction);
+            RoomNode nextRoomNode = getAdjacentRoomNode( direction);
 
             if (nextRoomNode != null) {
                 player.setCurrentRoom(nextRoomNode);
@@ -34,13 +33,8 @@ import org.pawtropolis.game.entity.Player;
             }
         }
 
-        private RoomNode getAdjacentRoomNode(RoomNode currentRoomNode, String direction) {
-            for (RoomNode adjacentNode : currentRoomNode.getAdjacentRooms()) {
-                if (adjacentNode.getName().equalsIgnoreCase(direction)) {
-                    return adjacentNode;
-                }
-            }
-            return null;
+        private RoomNode getAdjacentRoomNode(String direction) {
+            return mapController.getRoomNode(direction);
         }
     }
 
