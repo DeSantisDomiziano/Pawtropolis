@@ -1,20 +1,18 @@
 package org.pawtropolis.game.command.classcommand;
 
 import org.pawtropolis.game.command.iface.Command;
-import org.pawtropolis.game.controller.MapController;
 import org.pawtropolis.game.entity.Bag;
 import org.pawtropolis.game.entity.Item;
 import org.pawtropolis.game.entity.Player;
+import org.pawtropolis.game.entity.Room;
 
 public class DropCommand implements Command {
-    private final MapController mapController;
     private final Player player;
     private final Bag bag;
     private final String itemName;
 
 
-    public DropCommand(MapController mapController, Player player, Bag bag, String itemName) {
-        this.mapController = mapController;
+    public DropCommand( Player player, Bag bag, String itemName) {
         this.player = player;
         this.bag = bag;
         this.itemName = itemName;
@@ -31,10 +29,11 @@ public class DropCommand implements Command {
 
 
     private void dropItem(String name){
+        Room currentRoom = player.getCurrentRoom();
         Item item = bag.getItemFromBag(name);
 
         if (bag.containsItemInBag(item)){
-            mapController.getRoom(player.getCurrentRoom()).addItem(item);
+            currentRoom.addItem(item);
             bag.removeItem(item);
             bag.incrementCurrentSlotsCapacity(item);
             printCurrentSlotsLeft();

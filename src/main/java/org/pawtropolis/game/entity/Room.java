@@ -2,6 +2,7 @@ package org.pawtropolis.game.entity;
 
 import org.pawtropolis.animal.abst.Animal;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Room {
@@ -9,11 +10,19 @@ public class Room {
     private final List<Item> itemList;
 
     private final List<Animal> animalList;
+    private final List<Room> adjacentRooms;
+
 
     public Room(String name, List<Item> itemList, List<Animal> animalList) {
         setName(name);
         this.itemList = itemList;
         this.animalList = animalList;
+        this.adjacentRooms = new ArrayList<>();
+    }
+    public Room(){
+        this.adjacentRooms = new ArrayList<>();
+        this.animalList = new ArrayList<>();
+        this.itemList = new ArrayList<>();
     }
 
     public String getName() {
@@ -92,5 +101,36 @@ public class Room {
         System.out.println();
     }
 
+    private List<Room> getAdjacentRooms() {
+        return adjacentRooms;
+    }
+
+    public void addAdjacentRoom(Room room) {
+        adjacentRooms.add(room);
+    }
+
+    public void printAdjacentRoom(Player player){
+        Room currentRoom = player.getCurrentRoom();
+        List<Room> adjacentRooms = currentRoom.getAdjacentRooms();
+        System.out.println("Adjacent Rooms:");
+        for (Room adjacentRoom : adjacentRooms) {
+            if (adjacentRoom != null) {
+                System.out.println(adjacentRoom.getName());
+            }
+        }
+    }
+
+    public Room getRoom(Player player, String roomName){
+        Room currentRoom = player.getCurrentRoom();
+        return currentRoom.adjacentRooms.stream()
+                .filter(room -> room.getName().equalsIgnoreCase(roomName))
+                .findFirst()
+                .orElse(null);
+    }
+
+    public boolean containsRoom(Player player, Room room){
+        Room currentRoom = player.getCurrentRoom();
+        return currentRoom.adjacentRooms.contains(room);
+    }
 
 }

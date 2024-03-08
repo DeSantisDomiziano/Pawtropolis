@@ -7,12 +7,12 @@ public class Player {
     private String name;
     private int lifePoints;
 
-    private RoomNode currentRoom; // Modifica
+    private Room currentRoom;
 
-    public Player(String name, int lifePoints, RoomNode currentRoom) { // Modifica
+    public Player(String name, int lifePoints, Room currentRoom) {
         setName(name);
         setLifePoints(lifePoints);
-        setCurrentRoom(currentRoom); // Modifica
+        setCurrentRoom(currentRoom);
     }
 
     public Player(){
@@ -35,12 +35,12 @@ public class Player {
         this.lifePoints = lifePoints;
     }
 
-    public RoomNode getCurrentRoom() {
+    public Room getCurrentRoom() {
         return currentRoom;
     }
 
-    public void setCurrentRoom(RoomNode currentRoomNode) {
-        this.currentRoom = currentRoomNode;
+    public void setCurrentRoom(Room currentRoom) {
+        this.currentRoom = currentRoom;
     }
 
     public void decrementLifePoints(Room room){
@@ -48,7 +48,6 @@ public class Player {
             this.setLifePoints((this.getLifePoints() - Objects.requireNonNull(room.getPoisonItem()).getSlotsRequired()));
         }
     }
-
     public boolean isDead(){
         return this.getLifePoints() == 0;
     }

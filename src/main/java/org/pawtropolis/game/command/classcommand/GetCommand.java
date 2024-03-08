@@ -1,7 +1,6 @@
 package org.pawtropolis.game.command.classcommand;
 
 import org.pawtropolis.game.command.iface.Command;
-import org.pawtropolis.game.controller.MapController;
 import org.pawtropolis.game.entity.Bag;
 import org.pawtropolis.game.entity.Item;
 import org.pawtropolis.game.entity.Player;
@@ -9,13 +8,11 @@ import org.pawtropolis.game.entity.Room;
 
 
 public class GetCommand implements Command {
-    private final MapController mapController;
     private final Player player;
     private final Bag bag;
     private final String itemName;
 
-    public GetCommand(MapController mapController, Player player, Bag bag, String itemName) {
-        this.mapController = mapController;
+    public GetCommand( Player player, Bag bag, String itemName) {
         this.player = player;
         this.bag = bag;
         this.itemName = itemName;
@@ -35,7 +32,7 @@ public class GetCommand implements Command {
 
 
     private void getItem(String name){
-        Room currentRoom = mapController.getRoom(player.getCurrentRoom());
+        Room currentRoom = player.getCurrentRoom();
         Item item = currentRoom.getItemFromRoom(name);
 
         if (currentRoom.containsItemInRoom(item)){
