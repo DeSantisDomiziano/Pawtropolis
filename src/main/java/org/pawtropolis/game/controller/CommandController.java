@@ -5,11 +5,9 @@ import org.pawtropolis.game.command.classcommand.*;
 import org.pawtropolis.game.command.classcommand.GoCommand;
 import org.pawtropolis.game.entity.Bag;
 import org.pawtropolis.game.entity.Player;
-import org.pawtropolis.game.entity.Room;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.function.Supplier;
 
 
 public class CommandController {
@@ -29,22 +27,22 @@ public class CommandController {
         System.out.println("Invalid command\n");
     }
 
-    protected void launchCommand(String input, Room room, Player player, ExitCommand exitCommand){
-        String[] splitInput = input.split(" ");
-        String lastElement = splitInput[splitInput.length -1];
-        String command = splitInput[0];
+    protected void launchCommand(String input, Player player, MapController mapController, ExitCommand exitCommand){
+        String[] tokens = input.split(" ");
+        String parameter = tokens[tokens.length -1];
+        String commandName = tokens[0];
 
-        Map<String, Supplier<Command>> commandActionMap = new HashMap<>();
-        commandActionMap.put("go", () -> new GoCommand(room, player, lastElement));
-        commandActionMap.put("get", () -> new GetCommand( player, bag, lastElement));
-        commandActionMap.put("drop", () -> new DropCommand( player, bag, lastElement));
-        commandActionMap.put("look", () -> new LookCommand(player));
-        commandActionMap.put("bag", () -> new BagCommand(bag));
-        commandActionMap.put("help", HelpCommand::new);
-        commandActionMap.put("exit", () -> exitCommand);
+        Map<String, Command> commands = new HashMap<>();
+        commands.put("go", new GoCommand(mapController, player, parameter));
+        commands.put("get", new GetCommand( mapController, bag, parameter));
+        commands.put("drop", new DropCommand( mapController, bag, parameter));
+        commands.put("look",  new LookCommand(mapController));
+        commands.put("bag",  new BagCommand(bag));
+        commands.put("help", new HelpCommand());
+        commands.put("exit",  exitCommand);
 
         try{
-            commandActionMap.get(command).get().execute();
+            commands.get(commandName).execute();
         }catch (NullPointerException e){
             printInvalidCommand();
         }

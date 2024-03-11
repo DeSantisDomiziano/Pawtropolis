@@ -1,18 +1,19 @@
 package org.pawtropolis.game.command.classcommand;
 
 import org.pawtropolis.game.command.iface.Command;
+import org.pawtropolis.game.controller.MapController;
 import org.pawtropolis.game.entity.Player;
 
 public class LookCommand implements Command {
-    private final Player player;
+    private final MapController mapController;
 
-    public LookCommand( Player player) {
-        this.player = player;
+    public LookCommand( MapController mapController) {
+        this.mapController = mapController;
     }
 
     private void lookRoom(){
-    player.getCurrentRoom().printItems();
-    player.getCurrentRoom().printAnimals();
+        mapController.getCurrentRoom().printItems();
+        mapController.getCurrentRoom().printAnimals();
     }
 
     @Override

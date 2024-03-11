@@ -23,13 +23,11 @@ public class GameController {
     private final MapController mapController = MapController.getInstance();
     private final CommandController commandController = CommandController.getInstance();
     private  final Player player = new Player();
-
-    private final Room room = new Room();
     public static Scanner scanner = new Scanner(System.in);
     private final ExitCommand exitCommand = new ExitCommand();
 
    public void printRoomName(){
-       System.out.println("You are here: " + player.getCurrentRoom().getName() + "\n");
+       System.out.println("You are here: " + mapController.getCurrentRoom().getName() + "\n");
     }
 
     public void printQuestionName(){ System.out.println("Who's playing?\n");}
@@ -47,10 +45,11 @@ public class GameController {
         printWelcomeName();
         do {
             printRoomName();
-            room.printAdjacentRoom(player);
+            mapController.getCurrentRoom().printAdjacentRoom();
+            mapController.printCurrentLifePoints(player);
             printWriteACommand();
             String command = scanner.nextLine().trim();
-            commandController.launchCommand(command, room, player, exitCommand);
+            commandController.launchCommand(command, player, mapController, exitCommand);
         } while (!exitCommand.isExit());
     }
 

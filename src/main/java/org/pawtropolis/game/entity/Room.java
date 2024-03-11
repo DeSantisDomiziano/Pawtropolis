@@ -1,6 +1,7 @@
 package org.pawtropolis.game.entity;
 
 import org.pawtropolis.animal.abst.Animal;
+import org.pawtropolis.game.controller.MapController;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -101,36 +102,27 @@ public class Room {
         System.out.println();
     }
 
-    private List<Room> getAdjacentRooms() {
-        return adjacentRooms;
-    }
-
     public void addAdjacentRoom(Room room) {
         adjacentRooms.add(room);
     }
 
-    public void printAdjacentRoom(Player player){
-        Room currentRoom = player.getCurrentRoom();
-        List<Room> adjacentRooms = currentRoom.getAdjacentRooms();
+    public void printAdjacentRoom(){
         System.out.println("Adjacent Rooms:");
-        for (Room adjacentRoom : adjacentRooms) {
-            if (adjacentRoom != null) {
-                System.out.println(adjacentRoom.getName());
-            }
-        }
+        adjacentRooms.stream()
+                .map(Room::getName)
+                .forEach(System.out::println);
+        System.out.println();
     }
 
-    public Room getRoom(Player player, String roomName){
-        Room currentRoom = player.getCurrentRoom();
-        return currentRoom.adjacentRooms.stream()
+    public Room getRoom(String roomName){
+        return   adjacentRooms.stream()
                 .filter(room -> room.getName().equalsIgnoreCase(roomName))
                 .findFirst()
                 .orElse(null);
     }
 
-    public boolean containsRoom(Player player, Room room){
-        Room currentRoom = player.getCurrentRoom();
-        return currentRoom.adjacentRooms.contains(room);
+    public boolean containsRoom(Room room){
+        return adjacentRooms.contains(room);
     }
 
 }
