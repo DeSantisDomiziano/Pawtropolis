@@ -1,7 +1,6 @@
 package org.pawtropolis.game.entity;
 
 import org.pawtropolis.animal.abst.Animal;
-import org.pawtropolis.game.controller.MapController;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,11 +18,6 @@ public class Room {
         this.itemList = itemList;
         this.animalList = animalList;
         this.adjacentRooms = new ArrayList<>();
-    }
-    public Room(){
-        this.adjacentRooms = new ArrayList<>();
-        this.animalList = new ArrayList<>();
-        this.itemList = new ArrayList<>();
     }
 
     public String getName() {

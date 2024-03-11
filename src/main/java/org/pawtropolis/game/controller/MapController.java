@@ -29,7 +29,7 @@ public class MapController {
         System.out.println("game over");}
 
 
-    public void createGraph(Player player) {
+    public void createGraph() {
 
 
         Room room2 = new Room("salon", listItemFactory.getRandomItem(), listAnimalFactory.getRandomAnimal());

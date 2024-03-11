@@ -1,7 +1,5 @@
 package org.pawtropolis.game.entity;
 
-import java.util.Objects;
-
 public class Player {
 
     private String name;

@@ -3,6 +3,7 @@ package org.pawtropolis.game.controller;
 import org.pawtropolis.game.command.iface.Command;
 import org.pawtropolis.game.command.classcommand.*;
 import org.pawtropolis.game.command.classcommand.GoCommand;
+import org.pawtropolis.game.command.iface.CommandParameterized;
 import org.pawtropolis.game.entity.Bag;
 import org.pawtropolis.game.entity.Player;
 
@@ -12,13 +13,23 @@ import java.util.Map;
 
 public class CommandController {
     private static CommandController instance = null;
-    private final Bag bag = new Bag();
+    private  final Map<String, Command> commands;
 
-    private CommandController(){}
+    private CommandController(MapController mapController, Player player, ExitCommand exitCommand){
+        Bag bag = new Bag();
+        commands = new HashMap<>();
+        commands.put("go", new GoCommand(mapController, player));
+        commands.put("get", new GetCommand( mapController, bag));
+        commands.put("drop", new DropCommand( mapController, bag));
+        commands.put("look",  new LookCommand(mapController));
+        commands.put("bag",  new BagCommand(bag));
+        commands.put("help", new HelpCommand());
+        commands.put("exit",  exitCommand);
+    }
 
-    public static CommandController getInstance(){
+    public static CommandController getInstance(MapController mapController, Player player, ExitCommand exitCommand){
         if (instance == null){
-            instance = new CommandController();
+            instance = new CommandController(mapController, player, exitCommand);
         }
         return instance;
     }
@@ -27,29 +38,20 @@ public class CommandController {
         System.out.println("Invalid command\n");
     }
 
-    protected void launchCommand(String input, Player player, MapController mapController, ExitCommand exitCommand){
+    protected void launchCommand(String input){
         String[] tokens = input.split(" ");
         String parameter = tokens[tokens.length -1];
         String commandName = tokens[0];
 
-        Map<String, Command> commands = new HashMap<>();
-        commands.put("go", new GoCommand(mapController, player, parameter));
-        commands.put("get", new GetCommand( mapController, bag, parameter));
-        commands.put("drop", new DropCommand( mapController, bag, parameter));
-        commands.put("look",  new LookCommand(mapController));
-        commands.put("bag",  new BagCommand(bag));
-        commands.put("help", new HelpCommand());
-        commands.put("exit",  exitCommand);
-
         try{
-            commands.get(commandName).execute();
+            if (commands.get(commandName) instanceof CommandParameterized){
+                ((CommandParameterized) commands.get(commandName)).execute(parameter);
+            }else {
+                commands.get(commandName).execute();
+            }
         }catch (NullPointerException e){
-            printInvalidCommand();
+           printInvalidCommand();
         }
-
-
     }
-
-
 }
 

@@ -1,7 +1,6 @@
 package org.pawtropolis.game.controller;
 import org.pawtropolis.game.command.classcommand.ExitCommand;
 import org.pawtropolis.game.entity.Player;
-import org.pawtropolis.game.entity.Room;
 
 import java.util.Scanner;
 
@@ -21,10 +20,11 @@ public class GameController {
         return instance;
     }
     private final MapController mapController = MapController.getInstance();
-    private final CommandController commandController = CommandController.getInstance();
     private  final Player player = new Player();
     public static Scanner scanner = new Scanner(System.in);
     private final ExitCommand exitCommand = new ExitCommand();
+
+    private final CommandController commandController = CommandController.getInstance(mapController, player, exitCommand);
 
    public void printRoomName(){
        System.out.println("You are here: " + mapController.getCurrentRoom().getName() + "\n");
@@ -39,7 +39,7 @@ public class GameController {
 
 
     public void startGame() {
-        mapController.createGraph(player);
+        mapController.createGraph();
         printQuestionName();
         player.setName(scanner.nextLine());
         printWelcomeName();
@@ -49,7 +49,7 @@ public class GameController {
             mapController.printCurrentLifePoints(player);
             printWriteACommand();
             String command = scanner.nextLine().trim();
-            commandController.launchCommand(command, player, mapController, exitCommand);
+            commandController.launchCommand(command);
         } while (!exitCommand.isExit());
     }
 

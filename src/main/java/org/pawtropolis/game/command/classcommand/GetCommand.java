@@ -1,22 +1,19 @@
 package org.pawtropolis.game.command.classcommand;
 
-import org.pawtropolis.game.command.iface.Command;
+import org.pawtropolis.game.command.iface.CommandParameterized;
 import org.pawtropolis.game.controller.MapController;
 import org.pawtropolis.game.entity.Bag;
 import org.pawtropolis.game.entity.Item;
-import org.pawtropolis.game.entity.Player;
 import org.pawtropolis.game.entity.Room;
 
 
-public class GetCommand implements Command {
+public class GetCommand implements CommandParameterized {
     private final MapController mapController;
     private final Bag bag;
-    private final String itemName;
 
-    public GetCommand( MapController mapController, Bag bag, String itemName) {
+    public GetCommand( MapController mapController, Bag bag) {
         this.mapController = mapController;
         this.bag = bag;
-        this.itemName = itemName;
     }
 
     private void printNotEnoughSpace(){
@@ -32,9 +29,9 @@ public class GetCommand implements Command {
     }
 
 
-    private void getItem(String name){
+    private void getItem(String itemName){
         Room currentRoom = mapController.getCurrentRoom();
-        Item item = currentRoom.getItemFromRoom(name);
+        Item item = currentRoom.getItemFromRoom(itemName);
 
         if (currentRoom.containsItemInRoom(item)){
             if (bag.canFitInBag(item)){
@@ -51,7 +48,12 @@ public class GetCommand implements Command {
     }
 
     @Override
-    public void execute() {
+    public void execute(String itemName) {
         getItem(itemName);
+    }
+
+    @Override
+    public void execute() {
+
     }
 }
