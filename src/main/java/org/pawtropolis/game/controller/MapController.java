@@ -35,10 +35,12 @@ public class MapController {
         Room room2 = new Room("salon", listItemFactory.getRandomItem(), listAnimalFactory.getRandomAnimal());
         Room room3 = new Room("bathroom", listItemFactory.getRandomItem(), listAnimalFactory.getRandomAnimal());
         Room room4 = new Room("bed", listItemFactory.getRandomItem(), listAnimalFactory.getRandomAnimal());
+        Room room5 = new Room("evil corp alten", listItemFactory.getRandomItem(), listAnimalFactory.getRandomAnimal());
 
 
         currentRoom.addAdjacentRoom(room2);
         currentRoom.addAdjacentRoom(room3);
+        currentRoom.addAdjacentRoom(room5);
         room2.addAdjacentRoom(currentRoom);
         room2.addAdjacentRoom(room4);
         room3.addAdjacentRoom(currentRoom);

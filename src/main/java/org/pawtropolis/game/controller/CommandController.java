@@ -39,7 +39,7 @@ public class CommandController {
     }
 
     protected void launchCommand(String input){
-        String[] tokens = input.split(" ");
+        String[] tokens = input.split("\\s+",2);
         String parameter = tokens[tokens.length -1];
         String commandName = tokens[0];
 
