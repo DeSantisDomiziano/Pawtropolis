@@ -34,10 +34,9 @@ public class MapController {
 
     public void createGraph() {
         currentRoom.setName("Room 1");
-        List<String> uniqueNames = generateUniqueNames(names);
         List<Room> rooms = new ArrayList<>();
 
-        for (String roomName : uniqueNames) {
+        for (String roomName : names) {
             Room room = new Room(roomName, listItemFactory.getRandomItem(), listAnimalFactory.getRandomAnimal());
             rooms.add(room);
         }
@@ -58,15 +57,6 @@ public class MapController {
             }
         }
     }
-
-    private List<String> generateUniqueNames(String[] names) {
-        List<String> uniqueNames = new ArrayList<>();
-        Collections.addAll(uniqueNames, names);
-        Collections.shuffle(uniqueNames);
-        return uniqueNames;
-    }
-
-
 
     public Room getCurrentRoom() {
         return currentRoom;
