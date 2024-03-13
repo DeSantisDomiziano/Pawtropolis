@@ -4,7 +4,7 @@ import org.pawtropolis.game.entity.Room;
 import org.pawtropolis.game.factory.ListAnimalFactory;
 import org.pawtropolis.game.factory.ListItemFactory;
 
-import java.util.Objects;
+import java.util.*;
 
 public class MapController {
 
@@ -29,23 +29,44 @@ public class MapController {
         System.out.println("game over");}
 
 
+    private final String[] names = {"Entrance Room", "Bedroom", "Living Room", "Kitchen", "Bathroom",
+            "Dining Room", "Study", "Guest Room", "Game Room", "Laundry Room", "Home Office"};
+
     public void createGraph() {
+        currentRoom.setName("Room 1");
+        List<String> uniqueNames = generateUniqueNames(names);
+        List<Room> rooms = new ArrayList<>();
+
+        for (String roomName : uniqueNames) {
+            Room room = new Room(roomName, listItemFactory.getRandomItem(), listAnimalFactory.getRandomAnimal());
+            rooms.add(room);
+        }
 
 
-        Room room2 = new Room("salon", listItemFactory.getRandomItem(), listAnimalFactory.getRandomAnimal());
-        Room room3 = new Room("bathroom", listItemFactory.getRandomItem(), listAnimalFactory.getRandomAnimal());
-        Room room4 = new Room("bed", listItemFactory.getRandomItem(), listAnimalFactory.getRandomAnimal());
+        if (!rooms.isEmpty()) {
+            currentRoom.addAdjacentRoom(rooms.get(0));
+            rooms.get(0).addAdjacentRoom(currentRoom);
+            currentRoom.addAdjacentRoom(rooms.get(rooms.size() - 1));
+            rooms.get(rooms.size() - 1).addAdjacentRoom(currentRoom);
 
+            for (int i = 1; i < rooms.size(); i++) {
+                Room nextRoom = rooms.get(i);
+                Room previousRoom = rooms.get(i - 1);
 
-        currentRoom.addAdjacentRoom(room2);
-        currentRoom.addAdjacentRoom(room3);
-        room2.addAdjacentRoom(currentRoom);
-        room2.addAdjacentRoom(room4);
-        room3.addAdjacentRoom(currentRoom);
-        room3.addAdjacentRoom(room4);
-        room4.addAdjacentRoom(room2);
-        room4.addAdjacentRoom(room3);
+                nextRoom.addAdjacentRoom(previousRoom);
+                previousRoom.addAdjacentRoom(nextRoom);
+            }
+        }
     }
+
+    private List<String> generateUniqueNames(String[] names) {
+        List<String> uniqueNames = new ArrayList<>();
+        Collections.addAll(uniqueNames, names);
+        Collections.shuffle(uniqueNames);
+        return uniqueNames;
+    }
+
+
 
     public Room getCurrentRoom() {
         return currentRoom;
