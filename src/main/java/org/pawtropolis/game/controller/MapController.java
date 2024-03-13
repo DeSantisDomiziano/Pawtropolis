@@ -11,7 +11,7 @@ public class MapController {
     private static MapController instance = null;
     private final ListAnimalFactory listAnimalFactory = ListAnimalFactory.getInstance();
     private final ListItemFactory listItemFactory = ListItemFactory.getInstance();
-    private Room currentRoom = new Room("kitchen", listItemFactory.getRandomItem(), listAnimalFactory.getRandomAnimal());
+    private Room currentRoom = new Room("Outer Courtyard", listItemFactory.getRandomItem(), listAnimalFactory.getRandomAnimal());
 
 
     private MapController(){
@@ -29,32 +29,27 @@ public class MapController {
         System.out.println("game over");}
 
 
-    private final String[] names = {"Entrance Room", "Bedroom", "Living Room", "Kitchen", "Bathroom",
-            "Dining Room", "Study", "Guest Room", "Game Room", "Laundry Room", "Home Office"};
-
     public void createGraph() {
-        currentRoom.setName("Room 1");
         List<Room> rooms = new ArrayList<>();
+        String[] roomNames = {"Entrance Room", "Bedroom", "Living Room", "Kitchen", "Bathroom",
+                "Dining Room", "Study", "Guest Room", "Game Room", "Laundry Room", "Home Office"};
 
-        for (String roomName : names) {
+        for (String roomName : roomNames) {
             Room room = new Room(roomName, listItemFactory.getRandomItem(), listAnimalFactory.getRandomAnimal());
             rooms.add(room);
         }
 
 
-        if (!rooms.isEmpty()) {
-            currentRoom.addAdjacentRoom(rooms.get(0));
-            rooms.get(0).addAdjacentRoom(currentRoom);
-            currentRoom.addAdjacentRoom(rooms.get(rooms.size() - 1));
-            rooms.get(rooms.size() - 1).addAdjacentRoom(currentRoom);
+        currentRoom.addAdjacentRoom(rooms.get(0));
+        rooms.get(0).addAdjacentRoom(currentRoom);
 
-            for (int i = 1; i < rooms.size(); i++) {
-                Room nextRoom = rooms.get(i);
-                Room previousRoom = rooms.get(i - 1);
 
-                nextRoom.addAdjacentRoom(previousRoom);
-                previousRoom.addAdjacentRoom(nextRoom);
-            }
+        for (int i = 1; i < rooms.size(); i++) {
+            Room nextRoom = rooms.get(i);
+            Room previousRoom = rooms.get(i - 1);
+
+            nextRoom.addAdjacentRoom(previousRoom);
+            previousRoom.addAdjacentRoom(nextRoom);
         }
     }
 
