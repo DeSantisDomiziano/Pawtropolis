@@ -75,19 +75,14 @@ public class MapController {
         }
     }
 
-    public boolean isDead(Player player){
-        return player.getLifePoints() == 0;
-    }
 
-    public void changeGameOver(Player player){
-        if (isDead(player)) {
+    public void handlePlayerGameOver(Player player){
+        if (player.isDead()) {
             printGameOver();
             System.exit(0);
         }
     }
 
-    public void printCurrentLifePoints(Player player){
-        System.out.printf("Life Points: %s%n%n", player.getLifePoints());
-    }
+
 }
 

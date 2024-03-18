@@ -6,7 +6,6 @@ public class ExitCommand implements Command {
     private boolean exit = false;
 
     public ExitCommand() {
-
     }
 
 

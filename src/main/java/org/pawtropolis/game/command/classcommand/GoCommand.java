@@ -27,7 +27,7 @@ public class GoCommand implements CommandParameterized {
         if (mapController.containsAdjacentRoom(nextRoom)) {
             mapController.setCurrentRoom(nextRoom);
             mapController.decrementLifePoints(nextRoom, player);
-            mapController.changeGameOver(player);
+            mapController.handlePlayerGameOver(player);
         } else {
             printInvalidDirection();
         }

@@ -46,7 +46,7 @@ public class GameController {
         do {
             printRoomName();
             mapController.getCurrentRoom().printAdjacentRoom();
-            mapController.printCurrentLifePoints(player);
+            player.printCurrentLifePoints();
             printWriteACommand();
             String command = scanner.nextLine().trim();
             commandController.launchCommand(command);

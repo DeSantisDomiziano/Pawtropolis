@@ -16,13 +16,12 @@ public class CommandController {
     private final Map<String, Command> commands;
 
     private CommandController(MapController mapController, Player player, ExitCommand exitCommand){
-        Bag bag = new Bag();
         commands = new HashMap<>();
         commands.put("go", new GoCommand(mapController, player));
-        commands.put("get", new GetCommand(mapController, bag));
-        commands.put("drop", new DropCommand(mapController, bag));
+        commands.put("get", new GetCommand(mapController, player.getBag()));
+        commands.put("drop", new DropCommand(mapController, player.getBag()));
         commands.put("look",  new LookCommand(mapController));
-        commands.put("bag",  new BagCommand(bag));
+        commands.put("bag",  new BagCommand(player.getBag()));
         commands.put("help", new HelpCommand());
         commands.put("exit",  exitCommand);
     }
