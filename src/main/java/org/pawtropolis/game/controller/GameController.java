@@ -20,8 +20,8 @@ public class GameController {
         return instance;
     }
     private final MapController mapController = MapController.getInstance();
-    private  final Player player = new Player();
-    public static Scanner scanner = new Scanner(System.in);
+    private final Player player = new Player();
+    public final Scanner scanner = new Scanner(System.in);
     private final ExitCommand exitCommand = new ExitCommand();
 
     private final CommandController commandController = CommandController.getInstance(mapController, player, exitCommand);

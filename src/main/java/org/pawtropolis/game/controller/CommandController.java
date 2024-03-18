@@ -13,14 +13,14 @@ import java.util.Map;
 
 public class CommandController {
     private static CommandController instance = null;
-    private  final Map<String, Command> commands;
+    private final Map<String, Command> commands;
 
     private CommandController(MapController mapController, Player player, ExitCommand exitCommand){
         Bag bag = new Bag();
         commands = new HashMap<>();
         commands.put("go", new GoCommand(mapController, player));
-        commands.put("get", new GetCommand( mapController, bag));
-        commands.put("drop", new DropCommand( mapController, bag));
+        commands.put("get", new GetCommand(mapController, bag));
+        commands.put("drop", new DropCommand(mapController, bag));
         commands.put("look",  new LookCommand(mapController));
         commands.put("bag",  new BagCommand(bag));
         commands.put("help", new HelpCommand());
@@ -38,19 +38,20 @@ public class CommandController {
         System.out.println("Invalid command\n");
     }
 
-    protected void launchCommand(String input){
+    protected void launchCommand(String input) {
         String[] tokens = input.split("\\s+", 2);
-        String parameter = tokens[tokens.length -1];
+        String parameter = tokens[tokens.length - 1];
         String commandName = tokens[0];
 
-        try{
-            if (commands.get(commandName) instanceof CommandParameterized){
-                ((CommandParameterized) commands.get(commandName)).execute(parameter);
-            }else {
-                commands.get(commandName).execute();
-            }
-        }catch (NullPointerException e){
-           printInvalidCommand();
+        Command command = commands.get(commandName);
+        if (command == null) {
+            printInvalidCommand();
+            return;
+        }
+        if (command instanceof CommandParameterized) {
+            ((CommandParameterized) command).execute(parameter);
+        } else {
+            command.execute();
         }
     }
 }
