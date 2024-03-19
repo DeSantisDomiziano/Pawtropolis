@@ -1,9 +1,7 @@
 package org.pawtropolis.game.controller;
 
-import org.pawtropolis.game.command.classcommand.ExitCommand;
 import org.pawtropolis.game.entity.Player;
 import java.util.Scanner;
-
 
 public class GameController {
 

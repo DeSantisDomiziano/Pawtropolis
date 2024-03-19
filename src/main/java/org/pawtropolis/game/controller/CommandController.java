@@ -4,7 +4,6 @@ import org.pawtropolis.game.command.iface.Command;
 import org.pawtropolis.game.command.classcommand.*;
 import org.pawtropolis.game.command.classcommand.GoCommand;
 import org.pawtropolis.game.command.iface.CommandParameterized;
-import org.pawtropolis.game.entity.Bag;
 import org.pawtropolis.game.entity.Player;
 
 import java.util.HashMap;
