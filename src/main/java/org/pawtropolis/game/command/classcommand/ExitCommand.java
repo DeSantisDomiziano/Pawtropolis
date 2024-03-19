@@ -1,24 +1,15 @@
 package org.pawtropolis.game.command.classcommand;
 
 import org.pawtropolis.game.command.iface.Command;
+import org.pawtropolis.game.controller.GameController;
 
 public class ExitCommand implements Command {
-    private boolean exit = false;
 
     public ExitCommand() {
     }
 
-
-    private void quitGame(){
-        setExit(true);
-    }
-
-    public boolean isExit() {
-        return exit;
-    }
-
-    public void setExit(boolean exit) {
-        this.exit = exit;
+    public void quitGame(){
+        GameController.getInstance().setQuitGame(true);
     }
 
     @Override

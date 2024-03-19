@@ -15,7 +15,7 @@ public class CommandController {
     private static CommandController instance = null;
     private final Map<String, Command> commands;
 
-    private CommandController(MapController mapController, Player player, ExitCommand exitCommand){
+    private CommandController(MapController mapController, Player player){
         commands = new HashMap<>();
         commands.put("go", new GoCommand(mapController, player));
         commands.put("get", new GetCommand(mapController, player.getBag()));
@@ -23,12 +23,12 @@ public class CommandController {
         commands.put("look",  new LookCommand(mapController));
         commands.put("bag",  new BagCommand(player.getBag()));
         commands.put("help", new HelpCommand());
-        commands.put("exit",  exitCommand);
+        commands.put("exit",  new ExitCommand());
     }
 
-    public static CommandController getInstance(MapController mapController, Player player, ExitCommand exitCommand){
+    public static CommandController getInstance(MapController mapController, Player player){
         if (instance == null){
-            instance = new CommandController(mapController, player, exitCommand);
+            instance = new CommandController(mapController, player);
         }
         return instance;
     }
