@@ -1,4 +1,7 @@
 package org.pawtropolis.game.controller;
+
+import lombok.Getter;
+import lombok.Setter;
 import org.pawtropolis.game.entity.Player;
 import org.pawtropolis.game.entity.Room;
 import org.pawtropolis.game.factory.ListAnimalFactory;
@@ -11,10 +14,12 @@ public class MapController {
     private static MapController instance = null;
     private final ListAnimalFactory listAnimalFactory = ListAnimalFactory.getInstance();
     private final ListItemFactory listItemFactory = ListItemFactory.getInstance();
+    @Setter
+    @Getter
     private Room currentRoom = new Room("Outer Courtyard", listItemFactory.getRandomItem(), listAnimalFactory.getRandomAnimal());
 
 
-    private MapController(){
+    private MapController() {
 
     }
 
@@ -25,8 +30,9 @@ public class MapController {
         return instance;
     }
 
-    private void printGameOver(){
-        System.out.println("game over");}
+    private void printGameOver() {
+        System.out.println("game over");
+    }
 
 
     public void createGraph() {
@@ -53,36 +59,27 @@ public class MapController {
         }
     }
 
-    public Room getCurrentRoom() {
-        return currentRoom;
-    }
-
-    public void setCurrentRoom(Room currentRoom) {
-        this.currentRoom = currentRoom;
-    }
-
-    public Room getAdjacentRoom(String roomName){
+    public Room getAdjacentRoom(String roomName) {
         return currentRoom.getRoom(roomName);
     }
 
-    public boolean containsAdjacentRoom(Room room){
+    public boolean containsAdjacentRoom(Room room) {
         return currentRoom.containsRoom(room);
     }
 
-    public void decrementLifePoints(Room room, Player player){
-        if(room.getPoisonItem()!= null) {
+    public void decrementLifePoints(Room room, Player player) {
+        if (room.getPoisonItem() != null) {
             player.setLifePoints((player.getLifePoints() - Objects.requireNonNull(room.getPoisonItem()).getSlotsRequired()));
         }
     }
 
 
-    public void handlePlayerGameOver(Player player){
+    public void handlePlayerGameOver(Player player) {
         if (player.isDead()) {
             printGameOver();
             System.exit(0);
         }
     }
-
 
 
 }
