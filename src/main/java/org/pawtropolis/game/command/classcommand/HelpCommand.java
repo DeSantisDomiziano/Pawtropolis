@@ -1,11 +1,11 @@
 package org.pawtropolis.game.command.classcommand;
 
+import lombok.NoArgsConstructor;
 import org.pawtropolis.game.command.iface.Command;
 
+@NoArgsConstructor
 public class HelpCommand implements Command {
 
-    public HelpCommand() {
-    }
 
     private void printHelpCommandsMessage() {
         System.out.println("""

@@ -1,20 +1,16 @@
 package org.pawtropolis.game.command.classcommand;
 
+import lombok.AllArgsConstructor;
 import org.pawtropolis.game.command.iface.CommandParameterized;
 import org.pawtropolis.game.controller.MapController;
 import org.pawtropolis.game.entity.Bag;
 import org.pawtropolis.game.entity.Item;
 import org.pawtropolis.game.entity.Room;
 
-
+@AllArgsConstructor
 public class GetCommand implements CommandParameterized {
     private final MapController mapController;
     private final Bag bag;
-
-    public GetCommand( MapController mapController, Bag bag) {
-        this.mapController = mapController;
-        this.bag = bag;
-    }
 
     private void printNotEnoughSpace(){
         System.out.println("Not enough space\n");

@@ -1,15 +1,17 @@
 package org.pawtropolis.game.factory;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import org.pawtropolis.game.entity.Item;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ListItemFactory {
 
     private static ListItemFactory instance = null;
 
-    private ListItemFactory(){}
 
     public static ListItemFactory getInstance() {
         if( instance == null) {

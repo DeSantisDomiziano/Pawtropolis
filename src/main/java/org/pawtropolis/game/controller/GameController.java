@@ -1,16 +1,16 @@
 package org.pawtropolis.game.controller;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.pawtropolis.game.entity.Player;
 
 import java.util.Scanner;
 
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class GameController {
 
     private static GameController instance = null;
-
-    private GameController() {
-    }
 
     private final MapController mapController = MapController.getInstance();
     private final Player player = new Player();

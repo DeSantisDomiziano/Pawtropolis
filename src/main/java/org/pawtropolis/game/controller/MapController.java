@@ -1,6 +1,8 @@
 package org.pawtropolis.game.controller;
 
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.pawtropolis.game.entity.Player;
 import org.pawtropolis.game.entity.Room;
@@ -9,6 +11,7 @@ import org.pawtropolis.game.factory.ListItemFactory;
 
 import java.util.*;
 
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class MapController {
 
     private static MapController instance = null;
@@ -18,10 +21,6 @@ public class MapController {
     @Getter
     private Room currentRoom = new Room("Outer Courtyard", listItemFactory.getRandomItem(), listAnimalFactory.getRandomAnimal());
 
-
-    private MapController() {
-
-    }
 
     public static MapController getInstance() {
         if (instance == null) {
