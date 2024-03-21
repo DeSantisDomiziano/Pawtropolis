@@ -10,9 +10,10 @@ import java.util.stream.Collectors;
 public class Zoo {
 
     //Start Bill Pugh Singleton
-    private Zoo(){
+    private Zoo() {
         animals = new ArrayList<>();
     }
+
     private static class SingletonHelper {
         private static final Zoo INSTANCE = new Zoo();
     }
@@ -20,7 +21,7 @@ public class Zoo {
     List<Animal> animals;
 
     public static Zoo getInstance() {
-        return  SingletonHelper.INSTANCE;
+        return SingletonHelper.INSTANCE;
     }
     //End Bill Pugh Singleton
 
@@ -32,8 +33,8 @@ public class Zoo {
     }
 
     @SuppressWarnings("unchecked")
-    public static <T extends Animal> List<T>  getAnimalsByClass(Class<T> clazz){
-        if (allAnimals.get(clazz) != null){
+    public static <T extends Animal> List<T> getAnimalsByClass(Class<T> clazz) {
+        if (allAnimals.get(clazz) != null) {
             return (ArrayList<T>) allAnimals.get(clazz);
         }
         return allAnimals.values()
@@ -43,11 +44,12 @@ public class Zoo {
                 .map(clazz::cast)
                 .collect(Collectors.toList());
     }
+
     public List<Animal> getAllAnimal() {
         return animals;
     }
 
-    public <T extends Animal> T getHeaviestByClass(Class<T> clazz){
+    public <T extends Animal> T getHeaviestByClass(Class<T> clazz) {
 
         return getAnimalsByClass(clazz).stream()
                 .map(clazz::cast)
@@ -72,7 +74,7 @@ public class Zoo {
                 .orElse(null);
     }
 
-    public  <T extends Animal> T getShortestByClass(Class<T> clazz) {
+    public <T extends Animal> T getShortestByClass(Class<T> clazz) {
 
         return getAnimalsByClass(clazz).stream()
                 .map(clazz::cast)
@@ -81,7 +83,7 @@ public class Zoo {
     }
 
 
-    public <T extends AnimalWithTail> T getLongestTailByClass(Class<T> clazz){
+    public <T extends AnimalWithTail> T getLongestTailByClass(Class<T> clazz) {
 
         return getAnimalsByClass(clazz).stream()
                 .filter(Objects::nonNull)

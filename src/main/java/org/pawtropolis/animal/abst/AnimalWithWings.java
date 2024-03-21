@@ -15,7 +15,4 @@ public abstract class AnimalWithWings extends Animal {
         super(name, favouriteFood, age, dateAddedToTheZoo, weight, height);
         setWingsSpan(wingsSpan);
     }
-
-
-
 }

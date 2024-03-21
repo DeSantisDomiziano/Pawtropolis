@@ -2,11 +2,12 @@ package org.pawtropolis.animal.abst;
 
 import lombok.Getter;
 import lombok.Setter;
+
 import java.time.LocalDate;
 
 @Setter
 @Getter
-public abstract class AnimalWithTail extends Animal{
+public abstract class AnimalWithTail extends Animal {
 
     private float tailLength;
 

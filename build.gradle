@@ -4,16 +4,19 @@ plugins {
 
 group = 'org.example'
 version = '1.0-SNAPSHOT'
-description = 'Lesson1'
+description = 'Pawtropolis'
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    implementation 'org.projectlombok:lombok:1.18.20'
+    compileOnly 'org.projectlombok:lombok:1.18.22'
+    annotationProcessor 'org.projectlombok:lombok:1.18.22'
 }
+
 
 tasks.withType(JavaCompile).configureEach {
     options.compilerArgs << "-source" << "20" << "-target" << "20"
+    options.encoding = 'UTF-8'
 }

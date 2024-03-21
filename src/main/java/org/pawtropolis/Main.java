@@ -1,4 +1,5 @@
 package org.pawtropolis;
+
 import org.pawtropolis.animal.entity.*;
 import org.pawtropolis.game.controller.GameController;
 
