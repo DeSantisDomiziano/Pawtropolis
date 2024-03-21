@@ -1,7 +1,13 @@
 package org.pawtropolis.animal.abst;
 
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.time.LocalDate;
 
+@Setter
+@Getter
 public abstract class AnimalWithTail extends Animal{
 
     private float tailLength;
@@ -10,17 +16,4 @@ public abstract class AnimalWithTail extends Animal{
         super(name, favouriteFood, age, dateAddedToTheZoo, weight, height);
         setTailLength(tailLength);
     }
-
-    public float getTailLength() {
-        return tailLength;
-    }
-
-    public void setTailLength(float tailLength) {
-        this.tailLength = tailLength;
-    }
-
-    /*@Override
-    public String toString() {
-        return super.toString() + "cm, tailLength= " + getTailLength() + "cm}";
-    }*/
 }

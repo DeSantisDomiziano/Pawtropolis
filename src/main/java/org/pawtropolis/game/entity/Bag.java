@@ -1,7 +1,7 @@
 package org.pawtropolis.game.entity;
+
 import java.util.ArrayList;
 import java.util.List;
-
 
 public class Bag {
     private final List<Item> itemList;
