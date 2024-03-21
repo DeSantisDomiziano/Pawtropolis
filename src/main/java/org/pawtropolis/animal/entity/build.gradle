@@ -1,0 +1,24 @@
+package org.pawtropolis.animal.entity
+
+plugins {
+    id 'java-library'
+}
+
+group = 'org.example'
+version = '1.0-SNAPSHOT'
+description = 'Pawtropolis'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compileOnly 'org.projectlombok:lombok:1.18.22'
+    annotationProcessor 'org.projectlombok:lombok:1.18.22'
+}
+
+
+tasks.withType(JavaCompile).configureEach {
+    options.compilerArgs << "-source" << "20" << "-target" << "20"
+    options.encoding = 'UTF-8'
+}

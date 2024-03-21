@@ -1,47 +1,29 @@
 package org.pawtropolis.game.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@AllArgsConstructor
 public class Player {
 
+    @Setter
     private String name;
+    @Setter
     private int lifePoints;
-
     private final Bag bag;
 
-
-    public Player(String name, int lifePoints, Bag bag) {
-        setName(name);
-        setLifePoints(lifePoints);
-        this.bag = bag;
-    }
-
-    public Bag getBag() {
-        return bag;
-    }
-
-    public Player(){
+    public Player() {
         this("", 100, new Bag());
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-    public boolean isDead(){
+    public boolean isDead() {
         return getLifePoints() == 0;
     }
 
-    public void printCurrentLifePoints(){
+    public void printCurrentLifePoints() {
         System.out.printf("Life Points: %s%n%n", getLifePoints());
     }
 
-    public int getLifePoints() {
-        return lifePoints;
-    }
-
-    public void setLifePoints(int lifePoints) {
-        this.lifePoints = lifePoints;
-    }
 }
