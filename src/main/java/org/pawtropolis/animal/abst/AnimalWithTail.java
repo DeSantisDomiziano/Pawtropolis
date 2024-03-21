@@ -1,9 +1,7 @@
 package org.pawtropolis.animal.abst;
 
-import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
-
 import java.time.LocalDate;
 
 @Setter
