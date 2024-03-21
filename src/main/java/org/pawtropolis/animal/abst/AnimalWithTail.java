@@ -15,6 +15,5 @@ public abstract class AnimalWithTail extends Animal {
         super(name, favouriteFood, age, dateAddedToTheZoo, weight, height);
         setTailLength(tailLength);
         System.out.println();
-        System.out.println();
     }
 }
