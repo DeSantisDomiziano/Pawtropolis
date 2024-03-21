@@ -1,16 +1,22 @@
 package org.pawtropolis.game.controller;
 
+import lombok.Setter;
 import org.pawtropolis.game.entity.Player;
+
 import java.util.Scanner;
 
 public class GameController {
 
     private static GameController instance = null;
-    private GameController() {}
+
+    private GameController() {
+    }
+
     private final MapController mapController = MapController.getInstance();
     private final Player player = new Player();
     private final Scanner scanner = new Scanner(System.in);
     private final CommandController commandController = CommandController.getInstance(mapController, player);
+    @Setter
     private boolean quitGame = false;
 
 
@@ -24,11 +30,6 @@ public class GameController {
     public boolean getQuitGame() {
         return quitGame;
     }
-
-    public void setQuitGame(boolean quitGame) {
-        this.quitGame = quitGame;
-    }
-
 
 
     public void printRoomName() {
