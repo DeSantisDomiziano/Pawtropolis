@@ -5,8 +5,15 @@ import org.pawtropolis.game.controller.GameController;
 
 import java.time.LocalDate;
 
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+
+@SpringBootApplication
 public class Main {
     public static void main(String[] args) {
+        SpringApplication.run(Main.class, args);
+        
         Tiger t1 = new Tiger("Sid", "eagle", 3, LocalDate.now(), 100.75f, 130, 30);
         Tiger t2 = new Tiger("Gino", "pony", 5, LocalDate.now(), 150.3f, 140, 55);
         Tiger t3 = new Tiger("George", "cat", 3, LocalDate.now(), 154.5f, 144, 39);
