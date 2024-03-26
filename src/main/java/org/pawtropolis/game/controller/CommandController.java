@@ -5,7 +5,6 @@ import org.pawtropolis.game.command.classcommand.*;
 import org.pawtropolis.game.command.classcommand.GoCommand;
 import org.pawtropolis.game.command.iface.CommandParameterized;
 import org.pawtropolis.game.entity.Player;
-import org.springframework.stereotype.Controller;
 
 import java.util.HashMap;
 import java.util.Map;

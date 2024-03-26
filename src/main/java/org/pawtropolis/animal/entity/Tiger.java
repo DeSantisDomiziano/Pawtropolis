@@ -1,9 +1,11 @@
 package org.pawtropolis.animal.entity;
 
 import org.pawtropolis.animal.abst.AnimalWithTail;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 
+@Component
 public class Tiger extends AnimalWithTail
 {
 

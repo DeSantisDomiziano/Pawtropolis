@@ -3,7 +3,6 @@ package org.pawtropolis.game.controller;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.Value;
 import org.pawtropolis.game.entity.Player;
 
 
@@ -15,7 +14,6 @@ public class GameController {
 
     private static GameController instance = null;
 
-   
     private final MapController mapController = MapController.getInstance();
     private final Player player = new Player();
     private final Scanner scanner = new Scanner(System.in);

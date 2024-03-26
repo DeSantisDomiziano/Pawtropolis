@@ -1,6 +1,7 @@
 package org.pawtropolis.animal.abst;
 
 import lombok.*;
+
 import java.time.LocalDate;
 
 @Data

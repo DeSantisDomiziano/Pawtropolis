@@ -1,5 +1,6 @@
 package org.pawtropolis;
 
+import org.pawtropolis.animal.controller.ZooController;
 import org.pawtropolis.animal.entity.*;
 import org.pawtropolis.game.controller.GameController;
 
@@ -11,6 +12,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class Main {
+
+
     public static void main(String[] args) {
         SpringApplication.run(Main.class, args);
         
@@ -26,7 +29,7 @@ public class Main {
         Eagle e2 = new Eagle("Bomber", "balls", 2, LocalDate.now(), 20.3f, 54, 55);
         Eagle e3 = new Eagle("Fulvio", "other", 5, LocalDate.now(), 23.35f, 62, 59);
 
-        Zoo zoo = Zoo.getInstance();
+        ZooController zoo = ZooController.getInstance();
 
 
         zoo.addAnimal(t1);
@@ -43,5 +46,6 @@ public class Main {
 
         GameController gameController = GameController.getInstance();
         gameController.startGame();
+
     }
 }

@@ -2,12 +2,11 @@ package org.pawtropolis.game.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 import org.springframework.stereotype.Component;
 
 @AllArgsConstructor
 @Data
+@Component
 public class Player {
 
     private String name;

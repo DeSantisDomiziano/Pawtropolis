@@ -4,7 +4,7 @@ package org.pawtropolis.game.factory;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import org.pawtropolis.animal.abst.Animal;
-import org.pawtropolis.animal.entity.Zoo;
+import org.pawtropolis.animal.controller.ZooController;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +13,7 @@ import java.util.Random;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ListAnimalFactory {
     private static ListAnimalFactory instance = null;
-    private final List<Animal> animalList = Zoo.getAnimalsByClass(Animal.class);
+    private final List<Animal> animalList = ZooController.getAnimalsByClass(Animal.class);
     private final Random random = new Random();
 
     public static ListAnimalFactory getInstance() {

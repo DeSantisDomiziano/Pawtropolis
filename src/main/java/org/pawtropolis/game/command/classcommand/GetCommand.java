@@ -8,8 +8,12 @@ import org.pawtropolis.game.entity.Item;
 import org.pawtropolis.game.entity.Room;
 import org.springframework.beans.factory.annotation.Autowired;
 
+
+
 @AllArgsConstructor
 public class GetCommand implements CommandParameterized {
+
+    @Autowired
     private final MapController mapController;
 
     @Autowired

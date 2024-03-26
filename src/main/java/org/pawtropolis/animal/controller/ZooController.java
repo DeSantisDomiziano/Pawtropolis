@@ -1,4 +1,4 @@
-package org.pawtropolis.animal.entity;
+package org.pawtropolis.animal.controller;
 
 import org.pawtropolis.animal.abst.Animal;
 import org.pawtropolis.animal.abst.AnimalWithTail;
@@ -7,20 +7,19 @@ import org.pawtropolis.animal.abst.AnimalWithWings;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class Zoo {
+public class ZooController {
 
-    //Start Bill Pugh Singleton
-    private Zoo() {
+    private ZooController() {
         animals = new ArrayList<>();
     }
 
     private static class SingletonHelper {
-        private static final Zoo INSTANCE = new Zoo();
+        private static final ZooController INSTANCE = new ZooController();
     }
 
     List<Animal> animals;
 
-    public static Zoo getInstance() {
+    public static ZooController getInstance() {
         return SingletonHelper.INSTANCE;
     }
     //End Bill Pugh Singleton
