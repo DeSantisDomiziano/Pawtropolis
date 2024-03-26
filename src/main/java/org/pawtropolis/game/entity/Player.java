@@ -1,17 +1,18 @@
 package org.pawtropolis.game.entity;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.stereotype.Component;
 
-@Getter
 @AllArgsConstructor
+@Data
 public class Player {
 
-    @Setter
     private String name;
-    @Setter
     private int lifePoints;
+
     private final Bag bag;
 
     public Player() {

@@ -1,10 +1,12 @@
 package org.pawtropolis.game.entity;
 
 import lombok.Getter;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class Bag {
     private final List<Item> itemList;
     private static final int MAX_SLOTS_CAPACITY = 20;

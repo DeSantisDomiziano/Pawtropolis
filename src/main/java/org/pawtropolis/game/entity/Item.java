@@ -5,20 +5,17 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-@Setter
+
 @AllArgsConstructor
 @ToString
 public class Item {
 
     @Getter
+    @Setter
     private String name;
     private String description;
+    @Setter
     @Getter
     private int slotsRequired;
 
-
-    @SuppressWarnings("unused")
-    public String getDescription() {
-        return description;
-    }
 }

@@ -6,10 +6,13 @@ import org.pawtropolis.game.controller.MapController;
 import org.pawtropolis.game.entity.Bag;
 import org.pawtropolis.game.entity.Item;
 import org.pawtropolis.game.entity.Room;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @AllArgsConstructor
 public class GetCommand implements CommandParameterized {
     private final MapController mapController;
+
+    @Autowired
     private final Bag bag;
 
     private void printNotEnoughSpace(){

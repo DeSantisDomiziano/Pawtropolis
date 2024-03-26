@@ -8,6 +8,7 @@ import org.pawtropolis.game.entity.Player;
 import org.pawtropolis.game.entity.Room;
 import org.pawtropolis.game.factory.ListAnimalFactory;
 import org.pawtropolis.game.factory.ListItemFactory;
+import org.springframework.stereotype.Controller;
 
 import java.util.*;
 
